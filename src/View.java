@@ -40,7 +40,6 @@ public class View extends JFrame {
 
         // ActionListener für Alert Button
         alertButton.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 showAlert();
             }
@@ -48,7 +47,6 @@ public class View extends JFrame {
 
         // ActionListener für Roll Dice Button
         rollDiceButton.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 rollDice();
             }
@@ -56,7 +54,6 @@ public class View extends JFrame {
 
         // ActionListener für Update and Reset Button
         updateAndResetButton.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 updateAndReset();
             }
@@ -68,12 +65,13 @@ public class View extends JFrame {
     }
 
     private void showAlert() {
-        JOptionPane.showMessageDialog(this, "Hier könnte ihre Nachricht stehen!", "Alert", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Das ist eine Nachricht!", "Alert", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void rollDice() {
         if (counter < maxRolls) {
             try {
+                int inputNumber = Integer.parseInt(numberField.getText()); // Überprüfung der Eingabe
                 int randomNumber = new Random().nextInt(6) + 1; // Würfeln einer Zahl zwischen 1 und 6
                 JOptionPane.showMessageDialog(this, "Gewürfelte Zahl: " + randomNumber, "Würfeln", JOptionPane.INFORMATION_MESSAGE);
                 counter++;
@@ -87,12 +85,12 @@ public class View extends JFrame {
                 JOptionPane.showMessageDialog(this, "Bitte eine gültige Zahl eingeben.", "Fehler", JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Maximale Anzahl an Würfen erreicht. Bitte Sheet aktualisieren und Counter zurücksetzen.", "Fehler", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Maximale Anzahl an Würfen erreicht. Bitte das Sheet aktualisieren und den Counter zurücksetzen.", "Fehler", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void updateAndReset() {
-        // Beispiel: Update des einser Felds im Sheet und Reset des Counters
+        // Beispiel: Update des 'einser' Felds im Sheet und Reset des Counters
         Sheet.einser += new Random().nextInt(6) + 1; // Zufälliger Wert zwischen 1 und 6 hinzufügen
         resetCounter();
         JOptionPane.showMessageDialog(this, "Einser-Feld aktualisiert: " + Sheet.einser, "Update Sheet", JOptionPane.INFORMATION_MESSAGE);
@@ -106,8 +104,7 @@ public class View extends JFrame {
 
     public static void main(String[] args) {
         // GUI erstellen und anzeigen
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
+        SwingUtilities.invokeLater(new Runnable() {          
             public void run() {
                 new View().setVisible(true);
             }
