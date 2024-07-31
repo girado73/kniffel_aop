@@ -4,6 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
+/**
+ * View
+ * Here is the GUI constructed
+ */
 public class View extends JFrame {
     private JButton alertButton;
     private JButton rollDiceButton;
