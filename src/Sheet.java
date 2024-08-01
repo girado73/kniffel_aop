@@ -120,8 +120,51 @@ public class Sheet {
 
   public static boolean klstrcheck(int[] würfel) {
     Arrays.sort(würfel);
-    int[] vers1 = würfel.; // TODO hier 2 versionen von würfel, einmal ohne den ersten wert
-                          // und einmal ohne den letzten wert
-    int[] vers2 = würfel;
+
+    int[] vers1 = new int[4]; // 2 vers. von würfel, drop [0], drop[-1]
+    int[] vers2 = new int[4];
+    int counter = 0;
+
+    // erstellen der Listen
+    for (int x : würfel) {
+      if (counter == 0) {
+        vers2[counter] = x;
+      } else {
+        if (counter == würfel.length - 1) {
+          vers1[counter - 1] = x;
+        } else {
+          vers1[counter - 1] = x;
+          vers2[counter] = x;
+        }
+      }
+      counter++;
+    }
+
+    // checken der Listen:
+    if (vers1.length != vers2.length) {
+      throw new ArrayIndexOutOfBoundsException("Listen sind nicht gleich lang");
+    }
+
+    // variablen welchen den letzten wert von versx[i] halten
+    int tmp_vers1 = 0;
+    int tmp_vers2 = 0;
+
+    // variablen welche festhalten ob der array noch im rennen ist
+    boolean vers1_ex = true;
+    boolean vers2_ex = true;
+    for (int i = 0; i < vers1.length; i++) { // ver1.length da sie gleich lang sein müssen
+      if (vers1[i] <= tmp_vers1) {
+        vers1_ex = false;
+      }
+      if (vers2[i] <= tmp_vers2) {
+        vers2_ex = false;
+      }
+
+      tmp_vers1 = vers1[i];
+      tmp_vers2 = vers2[i];
+    }
+
+    return vers1_ex || vers2_ex; // logisches oder denn es reicht wenn eine funktioniert
   }
+
 }
