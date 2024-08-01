@@ -105,6 +105,38 @@ public class Sheet {
     }
   }
 
+  public static boolean pasch4checker(int[] würfel) {
+    int[] vers1 = new int[4]; // 2 vers. von würfel, drop [0], drop[-1]
+    int[] vers2 = new int[4];
+    int counter = 0;
+
+    // erstellen der Listen
+    for (int x : würfel) {
+      if (counter == 0) {
+        vers2[counter] = x;
+      } else {
+        if (counter == würfel.length - 1) {
+          vers1[counter - 1] = x;
+        } else {
+          vers1[counter - 1] = x;
+          vers2[counter] = x;
+        }
+      }
+      counter++;
+    }
+
+    return kniffelcheck(vers1) || kniffelcheck(vers2); // veroderung von kniffelcheck welches prüft ob alle zahlen
+                                                       // gleich sind
+
+  }
+
+  public static boolean pasch3checker(int[] würfel) {
+    // TODO erst alle zahlen welche drin sind aufschreiben und dann ihre
+    // vorkommnisse zählen
+    // wenn mehr als 3 verschiedene zahlen = false
+    return false;
+  }
+
   public static boolean grstrcheck(int[] würfel) {
     Arrays.sort(würfel);
     int tmpnumber = würfel[0] - 1;
@@ -165,6 +197,17 @@ public class Sheet {
     }
 
     return vers1_ex || vers2_ex; // logisches oder denn es reicht wenn eine funktioniert
+  }
+
+  public static boolean kniffelcheck(int[] würfel) {
+    int checkval = würfel[0];
+
+    for (int x : würfel) {
+      if (x != checkval) {
+        return false;
+      }
+    }
+    return true;
   }
 
 }
