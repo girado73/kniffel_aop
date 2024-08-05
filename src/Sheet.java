@@ -52,6 +52,9 @@ public class Sheet {
     return returnstring;
   }
 
+  /**
+   * Zähle das Vorkommen von target in würfel
+   */
   public static int nummercounter(int[] würfel, int nummer) {
     int resultnumber = 0;
     for (int number : würfel) {
@@ -63,43 +66,21 @@ public class Sheet {
   }
 
   /**
-   * Methode welche guckt ob im Array ein Pasch mit vorkommen = anzahl ist
-   * 
-   * @param würfel ist der Array von integern welches die würfel representiert
-   * @param anzahl ist die Anzahl der vorkommnisse der Paschzahl
-   * @param target ist die Zahl nach welcher geguckt wird
-   * @return gibt entweder true zurück wenn der Pasch da ist oder false wenn nicht
-   * @author Ricardo Güttner
-   */
-  private static boolean paschchecker(int[] würfel, int anzahl, int target) {
-    int counter = 0;
-    for (int number : würfel) {
-      if (number == target) {
-        counter++;
-      }
-    }
-    if (counter >= anzahl) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  /**
    * Zähle alle Würfel zusammen falls ein Pasch innerhalb der Würfel ist
    *
-   * @param würfel  ist der Array von integern welches die würfel representiert
-   * @param paschnr ist die angestrebte Paschzahl
-   * @param target  ist die Zahl nach welcher geguckt wird
+   * @param würfel ist der Array von integern welches die würfel representiert
+   * @param target ist die Zahl nach welcher geguckt wird
    * @return gibt entweder 0 zurück wenn kein Pasch enthalten ist oder die Summe
    *         aller würfel
    * @author Ricardo Güttner
    */
-  public static int paschcounter(int[] würfel, int paschnr, int target) {
+  public static int paschcounter(int[] würfel, int target) {
     int resultnumber = 0;
-    if (paschchecker(würfel, paschnr, target)) {
+    if (pasch4checker(würfel) || pasch3checker(würfel)) {
       for (int number : würfel) {
-        resultnumber += number;
+        if (number == target) {
+          resultnumber += number;
+        }
       }
       return resultnumber; // returnt mit summe aller würfel
     } else {
@@ -107,6 +88,9 @@ public class Sheet {
     }
   }
 
+  /**
+   * Checke ob ein 4erpasch in würfel ist
+   */
   public static boolean pasch4checker(int[] würfel) {
     Arrays.sort(würfel);
     int[] vers1 = new int[4]; // 2 vers. von würfel, drop [0], drop[-1]
@@ -174,6 +158,9 @@ public class Sheet {
 
   }
 
+  /**
+   * Checke ob das Intarray eine große Straße ist
+   */
   public static boolean grstrcheck(int[] würfel) {
     Arrays.sort(würfel);
     int tmpnumber = würfel[0] - 1;
@@ -187,6 +174,9 @@ public class Sheet {
     return true;
   }
 
+  /**
+   * Checke ob das Intarray eine kleine Straße ist
+   */
   public static boolean klstrcheck(int[] würfel) {
     Arrays.sort(würfel);
 
@@ -236,6 +226,9 @@ public class Sheet {
     return vers1_ex || vers2_ex; // logisches oder denn es reicht wenn eine funktioniert
   }
 
+  /**
+   * Checke ob ein Kniffel im Intarray vorliegt
+   */
   public static boolean kniffelcheck(int[] würfel) {
     int checkval = würfel[0];
 
