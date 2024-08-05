@@ -1,6 +1,8 @@
 package src;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Sheet
@@ -106,6 +108,7 @@ public class Sheet {
   }
 
   public static boolean pasch4checker(int[] würfel) {
+    Arrays.sort(würfel);
     int[] vers1 = new int[4]; // 2 vers. von würfel, drop [0], drop[-1]
     int[] vers2 = new int[4];
     int counter = 0;
@@ -127,14 +130,48 @@ public class Sheet {
 
     return kniffelcheck(vers1) || kniffelcheck(vers2); // veroderung von kniffelcheck welches prüft ob alle zahlen
                                                        // gleich sind
-
   }
 
+  /**
+   * Checke ob ein Dreierpasch in einem Intarray ist
+   */
   public static boolean pasch3checker(int[] würfel) {
-    // TODO erst alle zahlen welche drin sind aufschreiben und dann ihre
-    // vorkommnisse zählen
-    // wenn mehr als 3 verschiedene zahlen = false
-    return false;
+    Arrays.sort(würfel);
+
+    int last_number = 0;
+    int counter = 0;
+    for (int x : würfel) {
+      if (x == last_number) {
+        counter += 1;
+      } else {
+        counter = 0;
+      }
+      last_number = x;
+    }
+    if (counter == 3) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * Checke ob ein Intarray ein "full_house" ist
+   */
+  public static boolean full_house_check(int[] würfel) {
+
+    // set lässt nur unterschiedliche elemente zu
+    Set<Integer> countset = new HashSet<>();
+    for (int x : würfel) {
+      countset.add(x);
+    }
+
+    // wenn set.size() == 2 dann muss es ein full_house sein
+    if (countset.size() == 2)
+      return true;
+    else
+      return false;
+
   }
 
   public static boolean grstrcheck(int[] würfel) {
