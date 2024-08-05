@@ -2,9 +2,13 @@ package src;
 
 public class Test {
 
-  private static boolean kniffel_test() {
+  public static final String ANSI_RESET = "\u001B[0m";
+  public static final String ANSI_RED = "\u001B[31m";
+  public static final String ANSI_GREEN = "\u001B[32m";
 
-    int[] kniffel = { 6, 6, 6, 5, 6 };
+  private static boolean kniffel_test() {
+    System.out.println("Sheet.kniffelcheck Test:");
+    int[] kniffel = { 6, 6, 6, 6, 6 };
     int[] nokniffel = { 1, 2, 3, 4, 5 };
 
     try {
@@ -12,9 +16,10 @@ public class Test {
 
       assert false == src.Sheet.kniffelcheck(nokniffel) : "False Assertation failed";
 
+      System.out.println(ANSI_GREEN + "Kniffel Assertation Completed" + ANSI_RESET);
       return true;
     } catch (AssertionError e) {
-      System.out.println("Kniffel Assertation Failed");
+      System.out.println(ANSI_RED + "Kniffel Assertation Failed" + ANSI_RESET);
       System.out.println(e.getMessage());
       return false;
     }
@@ -22,7 +27,7 @@ public class Test {
   }
 
   private static boolean pasch3_test() {
-
+    System.out.println("Sheet.pasch3checker Test: ");
     int[] pasch = { 6, 6, 6, 2, 3 };
     int[] nopasch = { 1, 2, 3, 4, 5 };
 
@@ -31,9 +36,10 @@ public class Test {
 
       assert false == src.Sheet.pasch3checker(nopasch) : "False Assertation Failed";
 
+      System.out.println(ANSI_GREEN + "Pasch3 Assertation Completed" + ANSI_RESET);
       return true;
     } catch (AssertionError e) {
-      System.out.println("Pasch3 Assertation Failed");
+      System.out.println(ANSI_RED + "Pasch3 Assertation Failed" + ANSI_RESET);
       System.out.println(e.getMessage());
       return false;
     }
@@ -46,8 +52,8 @@ public class Test {
     ClassLoader loader = ClassLoader.getSystemClassLoader();
     loader.setDefaultAssertionStatus(true);
 
-    System.out.println("kniffel_test: " + Test.kniffel_test());
-    System.out.println("----");
-    System.out.println("pasch3_test: " + Test.pasch3_test());
+    kniffel_test();
+    System.out.println("- - - - - - - - - ");
+    pasch3_test();
   }
 }
