@@ -123,20 +123,19 @@ public class Sheet {
     Arrays.sort(würfel);
 
     int last_number = 0;
-    int counter = 0;
+    int counter = 1;
     for (int x : würfel) {
       if (x == last_number) {
         counter += 1;
+        if (counter >= 3) {
+          return true;
+        }
       } else {
-        counter = 0;
+        counter = 1;
       }
       last_number = x;
     }
-    if (counter == 3) {
-      return true;
-    } else {
-      return false;
-    }
+    return false;
   }
 
   /**

@@ -28,7 +28,7 @@ public class Test {
 
   private static boolean pasch3_test() {
     System.out.println("Sheet.pasch3checker Test: ");
-    int[] pasch = { 6, 6, 6, 2, 3 };
+    int[] pasch = { 5, 5, 5, 2, 6 };
     int[] nopasch = { 1, 2, 3, 4, 5 };
 
     try {
