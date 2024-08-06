@@ -54,6 +54,11 @@ public class Sheet {
 
   /**
    * Zähle das Vorkommen von target in würfel
+   *
+   * @param würfel ist der Array von integern welches die würfel representiert
+   * @param nummer ist die nummer nach welcher gesucht wird
+   * @return gibt das vorkommen von nummer zurück
+   * @author Ricardo Güttner
    */
   public static int nummercounter(int[] würfel, int nummer) {
     int resultnumber = 0;
@@ -90,6 +95,10 @@ public class Sheet {
 
   /**
    * Checke ob ein 4erpasch in würfel ist
+   * 
+   * @param würfel ist der Array von integern welches die würfel representiert
+   * @return gibt einen Boolean zurück ob ein 4erpasch im Array ist
+   * @author Ricardo Güttner
    */
   public static boolean pasch4checker(int[] würfel) {
     Arrays.sort(würfel);
@@ -118,6 +127,10 @@ public class Sheet {
 
   /**
    * Checke ob ein Dreierpasch in einem Intarray ist
+   *
+   * @param würfel ist der Array von integern welches die würfel representiert
+   * @return gibt einen Boolean zurück ob ein 3erpasch im Array ist
+   * @author Ricardo Güttner
    */
   public static boolean pasch3checker(int[] würfel) {
     Arrays.sort(würfel);
@@ -140,6 +153,10 @@ public class Sheet {
 
   /**
    * Checke ob ein Intarray ein "full_house" ist
+   *
+   * @param würfel ist der Array von integern welches die würfel representiert
+   * @return gibt einen Boolean zurück ob ein Full House im Array ist
+   * @author Ricardo Güttner
    */
   public static boolean full_house_check(int[] würfel) {
 
@@ -159,6 +176,10 @@ public class Sheet {
 
   /**
    * Checke ob das Intarray eine große Straße ist
+   *
+   * @param würfel ist der Array von integern welches die würfel representiert
+   * @return gibt einen Boolean zurück ob eine große Straße im Array ist
+   * @author Ricardo Güttner
    */
   public static boolean grstrcheck(int[] würfel) {
     Arrays.sort(würfel);
@@ -175,6 +196,10 @@ public class Sheet {
 
   /**
    * Checke ob das Intarray eine kleine Straße ist
+   *
+   * @param würfel ist der Array von integern welches die würfel representiert
+   * @return gibt einen Boolean zurück ob eine kleine Straße im Array ist
+   * @author Ricardo Güttner
    */
   public static boolean klstrcheck(int[] würfel) {
     Arrays.sort(würfel);
@@ -227,6 +252,10 @@ public class Sheet {
 
   /**
    * Checke ob ein Kniffel im Intarray vorliegt
+   *
+   * @param würfel ist der Array von integern welches die würfel representiert
+   * @return gibt einen Boolean zurück ob ein Kniffel im Array ist
+   * @author Ricardo Güttner
    */
   public static boolean kniffelcheck(int[] würfel) {
     int checkval = würfel[0];
