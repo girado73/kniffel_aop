@@ -45,6 +45,31 @@ public class Test {
     }
   }
 
+  // ----------------------------------------------------------
+  private static boolean getSumvalues_test() {
+    System.out.println("Brain.getSumvalues Test: ");
+    int[] würfel = { 1, 2, 2, 2, 4 };
+    int[] sumvalues = src.Brain.getSumvalues(würfel);
+    try {
+      assert 6 == sumvalues[1] : "Count Values 2";
+      assert 1 == sumvalues[0] : "Count Values 1";
+      assert 0 == sumvalues[5] : "Count Values 6";
+
+      assert 11 == sumvalues[6] : "Paschcheck + sum";
+      assert 11 == sumvalues[7] : "Paschcheck2 + sum";
+
+      assert 0 == sumvalues[11] : "Kniffelcheck";
+      assert 11 == sumvalues[12] : "Chance(sum)";
+
+      System.out.println(ANSI_GREEN + "getSumvalues Assertation Succeeded" + ANSI_RESET);
+      return true;
+    } catch (AssertionError e) {
+      System.out.println(ANSI_RED + "getSumvalues Assertation Failed" + ANSI_RESET);
+      System.out.println(e.getMessage());
+      return false;
+    }
+  }
+
   /**
    * Ausführen mit java -ea Test.java
    */
@@ -55,5 +80,7 @@ public class Test {
     kniffel_test();
     System.out.println("- - - - - - - - - ");
     pasch3_test();
+    System.out.println("- - - - - - - - - ");
+    getSumvalues_test();
   }
 }

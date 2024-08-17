@@ -52,6 +52,25 @@ public class Sheet {
     return returnstring;
   }
 
+  // TODO hier geht bestimmt auch ein Oneliner
+  public static int sum(int[] würfel) {
+    int returnnumber = 0;
+    for (int number : würfel) {
+      returnnumber += number;
+    }
+    return returnnumber;
+  }
+
+  public static int sumIf(int[] würfel, boolean checker) {
+    int returnnumber = 0;
+    if (checker) {
+      for (int number : würfel) {
+        returnnumber += number;
+      }
+    }
+    return returnnumber;
+  }
+
   /**
    * Zähle das Vorkommen von target in würfel
    */
@@ -74,13 +93,11 @@ public class Sheet {
    *         aller würfel
    * @author Ricardo Güttner
    */
-  public static int paschcounter(int[] würfel, int target) {
+  public static int paschcounter(int[] würfel) {
     int resultnumber = 0;
     if (pasch4checker(würfel) || pasch3checker(würfel)) {
       for (int number : würfel) {
-        if (number == target) {
-          resultnumber += number;
-        }
+        resultnumber += number;
       }
       return resultnumber; // returnt mit summe aller würfel
     } else {
