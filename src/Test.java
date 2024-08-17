@@ -20,8 +20,8 @@ public class Test {
     int[] würfel2 = { 1, 3, 3, 3, 3 };
 
     try {
-      assert 3 == src.Sheet.nummercounter(würfel, 4) : "True Assertation Failed";
-      assert 4 == src.Sheet.nummercounter(würfel2, 3) : "True Assertation2 Failed";
+      assert 12 == src.Sheet.nummercounter(würfel, 4) : "True Assertation Failed";
+      assert 12 == src.Sheet.nummercounter(würfel2, 3) : "True Assertation2 Failed";
       successPrint("Nummercounter Test Succeeded");
       return true;
     } catch (AssertionError e) {
