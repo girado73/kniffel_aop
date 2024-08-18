@@ -46,6 +46,9 @@ public class Test {
   }
 
   // ----------------------------------------------------------
+  /**
+   * Teste die Brain.getSumvalues MethodExitEvent
+   */
   private static boolean getSumvalues_test() {
     System.out.println("Brain.getSumvalues Test: ");
     int[] würfel = { 1, 2, 2, 2, 4 };
