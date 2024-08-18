@@ -178,51 +178,41 @@ public class Sheet {
    */
   public static boolean klstrcheck(int[] würfel) {
     Arrays.sort(würfel);
+    // Entfernen von Duplikaten und Sortieren des Arrays
+    int[] uniqueDice = Arrays.stream(würfel).distinct().sorted().toArray();
 
-    int[] vers1 = new int[4]; // 2 vers. von würfel, drop [0], drop[-1]
-    int[] vers2 = new int[4];
-    int counter = 0;
+    // Alle möglichen kleinen Straßen
+    int[][] smallStraights = {
+        { 1, 2, 3, 4 },
+        { 2, 3, 4, 5 },
+        { 3, 4, 5, 6 }
+    };
 
-    // erstellen der Listen
-    for (int x : würfel) {
-      if (counter == 0) {
-        vers2[counter] = x;
-      } else {
-        if (counter == würfel.length - 1) {
-          vers1[counter - 1] = x;
-        } else {
-          vers1[counter - 1] = x;
-          vers2[counter] = x;
+    // Überprüfung, ob eine der kleinen Straßen im Array enthalten ist
+    for (int[] straight : smallStraights) {
+      if (containsSubArray(uniqueDice, straight)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  // Hilfsmethode, die überprüft, ob das große Array das kleine Array enthält
+  private static boolean containsSubArray(int[] array, int[] subArray) {
+    for (int i = 0; i <= array.length - subArray.length; i++) {
+      boolean found = true;
+      for (int j = 0; j < subArray.length; j++) {
+        if (array[i + j] != subArray[j]) {
+          found = false;
+          break;
         }
       }
-      counter++;
-    }
-
-    // checken der Listen:
-    if (vers1.length != vers2.length) {
-      throw new ArrayIndexOutOfBoundsException("Listen sind nicht gleich lang");
-    }
-
-    // variablen welchen den letzten wert von versx[i] halten
-    int tmp_vers1 = 0;
-    int tmp_vers2 = 0;
-
-    // variablen welche festhalten ob der array noch im rennen ist
-    boolean vers1_ex = true;
-    boolean vers2_ex = true;
-    for (int i = 0; i < vers1.length; i++) { // ver1.length da sie gleich lang sein müssen
-      if (vers1[i] <= tmp_vers1) {
-        vers1_ex = false;
+      if (found) {
+        return true;
       }
-      if (vers2[i] <= tmp_vers2) {
-        vers2_ex = false;
-      }
-
-      tmp_vers1 = vers1[i];
-      tmp_vers2 = vers2[i];
     }
-
-    return vers1_ex || vers2_ex; // logisches oder denn es reicht wenn eine funktioniert
+    return false;
   }
 
   /**
