@@ -12,78 +12,41 @@ public class Brain extends Sheet {
   /**
    * Autoexecute all Funktions to instantly give proposal
    */
-  public Brain() {
-
+  public Brain(int[] würfel) {
+    printSumValues(würfel);
+    giveProp(würfel);
   }
 
   /**
    * Get a proposal on what option to take based on the dice you have
    */
-
   public static void giveProp(int[] würfel) {
-    // Nehmen wir an das wir nach nur nach den sum werten gehen
-    // Hier werden alle funktionen hintereinander auf würfel angewandt
-    // Danach werden die vorgeschlagen wo die größten werte bei rauskommen
-    // Dabei heißt 0 das es mit 0 eingetragen werden würde wenn die option gewählt
-
     int[] sumvalues = getSumvalues(würfel);
-    int[] indexValue = { -1, 0 };
+    int bestIndex = -1;
+    int maxValue = 0;
 
-    // wir machen hier fieldArrayLen - 1 da wir chance nicht mitnehmen
-    // wollen da das immer maximal/sum ist
+    // Check for the best option, ignoring the last field (assumed to be "chance")
     for (int i = 0; i < fieldArrayLen - 1; i++) {
-      // TODO hier muss noch aus dem sheet entnommen werden ob wert schon vergeben ist
-      // je nachdem wird sumvalues[i] verwertet oder nicht
-      if (sumvalues[i] >= indexValue[1]) { // TODO wir nehmen hier >= da der schwierigkeitsgrad nach unten hin steigt,
-                                           // ist das ok???
-        indexValue[0] = i; // Index setzen damit wir das Feld kennen
-        indexValue[1] = sumvalues[i]; // Value setzen damit wir den Wert kennen
+      // TODO hier muss aus dem Sheet entnommen werden, welche felder noch nicht
+      // vergeben sind
+      if (sumvalues[i] >= maxValue) { // TODO wir nehmen hier >= für da die schwierigkeit der felder nach unten hin
+                                      // steigt, hoffe das ist so ok
+        bestIndex = i;
+        maxValue = sumvalues[i];
       }
     }
-    // TODO ich seh hier bis jetzt keine andere möglichkeit als dieses Ungetüm
-    switch (indexValue[0]) {
-      case -1:
-        System.out.println("Something went wrong");
-        break;
-      case 0:
-        System.out.println("Einsen mit dem Wert: " + indexValue[1]);
-        break;
-      case 1:
-        System.out.println("Zweien mit dem Wert: " + indexValue[1]);
-        break;
-      case 2:
-        System.out.println("Dreien mit dem Wert: " + indexValue[1]);
-        break;
-      case 3:
-        System.out.println("Vieren mit dem Wert: " + indexValue[1]);
-        break;
-      case 4:
-        System.out.println("Fünfen mit dem Wert: " + indexValue[1]);
-        break;
-      case 5:
-        System.out.println("Sechsen mit dem Wert: " + indexValue[1]);
-        break;
-      case 6:
-        System.out.println("Dreierpasch mit dem Wert: " + indexValue[1]);
-        break;
-      case 7:
-        System.out.println("Viererpasch mit dem Wert: " + indexValue[1]);
-        break;
-      case 8:
-        System.out.println("Full House mit dem Wert: " + indexValue[1]);
-        break;
-      case 9:
-        System.out.println("Kleine Straße mit dem Wert: " + indexValue[1]);
-        break;
-      case 10:
-        System.out.println("Große Straße mit dem Wert: " + indexValue[1]);
-        break;
-      case 11:
-        System.out.println("Kniffel mit dem Wert: " + indexValue[1]);
-        break;
-      default:
-        System.out.println("We got somehow into default case");
-        break;
+
+    // Output result based on the bestIndex
+    String[] options = {
+        "Einsen", "Zweien", "Dreien", "Vieren", "Fünfen", "Sechsen",
+        "Dreierpasch", "Viererpasch", "Full House", "Kleine Straße",
+        "Große Straße", "Kniffel"
+    };
+
+    if (bestIndex >= 0 && bestIndex < options.length) {
+      System.out.println(options[bestIndex] + " mit dem Wert: " + maxValue);
+    } else {
+      System.out.println("Something went wrong");
     }
   }
 
@@ -110,7 +73,7 @@ public class Brain extends Sheet {
   public static void printSumValues(int[] würfel) {
     int[] sumvalues = getSumvalues(würfel);
 
-    System.err.println("Würfel: " + Arrays.toString(würfel));
+    System.out.println("Würfel: " + Arrays.toString(würfel));
 
     System.out.println("Einser: " + sumvalues[0]);
     System.out.println("Zweier: " + sumvalues[1]);
@@ -129,7 +92,7 @@ public class Brain extends Sheet {
   }
 
   public static void main(String[] args) {
-    int[] würfel = { 5, 2, 3, 4, 1 };
+    int[] würfel = { 2, 1, 2, 3, 4 };
     printSumValues(würfel);
     giveProp(würfel);
   }
