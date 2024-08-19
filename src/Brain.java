@@ -75,24 +75,20 @@ public class Brain extends Sheet {
 
     System.out.println("Würfel: " + Arrays.toString(würfel));
 
-    System.out.println("Einser: " + sumvalues[0]);
-    System.out.println("Zweier: " + sumvalues[1]);
-    System.out.println("Dreier: " + sumvalues[2]);
-    System.out.println("Vierer: " + sumvalues[3]);
-    System.out.println("Fünfer: " + sumvalues[4]);
-    System.out.println("Sechser: " + sumvalues[5]);
-    System.out.println("Dreierpasch: " + sumvalues[6]);
-    System.out.println("Viererpasch: " + sumvalues[7]);
-    System.out.println("Full House: " + sumvalues[8]);
-    System.out.println("Kleine Straße: " + sumvalues[9]);
-    System.out.println("Große Straße: " + sumvalues[10]);
-    System.out.println("Kniffel: " + sumvalues[11]);
-    System.out.println("Chance: " + sumvalues[12]);
+    // Output result based on the bestIndex
+    String[] options = {
+        "Einsen", "Zweien", "Dreien", "Vieren", "Fünfen", "Sechsen",
+        "Dreierpasch", "Viererpasch", "Full House", "Kleine Straße",
+        "Große Straße", "Kniffel", "Chance"
+    };
 
+    for (int i = 0; i < fieldArrayLen; i++) {
+      System.out.println(options[i] + ": " + sumvalues[i]);
+    }
   }
 
   public static void main(String[] args) {
-    int[] würfel = { 2, 1, 2, 3, 4 };
+    int[] würfel = { 1, 2, 2, 2, 4 };
     printSumValues(würfel);
     giveProp(würfel);
   }
