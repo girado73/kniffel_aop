@@ -40,5 +40,4 @@ giveProp :: [Int] -> IO String
 giveProp xs = do
   let sumVal = init $ getSumValues xs
   let maxVal = maximum sumVal
-  print $ elemIndex maxVal sumVal
   return $ options !! fromJust (elemIndex maxVal sumVal) ++ ": " ++ show maxVal

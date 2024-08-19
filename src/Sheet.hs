@@ -28,6 +28,7 @@ fullHouseCheck xs = sort (map length grouped) == [2, 3]
 
 -- Function to check if list is "grStr"
 grStrCheck :: (Ord a) => [a] -> Bool
+-- TODO das funktioniert nicht, da es auch [1,2,3,4,6] sein kann O.o
 grStrCheck xs = genericLength (nub xs) == 5
 
 -- Function to check if list is "klStr"
