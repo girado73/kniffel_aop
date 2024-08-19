@@ -9,8 +9,8 @@ sumIf xs b
   | otherwise = 0
 
 -- Function to count target in list
-nummercounter :: (Eq a) => [a] -> a -> Int
-nummercounter xs x = length $ filter (== x) xs
+nummercounter :: [Int] -> Int -> Int
+nummercounter xs x = x * length (filter (== x) xs)
 
 -- Funktion to check if any element occurs exactly 4 times in a list
 pasch4checker :: (Eq a) => [a] -> Bool
@@ -31,9 +31,10 @@ grStrCheck :: (Ord a) => [a] -> Bool
 grStrCheck xs = genericLength (nub xs) == 5
 
 -- Function to check if list is "klStr"
+-- TODO funktioniert nur teilweise
 klStrCheck :: (Num a, Ord a) => [a] -> Bool
 klStrCheck xs =
-  let noDup = sort $ nub xs
+  let noDup = drop 1 $ sort $ nub xs
    in noDup == [1, 2, 3, 4] || noDup == [2, 3, 4, 5] || noDup == [3, 4, 5, 6]
 
 -- Function to check if all elements are the same
