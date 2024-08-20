@@ -52,10 +52,16 @@ public class Sheet {
     return returnstring;
   }
 
+  /**
+   * Faltet einen int[] indem es die Summe aller Werte bildet
+   */
   public static int sum(int[] würfel) {
     return Arrays.stream(würfel).sum();
   }
 
+  /**
+   * Sum wenn checker true ist ansonten wird 0 zurück gegeben
+   */
   public static int sumIf(int[] würfel, boolean checker) {
     if (checker) {
       return sum(würfel);
@@ -232,7 +238,9 @@ public class Sheet {
     return false;
   }
 
-  // Hilfsmethode, die überprüft, ob das große Array das kleine Array enthält
+  /**
+   * Hilfsmethode, die überprüft, ob das große Array das kleine Array enthält
+   */
   private static boolean containsSubArray(int[] array, int[] subArray) {
     for (int i = 0; i <= array.length - subArray.length; i++) {
       boolean found = true;
