@@ -27,15 +27,13 @@ fullHouseCheck xs = sort (map length grouped) == [2, 3]
   grouped = group (sort xs)
 
 -- Function to check if list is "grStr"
-grStrCheck :: (Ord a) => [a] -> Bool
--- TODO das funktioniert nicht, da es auch [1,2,3,4,6] sein kann O.o
-grStrCheck xs = genericLength (nub xs) == 5
+grStrCheck :: (Ord a, Num a) => [a] -> Bool
+grStrCheck xs = genericLength (nub xs) == 5 && sort xs == [1, 2, 3, 4, 5] || sort xs == [2, 3, 4, 5, 6]
 
 -- Function to check if list is "klStr"
--- TODO funktioniert nur teilweise
 klStrCheck :: (Num a, Ord a) => [a] -> Bool
 klStrCheck xs =
-  let noDup = drop 1 $ sort $ nub xs
+  let noDup = sort $ nub xs
    in noDup == [1, 2, 3, 4] || noDup == [2, 3, 4, 5] || noDup == [3, 4, 5, 6]
 
 -- Function to check if all elements are the same
