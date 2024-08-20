@@ -96,6 +96,11 @@ public class View extends JFrame {
                 // Überprüfung der Eingabe, ob sie eine gültige Zahl ist
                 int inputNumber = Integer.parseInt(numberField.getText());
 
+                // Überprüfung, ob die Zahl positiv ist
+                if (inputNumber <= 0) {
+                    throw new IllegalArgumentException("Die Zahl muss positiv und größer als null sein.");
+                }
+
                 // Würfeln mehrerer Würfel basierend auf der eingegebenen Zahl
                 int[] rollResults = dice.rollMultiple(inputNumber);
 
@@ -113,6 +118,9 @@ public class View extends JFrame {
             } catch (NumberFormatException ex) {
                 // Fehlermeldung anzeigen, wenn die Eingabe keine gültige Zahl ist
                 JOptionPane.showMessageDialog(this, "Bitte eine gültige Zahl eingeben.", "Fehler", JOptionPane.ERROR_MESSAGE);
+            } catch (IllegalArgumentException ex) {
+                // Fehlermeldung anzeigen, wenn die Eingabe eine negative oder Nullzahl ist
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             // Fehlermeldung anzeigen, wenn die maximale Anzahl an Würfen erreicht ist
