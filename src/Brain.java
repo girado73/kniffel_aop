@@ -29,8 +29,7 @@ public class Brain extends Sheet {
     for (int i = 0; i < fieldArrayLen - 1; i++) {
       // TODO hier muss aus dem Sheet entnommen werden, welche felder noch nicht
       // vergeben sind
-      if (sumvalues[i] >= maxValue) { // TODO wir nehmen hier >= für da die schwierigkeit der felder nach unten hin
-                                      // steigt, hoffe das ist so ok
+      if (sumvalues[i] >= maxValue) {
         bestIndex = i;
         maxValue = sumvalues[i];
       }
@@ -51,8 +50,6 @@ public class Brain extends Sheet {
   }
 
   public static int[] getSumvalues(int[] würfel) {
-    // TODO vielleicht ist ein array aus (Valuename, Valuesum) besser
-    // Es gibt keine tupel o.O
     int[] sumvalues = new int[13];
 
     for (int i = 0; i < 6; i++) {
