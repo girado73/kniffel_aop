@@ -7,6 +7,9 @@ import java.util.Arrays;
  */
 public class Brain extends Sheet {
 
+  /**
+   * Enthält die Feldanzahl für das Sheet
+   */
   private static final int fieldArrayLen = 13;
 
   /**
@@ -49,6 +52,9 @@ public class Brain extends Sheet {
     }
   }
 
+  /**
+   * Wendet alle Checker für die Felder an und fasst es in einem int[] zusammen
+   */
   public static int[] getSumvalues(int[] würfel) {
     int[] sumvalues = new int[13];
 
@@ -67,6 +73,9 @@ public class Brain extends Sheet {
     return sumvalues;
   }
 
+  /**
+   * Printfunktion für die bessere Anschauung der Felder
+   */
   public static void printSumValues(int[] würfel) {
     int[] sumvalues = getSumvalues(würfel);
 

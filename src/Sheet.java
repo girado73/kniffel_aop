@@ -52,10 +52,25 @@ public class Sheet {
     return returnstring;
   }
 
+  /**
+   * Faltet einen int[] indem es die Summe aller Werte bildet
+   *
+   * @param würfel Array welcher zusammengefasst werden soll
+   * @return gibt die Summe des int[] zurück
+   * @author Ricardo Güttner
+   */
   public static int sum(int[] würfel) {
     return Arrays.stream(würfel).sum();
   }
 
+  /**
+   * Sum wenn checker true ist ansonten wird 0 zurück gegeben
+   *
+   * @param würfel  Array welcher zusammengefasst werden soll
+   * @param checker Boolean welche entscheidet ob die sum gebildet wird
+   * @return gibt die Summe des int[] zurück
+   * @author Ricardo Güttner
+   */
   public static int sumIf(int[] würfel, boolean checker) {
     if (checker) {
       return sum(würfel);
@@ -65,6 +80,11 @@ public class Sheet {
 
   /**
    * Zähle das Vorkommen von target in würfel
+   *
+   * @param würfel ist der Array von integern welches die würfel representiert
+   * @param nummer ist die nummer nach welcher gesucht wird
+   * @return gibt das vorkommen von nummer zurück
+   * @author Ricardo Güttner
    */
   public static int nummercounter(int[] würfel, int nummer) {
     int resultnumber = 0;
@@ -80,7 +100,6 @@ public class Sheet {
    * Zähle alle Würfel zusammen falls ein Pasch innerhalb der Würfel ist
    *
    * @param würfel ist der Array von integern welches die würfel representiert
-   * @param target ist die Zahl nach welcher geguckt wird
    * @return gibt entweder 0 zurück wenn kein Pasch enthalten ist oder die Summe
    *         aller würfel
    * @author Ricardo Güttner
@@ -99,6 +118,10 @@ public class Sheet {
 
   /**
    * Checke ob ein 4erpasch in würfel ist
+   * 
+   * @param würfel ist der Array von integern welches die würfel representiert
+   * @return gibt einen Boolean zurück ob ein 4erpasch im Array ist
+   * @author Ricardo Güttner
    */
   public static boolean pasch4checker(int[] würfel) {
     Arrays.sort(würfel);
@@ -127,6 +150,10 @@ public class Sheet {
 
   /**
    * Checke ob ein Dreierpasch in einem Intarray ist
+   *
+   * @param würfel ist der Array von integern welches die würfel representiert
+   * @return gibt einen Boolean zurück ob ein 3erpasch im Array ist
+   * @author Ricardo Güttner
    */
   public static boolean pasch3checker(int[] würfel) {
     Arrays.sort(würfel);
@@ -149,6 +176,10 @@ public class Sheet {
 
   /**
    * Checke ob ein Intarray ein "full_house" ist
+   *
+   * @param würfel ist der Array von integern welches die würfel representiert
+   * @return gibt einen Boolean zurück ob ein Full House im Array ist
+   * @author Ricardo Güttner
    */
   public static boolean full_house_check(int[] würfel) {
 
@@ -168,6 +199,10 @@ public class Sheet {
 
   /**
    * Checke ob das Intarray eine große Straße ist
+   *
+   * @param würfel ist der Array von integern welches die würfel representiert
+   * @return gibt einen Boolean zurück ob eine große Straße im Array ist
+   * @author Ricardo Güttner
    */
   public static boolean grstrcheck(int[] würfel) {
     Arrays.sort(würfel);
@@ -184,6 +219,10 @@ public class Sheet {
 
   /**
    * Checke ob das Intarray eine kleine Straße ist
+   *
+   * @param würfel ist der Array von integern welches die würfel representiert
+   * @return gibt einen Boolean zurück ob eine kleine Straße im Array ist
+   * @author Ricardo Güttner
    */
   public static boolean klstrcheck(int[] würfel) {
     Arrays.sort(würfel);
@@ -207,7 +246,14 @@ public class Sheet {
     return false;
   }
 
-  // Hilfsmethode, die überprüft, ob das große Array das kleine Array enthält
+  /**
+   * Hilfsmethode, die überprüft, ob das große Array das kleine Array enthält
+   *
+   * @param array    der "größere Array"
+   * @param subArray der "kleinere Array" welcher im größeren enthalten sein soll
+   * @return true wenn subArray Teil von array sonst false
+   * @author Ricardo Güttner
+   */
   private static boolean containsSubArray(int[] array, int[] subArray) {
     for (int i = 0; i <= array.length - subArray.length; i++) {
       boolean found = true;
@@ -226,6 +272,10 @@ public class Sheet {
 
   /**
    * Checke ob ein Kniffel im Intarray vorliegt
+   *
+   * @param würfel ist der Array von integern welches die würfel representiert
+   * @return gibt einen Boolean zurück ob ein Kniffel im Array ist
+   * @author Ricardo Güttner
    */
   public static boolean kniffelcheck(int[] würfel) {
     int checkval = würfel[0];
