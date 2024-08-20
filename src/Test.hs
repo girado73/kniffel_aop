@@ -42,11 +42,8 @@ test_digs x
 main :: IO ()
 main = do
   quickCheckResult prop_rollMultipleCheck
-    >>= \r ->
-      print r
-        >> quickCheckResult prop_grStrCheck
-        >>= \r ->
-          print r
-            >> quickCheckResult test_digs
-            >>= \r ->
-              print r
+    >>= print
+    >> quickCheckResult prop_grStrCheck
+    >>= print
+    >> quickCheckResult test_digs
+    >>= print
