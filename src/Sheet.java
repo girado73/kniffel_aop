@@ -54,6 +54,10 @@ public class Sheet {
 
   /**
    * Faltet einen int[] indem es die Summe aller Werte bildet
+   *
+   * @param würfel Array welcher zusammengefasst werden soll
+   * @return gibt die Summe des int[] zurück
+   * @author Ricardo Güttner
    */
   public static int sum(int[] würfel) {
     return Arrays.stream(würfel).sum();
@@ -61,6 +65,11 @@ public class Sheet {
 
   /**
    * Sum wenn checker true ist ansonten wird 0 zurück gegeben
+   *
+   * @param würfel  Array welcher zusammengefasst werden soll
+   * @param checker Boolean welche entscheidet ob die sum gebildet wird
+   * @return gibt die Summe des int[] zurück
+   * @author Ricardo Güttner
    */
   public static int sumIf(int[] würfel, boolean checker) {
     if (checker) {
@@ -91,7 +100,6 @@ public class Sheet {
    * Zähle alle Würfel zusammen falls ein Pasch innerhalb der Würfel ist
    *
    * @param würfel ist der Array von integern welches die würfel representiert
-   * @param target ist die Zahl nach welcher geguckt wird
    * @return gibt entweder 0 zurück wenn kein Pasch enthalten ist oder die Summe
    *         aller würfel
    * @author Ricardo Güttner
@@ -240,6 +248,11 @@ public class Sheet {
 
   /**
    * Hilfsmethode, die überprüft, ob das große Array das kleine Array enthält
+   *
+   * @param array    der "größere Array"
+   * @param subArray der "kleinere Array" welcher im größeren enthalten sein soll
+   * @return true wenn subArray Teil von array sonst false
+   * @author Ricardo Güttner
    */
   private static boolean containsSubArray(int[] array, int[] subArray) {
     for (int i = 0; i <= array.length - subArray.length; i++) {
