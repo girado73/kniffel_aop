@@ -52,23 +52,15 @@ public class Sheet {
     return returnstring;
   }
 
-  // TODO hier geht bestimmt auch ein Oneliner
   public static int sum(int[] würfel) {
-    int returnnumber = 0;
-    for (int number : würfel) {
-      returnnumber += number;
-    }
-    return returnnumber;
+    return Arrays.stream(würfel).sum();
   }
 
   public static int sumIf(int[] würfel, boolean checker) {
-    int returnnumber = 0;
     if (checker) {
-      for (int number : würfel) {
-        returnnumber += number;
-      }
-    }
-    return returnnumber;
+      return sum(würfel);
+    } else
+      return 0;
   }
 
   /**
