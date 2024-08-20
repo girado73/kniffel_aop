@@ -52,6 +52,17 @@ public class Sheet {
     return returnstring;
   }
 
+  public static int sum(int[] würfel) {
+    return Arrays.stream(würfel).sum();
+  }
+
+  public static int sumIf(int[] würfel, boolean checker) {
+    if (checker) {
+      return sum(würfel);
+    } else
+      return 0;
+  }
+
   /**
    * Zähle das Vorkommen von target in würfel
    */
@@ -74,13 +85,11 @@ public class Sheet {
    *         aller würfel
    * @author Ricardo Güttner
    */
-  public static int paschcounter(int[] würfel, int target) {
+  public static int paschcounter(int[] würfel) {
     int resultnumber = 0;
     if (pasch4checker(würfel) || pasch3checker(würfel)) {
       for (int number : würfel) {
-        if (number == target) {
-          resultnumber += number;
-        }
+        resultnumber += number;
       }
       return resultnumber; // returnt mit summe aller würfel
     } else {
