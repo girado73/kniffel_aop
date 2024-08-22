@@ -53,7 +53,38 @@ public class Sheet {
   }
 
   /**
+   * Faltet einen int[] indem es die Summe aller Werte bildet
+   *
+   * @param würfel Array welcher zusammengefasst werden soll
+   * @return gibt die Summe des int[] zurück
+   * @author Ricardo Güttner
+   */
+  public static int sum(int[] würfel) {
+    return Arrays.stream(würfel).sum();
+  }
+
+  /**
+   * Sum wenn checker true ist ansonten wird 0 zurück gegeben
+   *
+   * @param würfel  Array welcher zusammengefasst werden soll
+   * @param checker Boolean welche entscheidet ob die sum gebildet wird
+   * @return gibt die Summe des int[] zurück
+   * @author Ricardo Güttner
+   */
+  public static int sumIf(int[] würfel, boolean checker) {
+    if (checker) {
+      return sum(würfel);
+    } else
+      return 0;
+  }
+
+  /**
    * Zähle das Vorkommen von target in würfel
+   *
+   * @param würfel ist der Array von integern welches die würfel representiert
+   * @param nummer ist die nummer nach welcher gesucht wird
+   * @return gibt das vorkommen von nummer zurück
+   * @author Ricardo Güttner
    */
   public static int nummercounter(int[] würfel, int nummer) {
     int resultnumber = 0;
@@ -69,18 +100,15 @@ public class Sheet {
    * Zähle alle Würfel zusammen falls ein Pasch innerhalb der Würfel ist
    *
    * @param würfel ist der Array von integern welches die würfel representiert
-   * @param target ist die Zahl nach welcher geguckt wird
    * @return gibt entweder 0 zurück wenn kein Pasch enthalten ist oder die Summe
    *         aller würfel
    * @author Ricardo Güttner
    */
-  public static int paschcounter(int[] würfel, int target) {
+  public static int paschcounter(int[] würfel) {
     int resultnumber = 0;
     if (pasch4checker(würfel) || pasch3checker(würfel)) {
       for (int number : würfel) {
-        if (number == target) {
-          resultnumber += number;
-        }
+        resultnumber += number;
       }
       return resultnumber; // returnt mit summe aller würfel
     } else {
@@ -90,6 +118,10 @@ public class Sheet {
 
   /**
    * Checke ob ein 4erpasch in würfel ist
+   * 
+   * @param würfel ist der Array von integern welches die würfel representiert
+   * @return gibt einen Boolean zurück ob ein 4erpasch im Array ist
+   * @author Ricardo Güttner
    */
   public static boolean pasch4checker(int[] würfel) {
     Arrays.sort(würfel);
@@ -118,6 +150,10 @@ public class Sheet {
 
   /**
    * Checke ob ein Dreierpasch in einem Intarray ist
+   *
+   * @param würfel ist der Array von integern welches die würfel representiert
+   * @return gibt einen Boolean zurück ob ein 3erpasch im Array ist
+   * @author Ricardo Güttner
    */
   public static boolean pasch3checker(int[] würfel) {
     Arrays.sort(würfel);
@@ -140,6 +176,10 @@ public class Sheet {
 
   /**
    * Checke ob ein Intarray ein "full_house" ist
+   *
+   * @param würfel ist der Array von integern welches die würfel representiert
+   * @return gibt einen Boolean zurück ob ein Full House im Array ist
+   * @author Ricardo Güttner
    */
   public static boolean full_house_check(int[] würfel) {
 
@@ -159,6 +199,10 @@ public class Sheet {
 
   /**
    * Checke ob das Intarray eine große Straße ist
+   *
+   * @param würfel ist der Array von integern welches die würfel representiert
+   * @return gibt einen Boolean zurück ob eine große Straße im Array ist
+   * @author Ricardo Güttner
    */
   public static boolean grstrcheck(int[] würfel) {
     Arrays.sort(würfel);
@@ -175,58 +219,63 @@ public class Sheet {
 
   /**
    * Checke ob das Intarray eine kleine Straße ist
+   *
+   * @param würfel ist der Array von integern welches die würfel representiert
+   * @return gibt einen Boolean zurück ob eine kleine Straße im Array ist
+   * @author Ricardo Güttner
    */
   public static boolean klstrcheck(int[] würfel) {
     Arrays.sort(würfel);
+    // Entfernen von Duplikaten und Sortieren des Arrays
+    int[] uniqueDice = Arrays.stream(würfel).distinct().sorted().toArray();
 
-    int[] vers1 = new int[4]; // 2 vers. von würfel, drop [0], drop[-1]
-    int[] vers2 = new int[4];
-    int counter = 0;
+    // Alle möglichen kleinen Straßen
+    int[][] smallStraights = {
+        { 1, 2, 3, 4 },
+        { 2, 3, 4, 5 },
+        { 3, 4, 5, 6 }
+    };
 
-    // erstellen der Listen
-    for (int x : würfel) {
-      if (counter == 0) {
-        vers2[counter] = x;
-      } else {
-        if (counter == würfel.length - 1) {
-          vers1[counter - 1] = x;
-        } else {
-          vers1[counter - 1] = x;
-          vers2[counter] = x;
+    // Überprüfung, ob eine der kleinen Straßen im Array enthalten ist
+    for (int[] straight : smallStraights) {
+      if (containsSubArray(uniqueDice, straight)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  /**
+   * Hilfsmethode, die überprüft, ob das große Array das kleine Array enthält
+   *
+   * @param array    der "größere Array"
+   * @param subArray der "kleinere Array" welcher im größeren enthalten sein soll
+   * @return true wenn subArray Teil von array sonst false
+   * @author Ricardo Güttner
+   */
+  private static boolean containsSubArray(int[] array, int[] subArray) {
+    for (int i = 0; i <= array.length - subArray.length; i++) {
+      boolean found = true;
+      for (int j = 0; j < subArray.length; j++) {
+        if (array[i + j] != subArray[j]) {
+          found = false;
+          break;
         }
       }
-      counter++;
-    }
-
-    // checken der Listen:
-    if (vers1.length != vers2.length) {
-      throw new ArrayIndexOutOfBoundsException("Listen sind nicht gleich lang");
-    }
-
-    // variablen welchen den letzten wert von versx[i] halten
-    int tmp_vers1 = 0;
-    int tmp_vers2 = 0;
-
-    // variablen welche festhalten ob der array noch im rennen ist
-    boolean vers1_ex = true;
-    boolean vers2_ex = true;
-    for (int i = 0; i < vers1.length; i++) { // ver1.length da sie gleich lang sein müssen
-      if (vers1[i] <= tmp_vers1) {
-        vers1_ex = false;
+      if (found) {
+        return true;
       }
-      if (vers2[i] <= tmp_vers2) {
-        vers2_ex = false;
-      }
-
-      tmp_vers1 = vers1[i];
-      tmp_vers2 = vers2[i];
     }
-
-    return vers1_ex || vers2_ex; // logisches oder denn es reicht wenn eine funktioniert
+    return false;
   }
 
   /**
    * Checke ob ein Kniffel im Intarray vorliegt
+   *
+   * @param würfel ist der Array von integern welches die würfel representiert
+   * @return gibt einen Boolean zurück ob ein Kniffel im Array ist
+   * @author Ricardo Güttner
    */
   public static boolean kniffelcheck(int[] würfel) {
     int checkval = würfel[0];
