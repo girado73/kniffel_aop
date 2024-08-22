@@ -14,6 +14,37 @@ public class Test {
     System.out.println(ANSI_GREEN + msg + ANSI_RESET);
   }
 
+  private static boolean sum_test() {
+    System.out.println("Sheet.sum Test: ");
+    int[] würfel = { 1, 2, 3, 4, 5 };
+
+    try {
+      assert 15 == src.Sheet.sum(würfel) : "True Assertation Failed";
+      successPrint("Sum Test Succeeded");
+      return true;
+    } catch (AssertionError e) {
+      errorPrint("Sum Test failed");
+      System.out.println(e.getMessage());
+      return false;
+    }
+  };
+
+  private static boolean sumIf_test() {
+    System.out.println("Sheet.sumIf Test: ");
+    int[] würfel = { 1, 2, 3, 4, 5 };
+
+    try {
+      assert 15 == src.Sheet.sumIf(würfel, true) : "True Assertation Failed";
+      assert 0 == src.Sheet.sumIf(würfel, false) : "False Assertation Failed";
+      successPrint("Sum Test Succeeded");
+      return true;
+    } catch (AssertionError e) {
+      errorPrint("Sum Test failed");
+      System.out.println(e.getMessage());
+      return false;
+    }
+  };
+
   private static boolean nummercounter_test() {
     System.out.println("Nummercounter Test:");
     int[] würfel = { 1, 2, 4, 4, 4 };
@@ -139,6 +170,8 @@ public class Test {
   }
 
   // ----------------------------------------------------------
+  // Brain.java Tests
+
   /**
    * Teste die Brain.getSumvalues MethodExitEvent
    */
@@ -166,6 +199,8 @@ public class Test {
     }
   }
 
+  // ----------------------------------------------------------
+  // executing Tests
   /**
    * Ausführen mit java -ea Test.java
    */
@@ -186,5 +221,11 @@ public class Test {
     grstrcheck_test();
     System.out.println("- - - - - - - - - ");
     nummercounter_test();
+    System.out.println("- - - - - - - - - ");
+    sum_test();
+    System.out.println("- - - - - - - - - ");
+    sumIf_test();
+    System.out.println("- - - - - - - - - ");
+    getSumvalues_test();
   }
 }

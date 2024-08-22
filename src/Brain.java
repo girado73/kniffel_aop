@@ -23,6 +23,8 @@ public class Brain extends Sheet {
   /**
    * Get a proposal on what option to take based on the dice you have
    */
+  // TODO hier vielleicht kein void
+  // dann können wir weiter damit arbeiten
   public static void giveProp(int[] würfel) {
     int[] sumvalues = getSumvalues(würfel);
     int bestIndex = -1;
