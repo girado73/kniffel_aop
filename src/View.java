@@ -96,9 +96,9 @@ public class View extends JFrame {
                 // Überprüfung der Eingabe, ob sie eine gültige Zahl ist
                 int inputNumber = Integer.parseInt(numberField.getText());
 
-                // Überprüfung, ob die Zahl positiv ist
-                if (inputNumber <= 0) {
-                    throw new IllegalArgumentException("Die Zahl muss positiv und größer als null sein.");
+                // Überprüfung, ob die Zahl zwischen 1 und 5 liegt
+                if (inputNumber < 1 || inputNumber > 5) {
+                    throw new IllegalArgumentException("Die Zahl muss zwischen 1 und 5 liegen.");
                 }
 
                 // Würfeln mehrerer Würfel basierend auf der eingegebenen Zahl
@@ -119,7 +119,7 @@ public class View extends JFrame {
                 // Fehlermeldung anzeigen, wenn die Eingabe keine gültige Zahl ist
                 JOptionPane.showMessageDialog(this, "Bitte eine gültige Zahl eingeben.", "Fehler", JOptionPane.ERROR_MESSAGE);
             } catch (IllegalArgumentException ex) {
-                // Fehlermeldung anzeigen, wenn die Eingabe eine negative oder Nullzahl ist
+                // Fehlermeldung anzeigen, wenn die Eingabe außerhalb des Bereichs liegt
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
             }
         } else {
