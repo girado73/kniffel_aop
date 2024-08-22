@@ -1,3 +1,5 @@
+package src;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -23,6 +25,8 @@ public class View extends JFrame {
     private int counter;
     private final int maxRolls = 3; // Maximale Anzahl an Würfen
     private Dice dice; // Instanz der Dice-Klasse
+    private Sheet[] sheetlist;
+    private JLabel sheetdisplay;
 
     /**
      * Konstruktor für die View Klasse.
@@ -37,6 +41,8 @@ public class View extends JFrame {
 
         // Würfel-Instanz initialisieren
         dice = new Dice();
+        final int playernumber = 3;
+        sheetlist = new Sheet[playernumber];
 
         // GUI-Komponenten initialisieren
         alertButton = new JButton("Alert");
@@ -44,6 +50,7 @@ public class View extends JFrame {
         updateAndResetButton = new JButton("Update Sheet and Reset Counter");
         numberField = new JTextField(10);
         counterLabel = new JLabel("Rolls: 0");
+        sheetdisplay = new JLabel("<html><body>" + sheetlist[0].sheet_to_string().replace("\n", "<br>") + "</body></html>");
 
         // Komponenten dem Fenster hinzufügen
         add(alertButton);
@@ -51,6 +58,7 @@ public class View extends JFrame {
         add(rollDiceButton);
         add(counterLabel);
         add(updateAndResetButton);
+        add(sheetdisplay);
 
         // ActionListener für Alert Button
         alertButton.addActionListener(new ActionListener() {
