@@ -47,3 +47,5 @@ main = do
     >>= print
     >> quickCheckResult test_digs
     >>= print
+    >> quickCheckResult test_roll
+    >>= print
