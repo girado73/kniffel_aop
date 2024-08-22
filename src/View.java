@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 /**
  * View
@@ -9,12 +10,8 @@ import java.awt.event.ActionListener;
  * 
  * @author Max Hollerbaum
  */
-
-/**
- * View
- * Here is the GUI constructed
- */
 public class View extends JFrame {
+    // GUI-Komponenten
     private JButton alertButton;
     private JButton rollDiceButton;
     private JButton updateAndResetButton;
@@ -41,7 +38,7 @@ public class View extends JFrame {
         // GUI-Komponenten initialisieren
         alertButton = new JButton("Alert");
         rollDiceButton = new JButton("Roll Dice");
-        updateAndResetButton = new JButton("Update Sheet and Reset Counter");
+        updateAndResetButton = new JButton("Update Einser and Reset Counter");
         numberField = new JTextField(10);
         counterLabel = new JLabel("Rolls: 0");
 
@@ -54,6 +51,7 @@ public class View extends JFrame {
 
         // ActionListener für Alert Button
         alertButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 showAlert();
             }
@@ -61,6 +59,7 @@ public class View extends JFrame {
 
         // ActionListener für Roll Dice Button
         rollDiceButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 rollDice();
             }
@@ -68,6 +67,7 @@ public class View extends JFrame {
 
         // ActionListener für Update and Reset Button
         updateAndResetButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 updateAndReset();
             }
@@ -86,7 +86,8 @@ public class View extends JFrame {
     }
 
     /**
-     * Würfelt eine Zahl, zeigt sie an und aktualisiert den Counter.
+     * Würfelt eine Anzahl von Würfeln basierend auf der Eingabe im Textfeld,
+     * zeigt die Ergebnisse an und aktualisiert den Counter.
      * Aktiviert den Update-Button, wenn die maximale Anzahl an Würfen erreicht ist.
      */
     private void rollDice() {
@@ -94,10 +95,18 @@ public class View extends JFrame {
             try {
                 // Überprüfung der Eingabe, ob sie eine gültige Zahl ist
                 int inputNumber = Integer.parseInt(numberField.getText());
-                // Würfeln einer Zahl zwischen 1 und 6
-                int randomNumber = dice.roll();
-                // Anzeigen der gewürfelten Zahl
-                JOptionPane.showMessageDialog(this, "Gewürfelte Zahl: " + randomNumber, "Würfeln", JOptionPane.INFORMATION_MESSAGE);
+
+                // Überprüfung, ob die Zahl zwischen 1 und 5 liegt
+                if (inputNumber < 1 || inputNumber > 5) {
+                    throw new IllegalArgumentException("Die Zahl muss zwischen 1 und 5 liegen.");
+                }
+
+                // Würfeln mehrerer Würfel basierend auf der eingegebenen Zahl
+                int[] rollResults = dice.rollMultiple(inputNumber);
+
+                // Anzeigen der gewürfelten Zahlen
+                JOptionPane.showMessageDialog(this, "Gewürfelte Zahlen: " + Arrays.toString(rollResults), "Würfeln", JOptionPane.INFORMATION_MESSAGE);
+
                 // Counter erhöhen und aktualisieren
                 counter++;
                 counterLabel.setText("Rolls: " + counter);
@@ -109,6 +118,9 @@ public class View extends JFrame {
             } catch (NumberFormatException ex) {
                 // Fehlermeldung anzeigen, wenn die Eingabe keine gültige Zahl ist
                 JOptionPane.showMessageDialog(this, "Bitte eine gültige Zahl eingeben.", "Fehler", JOptionPane.ERROR_MESSAGE);
+            } catch (IllegalArgumentException ex) {
+                // Fehlermeldung anzeigen, wenn die Eingabe außerhalb des Bereichs liegt
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             // Fehlermeldung anzeigen, wenn die maximale Anzahl an Würfen erreicht ist
@@ -142,6 +154,7 @@ public class View extends JFrame {
      */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new View().setVisible(true);
             }
