@@ -33,9 +33,8 @@ public class Main {
 
         // Erstellen eines Arrays von Sheet-Instanzen
         Sheet[] sheets = new Sheet[numberOfPlayers];
-        for (int i = 0; i < numberOfPlayers; i++) {
-            sheets[i] = new Sheet(); // Erstellen einer neuen Sheet-Instanz für jeden Spieler
-        }
+        
+        
 
         // Erstellen der View-Instanz und übergeben des Sheet-Arrays
         View view = new View();
@@ -48,6 +47,13 @@ public class Main {
         // Spiel-Loop zur Überprüfung, ob das Sheet voll ist
         Timer gameTimer = new Timer(5000, e -> {
             boolean allSheetsFull = false;
+
+            for (Sheet sheet : sheets) {
+                if (!sheet.isFull()) {
+                    allSheetsFull = false;
+                    break;
+                }
+            }
 
             if (allSheetsFull) {
                 ((Timer) e.getSource()).stop(); // Stoppen des Timers, wenn alle Sheets voll sind
