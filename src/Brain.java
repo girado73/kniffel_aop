@@ -38,6 +38,7 @@ public class Brain extends Sheet {
       }
     }
 
+    // TODO options zu final und als klassenvariable machen
     // Output result based on the bestIndex
     String[] options = {
         "Einsen", "Zweien", "Dreien", "Vieren", "Fünfen", "Sechsen",
