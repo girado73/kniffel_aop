@@ -32,8 +32,9 @@ public class View extends JFrame {
   private JLabel sheetdisplay; // String mit den informationen über das derzeitige Sheet
   private JLabel dicedisplay; // Anzeige des derzeitigen Wurfs
   private JList<String> feldliste;
-  private JButton setListButton;
   private int feldindex; // Index des feldes in sheet welches verändert wird
+  private final String[] options = { "Einsen", "Zweien", "Dreien", "Vieren", "Fünfen", "Sechsen", "Dreierpasch",
+      "Viererpasch", "Full House", "Kleine Straße", "Große Straße", "Kniffel" };;
 
   /**
    * Konstruktor für die View Klasse.
@@ -59,13 +60,7 @@ public class View extends JFrame {
     counterLabel = new JLabel("Rolls: 0");
     sheetdisplay = new JLabel("<html><body>" + sheetlist[0].sheet_to_string().replace("\n", "<br>") + "</body></html>");
     dicedisplay = new JLabel("");
-    setListButton = new JButton("Eintragen");
     // Output result based on the bestIndex
-    String[] options = {
-        "Einsen", "Zweien", "Dreien", "Vieren", "Fünfen", "Sechsen",
-        "Dreierpasch", "Viererpasch", "Full House", "Kleine Straße",
-        "Große Straße", "Kniffel"
-    };
     feldliste = new JList<String>(options);
     feldindex = 0;
 
@@ -78,7 +73,6 @@ public class View extends JFrame {
     add(sheetdisplay);
     add(dicedisplay);
     add(feldliste);
-    add(setListButton);
 
     // ActionListener für Alert Button
     alertButton.addActionListener(new ActionListener() {
@@ -98,21 +92,15 @@ public class View extends JFrame {
     updateAndResetButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         updateAndReset();
-      }
-    });
-
-    setListButton.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        // TODO hier die Eintragung in das Sheet machen
-        setList();
         // update das sheetdisplay
+        // TODO hier statt [0] die "spielernummer eintragen"
         sheetdisplay.setText("<html><body>" + sheetlist[0].sheet_to_string().replace("\n", "<br>"));
       }
     });
+
     // ListSelectionListener für die Felderliste
     feldliste.addListSelectionListener(new ListSelectionListener() {
       public void valueChanged(ListSelectionEvent e) {
-        // TODO hier den Index an den Festlegen-Button weitergeben
         feldindex = feldliste.getSelectedIndex();
       }
     });
@@ -120,7 +108,6 @@ public class View extends JFrame {
     // Initialisierung des Counters und Deaktivierung des Update-Buttons
     counter = 0;
     updateAndResetButton.setEnabled(false);
-    setListButton.setEnabled(false);
   }
 
   /**
@@ -147,12 +134,11 @@ public class View extends JFrame {
         // Counter erhöhen und aktualisieren
         dicedisplay.setText("[" + randomNumber + "]");
         // setListButton wird nach dem dicedisplay ein value hat aktiviert
-        setListButton.setEnabled(true);
         counter++;
         counterLabel.setText("Rolls: " + counter);
 
         // Aktivieren des Update-Buttons, wenn maximale Anzahl erreicht ist
-        if (counter == maxRolls) {
+        if (counter > 0) {
           updateAndResetButton.setEnabled(true);
         }
       } catch (NumberFormatException ex) {
@@ -172,10 +158,10 @@ public class View extends JFrame {
    */
   private void updateAndReset() {
     // Beispiel: Update des 'einser' Felds im Sheet mit einer gewürfelten Zahl
-    Sheet.einser += dice.roll();
+    setList();
     resetCounter();
     // Anzeige des aktualisierten Werts des 'einser' Felds
-    JOptionPane.showMessageDialog(this, "Einser-Feld aktualisiert: " + Sheet.einser, "Update Sheet",
+    JOptionPane.showMessageDialog(this, options[feldindex] + "-Feld aktualisiert: ", "Update Sheet",
         JOptionPane.INFORMATION_MESSAGE);
   }
 
@@ -191,6 +177,8 @@ public class View extends JFrame {
   private void setList() {
     // hier wird der in feldindex festgelegte index auf Sheet.indexSet eingesetzt um
     // im Sheet das passende feld zu ändern
+
+    // TODO hier statt [0] die spielernummer eintragen
     sheetlist[0].indexSet(feldindex, Integer.parseInt(dicedisplay.getText().replace("[", "").replace("]", "")));
   }
 
