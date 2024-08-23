@@ -1,3 +1,4 @@
+package src;
 
 import java.util.Arrays;
 
@@ -6,17 +7,17 @@ import java.util.Arrays;
  * This class should represent the Dices
  */
 public class Dice {
-  private static final int Seiten = 6;
+  private static final int SEITEN = 6;
 
   /**
    * Erstelle eine Zufallsint zwischen 1 und 6
    */
   public int roll() {
-    return (int) (Math.random() * Seiten) + 1;
+    return (int) (Math.random() * SEITEN) + 1;
   }
 
   /**
-   * Erstelle einen Array von Zufallsints mit einer länge von numberOfDice
+   * Erstelle einen Array von Zufallsints mit einer Länge von numberOfDice
    */
   public int[] rollMultiple(int numberOfDice) {
     int[] results = new int[numberOfDice];
@@ -29,9 +30,7 @@ public class Dice {
 
   public static void main(String[] args) {
     Dice dice = new Dice();
-
     int[] results = dice.rollMultiple(5);
-
     System.out.println("Das Ergebnis der Würfel ist: " + Arrays.toString(results));
   }
 }
