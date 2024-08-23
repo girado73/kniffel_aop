@@ -337,5 +337,13 @@ public class Sheet {
     }
     return true;
   }
-
+  public boolean isFull() {
+    int[] fields = {einser, zweier, dreier, vierer, fünfer, sechser, dreierpasch, viererpasch, full_house, kleine_str, grosse_str, kniffel, chance};
+    for (int field : fields) {
+        if (field == 0) {
+            return false;
+        }
+    }
+    return true;
+}
 }
