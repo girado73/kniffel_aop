@@ -38,7 +38,7 @@ public class Main {
         }
 
         // Erstellen der View-Instanz und übergeben des Sheet-Arrays
-        View view = new View(sheets);
+        View view = new View();
 
         // Starten des GUI
         SwingUtilities.invokeLater(() -> {
@@ -47,14 +47,7 @@ public class Main {
 
         // Spiel-Loop zur Überprüfung, ob das Sheet voll ist
         Timer gameTimer = new Timer(5000, e -> {
-            boolean allSheetsFull = true;
-
-            for (Sheet sheet : sheets) {
-                if (!sheet.isFull()) {
-                    allSheetsFull = false;
-                    break;
-                }
-            }
+            boolean allSheetsFull = false;
 
             if (allSheetsFull) {
                 ((Timer) e.getSource()).stop(); // Stoppen des Timers, wenn alle Sheets voll sind

@@ -25,21 +25,17 @@ public class View extends JFrame {
     private int counter;
     private final int maxRolls = 3; // Maximale Anzahl an Würfen
     private Dice dice; // Instanz der Dice-Klasse
-    private Sheet[] sheets; // Array von Sheet-Instanzen
 
     /**
      * Konstruktor für die View Klasse.
      * Initialisiert das Fenster und die Komponenten.
-     * @param sheets Das Array von Sheet-Objekten, das übergeben wird.
      */
-    public View(Sheet[] sheets) {
+    public View() {
         // Fenster-Einstellungen
         setTitle("Kniffel Spiel");
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new FlowLayout());
-
-        this.sheets = sheets; // Setzen des Sheet-Arrays
 
         // Würfel-Instanz initialisieren
         dice = new Dice();
@@ -149,15 +145,7 @@ public class View extends JFrame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                // Erstellen eines Arrays von Sheet-Instanzen
-                int numberOfPlayers = 2; // Beispielwert, dieser sollte dynamisch sein
-                Sheet[] sheets = new Sheet[numberOfPlayers];
-                for (int i = 0; i < numberOfPlayers; i++) {
-                    sheets[i] = new Sheet(); // Erstellen einer neuen Sheet-Instanz für jeden Spieler
-                }
-
-                // Erstellen und Anzeigen der View mit dem Sheet-Array
-                new View(sheets).setVisible(true);
+                new View().setVisible(true);
             }
         });
     }
