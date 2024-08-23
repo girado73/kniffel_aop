@@ -30,12 +30,16 @@ public class Main {
         }
 
         scanner.close();
-        // Erstellen der Sheet-Instanz, die die Spielstände verwaltet
-        Sheet sheet = new Sheet();
 
-        // Erstellen der View-Instanz und übergeben der Sheet-Instanz
-        View view = new View();
-        
+        // Erstellen eines Arrays von Sheet-Instanzen
+        Sheet[] sheets = new Sheet[numberOfPlayers];
+        for (int i = 0; i < numberOfPlayers; i++) {
+            sheets[i] = new Sheet(); // Erstellen einer neuen Sheet-Instanz für jeden Spieler
+        }
+
+        // Erstellen der View-Instanz und übergeben des Sheet-Arrays
+        View view = new View(sheets);
+
         // Starten des GUI
         SwingUtilities.invokeLater(() -> {
             view.setVisible(true);
@@ -43,9 +47,18 @@ public class Main {
 
         // Spiel-Loop zur Überprüfung, ob das Sheet voll ist
         Timer gameTimer = new Timer(5000, e -> {
-            if (sheet.isFull()) {
-                ((Timer) e.getSource()).stop(); // Stoppen des Timers, wenn das Sheet voll ist
-                JOptionPane.showMessageDialog(null, "Das Spiel ist vorbei! Das Sheet ist voll.", "Spiel beendet", JOptionPane.INFORMATION_MESSAGE);
+            boolean allSheetsFull = true;
+
+            for (Sheet sheet : sheets) {
+                if (!sheet.isFull()) {
+                    allSheetsFull = false;
+                    break;
+                }
+            }
+
+            if (allSheetsFull) {
+                ((Timer) e.getSource()).stop(); // Stoppen des Timers, wenn alle Sheets voll sind
+                JOptionPane.showMessageDialog(null, "Das Spiel ist vorbei! Alle Sheets sind voll.", "Spiel beendet", JOptionPane.INFORMATION_MESSAGE);
             }
         });
         gameTimer.start();

@@ -288,18 +288,12 @@ public class Sheet {
     return true;
   }
   public boolean isFull() {
-    return einser != 0 &&
-           zweier != 0 &&
-           dreier != 0 &&
-           vierer != 0 &&
-           fünfer != 0 &&
-           sechser != 0 &&
-           dreierpasch != 0 &&
-           viererpasch != 0 &&
-           full_house != 0 &&
-           kleine_str != 0 &&
-           grosse_str != 0 &&
-           kniffel != 0 &&
-           chance != 0;
-  }
+    int[] fields = {einser, zweier, dreier, vierer, fünfer, sechser, dreierpasch, viererpasch, full_house, kleine_str, grosse_str, kniffel, chance};
+    for (int field : fields) {
+        if (field == 0) {
+            return false;
+        }
+    }
+    return true;
+}
 }
