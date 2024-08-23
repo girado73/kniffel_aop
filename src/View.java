@@ -7,6 +7,7 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 /**
  * View
@@ -17,7 +18,10 @@ import java.awt.event.ActionListener;
 
 /**
  * View
- * Here is the GUI constructed
+ * Diese Klasse repräsentiert die grafische Benutzeroberfläche für das
+ * Kniffel-Spiel.
+ *
+ * @author Max Hollerbaum, Ricardo Güttner
  */
 public class View extends JFrame {
   private JButton alertButton;
@@ -35,6 +39,7 @@ public class View extends JFrame {
   private int feldindex; // Index des feldes in sheet welches verändert wird
   private final String[] options = { "Einsen", "Zweien", "Dreien", "Vieren", "Fünfen", "Sechsen", "Dreierpasch",
       "Viererpasch", "Full House", "Kleine Straße", "Große Straße", "Kniffel" };;
+  private int[] würfelstand;
 
   /**
    * Konstruktor für die View Klasse.
@@ -49,7 +54,9 @@ public class View extends JFrame {
 
     // Würfel-Instanz initialisieren
     dice = new Dice();
+    // TODO Playernumber aus Main übernehmen
     final int playernumber = 3;
+    // TODO sheetlist aus Main übernehmen
     sheetlist = new Sheet[playernumber];
 
     // GUI-Komponenten initialisieren
@@ -60,8 +67,10 @@ public class View extends JFrame {
     counterLabel = new JLabel("Rolls: 0");
     sheetdisplay = new JLabel("<html><body>" + sheetlist[0].sheet_to_string().replace("\n", "<br>") + "</body></html>");
     dicedisplay = new JLabel("");
-    // Output result based on the bestIndex
     feldliste = new JList<String>(options);
+    würfelstand = new int[5];
+
+    // Feldindex mit 0 initialisieren
     feldindex = 0;
 
     // Komponenten dem Fenster hinzufügen
@@ -76,6 +85,7 @@ public class View extends JFrame {
 
     // ActionListener für Alert Button
     alertButton.addActionListener(new ActionListener() {
+      @Override
       public void actionPerformed(ActionEvent e) {
         showAlert();
       }
@@ -83,6 +93,7 @@ public class View extends JFrame {
 
     // ActionListener für Roll Dice Button
     rollDiceButton.addActionListener(new ActionListener() {
+      @Override
       public void actionPerformed(ActionEvent e) {
         rollDice();
       }
@@ -90,6 +101,7 @@ public class View extends JFrame {
 
     // ActionListener für Update and Reset Button
     updateAndResetButton.addActionListener(new ActionListener() {
+      @Override
       public void actionPerformed(ActionEvent e) {
         updateAndReset();
         // update das sheetdisplay
@@ -100,6 +112,7 @@ public class View extends JFrame {
 
     // ListSelectionListener für die Felderliste
     feldliste.addListSelectionListener(new ListSelectionListener() {
+      @Override
       public void valueChanged(ListSelectionEvent e) {
         feldindex = feldliste.getSelectedIndex();
       }
@@ -126,13 +139,23 @@ public class View extends JFrame {
       try {
         // Überprüfung der Eingabe, ob sie eine gültige Zahl ist
         int inputNumber = Integer.parseInt(numberField.getText());
-        // Würfeln einer Zahl zwischen 1 und 6
-        int randomNumber = dice.roll();
+
+        // Überprüfung, ob die Zahl zwischen 1 und 5 liegt
+        if (inputNumber < 1 || inputNumber > 5) {
+          throw new IllegalArgumentException("Die Zahl muss zwischen 1 und 5 liegen.");
+        }
+
+        // Würfeln mehrerer Würfel basierend auf der eingegebenen Zahl
+        int[] rollResults = dice.rollMultiple(inputNumber);
+        würfelstand = rollResults;
+
         // Anzeigen der gewürfelten Zahl
-        JOptionPane.showMessageDialog(this, "Gewürfelte Zahl: " + randomNumber, "Würfeln",
+        JOptionPane.showMessageDialog(this, "Gewürfelte Zahlen: " + Arrays.toString(rollResults), "Würfeln",
             JOptionPane.INFORMATION_MESSAGE);
+
         // Counter erhöhen und aktualisieren
-        dicedisplay.setText("[" + randomNumber + "]");
+        dicedisplay.setText(Arrays.toString(rollResults));
+
         // setListButton wird nach dem dicedisplay ein value hat aktiviert
         counter++;
         counterLabel.setText("Rolls: " + counter);
@@ -144,6 +167,9 @@ public class View extends JFrame {
       } catch (NumberFormatException ex) {
         // Fehlermeldung anzeigen, wenn die Eingabe keine gültige Zahl ist
         JOptionPane.showMessageDialog(this, "Bitte eine gültige Zahl eingeben.", "Fehler", JOptionPane.ERROR_MESSAGE);
+      } catch (IllegalArgumentException ex) {
+        // Fehlermeldung anzeigen, wenn die Eingabe außerhalb des Bereichs liegt
+        JOptionPane.showMessageDialog(this, ex.getMessage(), "Fehler", JOptionPane.ERROR_MESSAGE);
       }
     } else {
       // Fehlermeldung anzeigen, wenn die maximale Anzahl an Würfen erreicht ist
@@ -154,7 +180,7 @@ public class View extends JFrame {
   }
 
   /**
-   * Aktualisiert das 'einser' Feld im Sheet und setzt den Counter zurück.
+   * Aktualisiert das passende Feld im Sheet und setzt den Counter zurück.
    */
   private void updateAndReset() {
     // Beispiel: Update des 'einser' Felds im Sheet mit einer gewürfelten Zahl
@@ -179,7 +205,9 @@ public class View extends JFrame {
     // im Sheet das passende feld zu ändern
 
     // TODO hier statt [0] die spielernummer eintragen
-    sheetlist[0].indexSet(feldindex, Integer.parseInt(dicedisplay.getText().replace("[", "").replace("]", "")));
+    // TODO die quickBrain kann auch durch eine klassenvariable abgelößt werden
+    Brain quickBrain = new Brain(würfelstand);
+    sheetlist[0].indexSet(feldindex, quickBrain.getSumvalues(würfelstand)[feldindex]);
   }
 
   /**
