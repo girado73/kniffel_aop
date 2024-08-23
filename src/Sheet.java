@@ -53,6 +53,56 @@ public class Sheet {
   }
 
   /**
+   * Setter für die Class Methods über index
+   */
+  public static void indexSet(int index, int value) {
+    switch (index) {
+      case 0:
+        einser = value;
+        break;
+      case 1:
+        zweier = value;
+        break;
+      case 2:
+        dreier = value;
+        break;
+      case 3:
+        vierer = value;
+        break;
+      case 4:
+        fünfer = value;
+        break;
+      case 5:
+        sechser = value;
+        break;
+      case 6:
+        dreierpasch = value;
+        break;
+      case 7:
+        viererpasch = value;
+        break;
+      case 8:
+        full_house = value;
+        break;
+      case 9:
+        kleine_str = value;
+        break;
+      case 10:
+        grosse_str = value;
+        break;
+      case 11:
+        kniffel = value;
+        break;
+      case 12:
+        chance = value;
+        break;
+      default:
+        System.out.println("Es ist ein unerwarteter fehler aufgetreten");
+        break;
+    }
+  }
+
+  /**
    * Faltet einen int[] indem es die Summe aller Werte bildet
    *
    * @param würfel Array welcher zusammengefasst werden soll
