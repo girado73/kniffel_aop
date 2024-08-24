@@ -27,6 +27,7 @@ public class View extends JFrame {
   private JButton alertButton;
   private JButton rollDiceButton;
   private JButton updateAndResetButton;
+  private JButton rerollButton;
   private JTextField numberField;
   private JLabel counterLabel;
   private int counter;
@@ -63,6 +64,7 @@ public class View extends JFrame {
     alertButton = new JButton("Alert");
     rollDiceButton = new JButton("Roll Dice");
     updateAndResetButton = new JButton("Update Sheet and Reset Counter");
+    rerollButton = new JButton("Reroll Selected Die");
     numberField = new JTextField(10);
     counterLabel = new JLabel("Rolls: 0");
     sheetdisplay = new JLabel("<html><body>" + sheetlist[0].sheet_to_string().replace("\n", "<br>") + "</body></html>");
@@ -79,6 +81,7 @@ public class View extends JFrame {
     add(rollDiceButton);
     add(counterLabel);
     add(updateAndResetButton);
+    add(rerollButton);
     add(sheetdisplay);
     add(dicedisplay);
     add(feldliste);
@@ -110,6 +113,14 @@ public class View extends JFrame {
       }
     });
 
+    // ActionListener für Reroll Button
+    rerollButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        rerollSelectedDie();
+      }
+    });
+
     // ListSelectionListener für die Felderliste
     feldliste.addListSelectionListener(new ListSelectionListener() {
       @Override
@@ -121,6 +132,7 @@ public class View extends JFrame {
     // Initialisierung des Counters und Deaktivierung des Update-Buttons
     counter = 0;
     updateAndResetButton.setEnabled(false);
+    rerollButton.setEnabled(false); // Reroll Button wird erst aktiv, wenn mindestens einmal geworfen wurde
   }
 
   /**
@@ -149,8 +161,8 @@ public class View extends JFrame {
         int[] rollResults = dice.rollMultiple(inputNumber);
         würfelstand = rollResults;
 
-        // Anzeigen der gewürfelten Zahl
-        JOptionPane.showMessageDialog(this, "Gewürfelte Zahlen: " + Arrays.toString(rollResults), "Würfeln",
+        // Anzeigen der geworfenen Zahlen
+        JOptionPane.showMessageDialog(this, "Geworfene Zahlen: " + Arrays.toString(rollResults), "Würfeln",
             JOptionPane.INFORMATION_MESSAGE);
 
         // Counter erhöhen und aktualisieren
@@ -163,6 +175,7 @@ public class View extends JFrame {
         // Aktivieren des Update-Buttons, wenn maximale Anzahl erreicht ist
         if (counter > 0) {
           updateAndResetButton.setEnabled(true);
+          rerollButton.setEnabled(true); // Reroll Button aktivieren
         }
       } catch (NumberFormatException ex) {
         // Fehlermeldung anzeigen, wenn die Eingabe keine gültige Zahl ist
@@ -183,7 +196,7 @@ public class View extends JFrame {
    * Aktualisiert das passende Feld im Sheet und setzt den Counter zurück.
    */
   private void updateAndReset() {
-    // Beispiel: Update des 'einser' Felds im Sheet mit einer gewürfelten Zahl
+    // Beispiel: Update des 'einser' Felds im Sheet mit einer geworfenen Zahl
     setList();
     resetCounter();
     // Anzeige des aktualisierten Werts des 'einser' Felds
@@ -198,6 +211,7 @@ public class View extends JFrame {
     counter = 0;
     counterLabel.setText("Rolls: " + counter);
     updateAndResetButton.setEnabled(false);
+    rerollButton.setEnabled(false);
   }
 
   private void setList() {
@@ -208,6 +222,27 @@ public class View extends JFrame {
     // TODO die quickBrain kann auch durch eine klassenvariable abgelößt werden
     Brain quickBrain = new Brain(würfelstand);
     sheetlist[0].indexSet(feldindex, quickBrain.getSumvalues(würfelstand)[feldindex]);
+  }
+
+  /**
+   * Würfelt den aktuell ausgewählten Würfel neu.
+   */
+  private void rerollSelectedDie() {
+    // Verhindern, dass der Button gedrückt wird, wenn keine Würfel vorhanden sind
+    if (würfelstand.length == 0) {
+      JOptionPane.showMessageDialog(this, "Es gibt keine geworfenen Würfel, die neu geworfen werden können.", "Fehler", JOptionPane.ERROR_MESSAGE);
+      return;
+    }
+
+    // Überprüfen, ob ein Würfel ausgewählt ist
+    if (feldindex >= 0 && feldindex < würfelstand.length) {
+      // Nur den ausgewählten Würfel neu würfeln
+      int[] newWürfelstand = dice.rollSpecific(würfelstand, feldindex);
+      würfelstand = newWürfelstand;
+      dicedisplay.setText(Arrays.toString(würfelstand));
+    } else {
+      JOptionPane.showMessageDialog(this, "Kein gültiger Würfel ausgewählt.", "Fehler", JOptionPane.ERROR_MESSAGE);
+    }
   }
 
   /**
