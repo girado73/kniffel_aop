@@ -32,7 +32,7 @@ public class View extends JFrame {
   private int counter;
   private final int maxRolls = 3; // Maximale Anzahl an Würfen
   private Dice dice; // Instanz der Dice-Klasse
-  private Sheet[] sheetlist; // Spielerinformationen hier drinnen
+  private Sheet[] sheetlist;
   private JLabel sheetdisplay; // String mit den informationen über das derzeitige Sheet
   private JLabel dicedisplay; // Anzeige des derzeitigen Wurfs
   private JList<String> feldliste;
@@ -40,12 +40,15 @@ public class View extends JFrame {
   private final String[] options = { "Einsen", "Zweien", "Dreien", "Vieren", "Fünfen", "Sechsen", "Dreierpasch",
       "Viererpasch", "Full House", "Kleine Straße", "Große Straße", "Kniffel" };;
   private int[] würfelstand;
+  private int activeSpielerNr = 0;
+  private JLabel spieleridendify;
+  private int spieleranzahl;
 
   /**
    * Konstruktor für die View Klasse.
    * Initialisiert das Fenster und die Komponenten.
    */
-  public View() {
+  public View(Sheet[] mainSheetlist, int mainSpieleranzahl) {
     // Fenster-Einstellungen
     setTitle("Kniffel Spiel");
     setSize(800, 800);
@@ -54,10 +57,7 @@ public class View extends JFrame {
 
     // Würfel-Instanz initialisieren
     dice = new Dice();
-    // TODO Playernumber aus Main übernehmen
-    final int playernumber = 3;
-    // TODO sheetlist aus Main übernehmen
-    sheetlist = new Sheet[playernumber];
+    sheetlist = mainSheetlist;
 
     // GUI-Komponenten initialisieren
     alertButton = new JButton("Alert");
@@ -65,10 +65,13 @@ public class View extends JFrame {
     updateAndResetButton = new JButton("Update Sheet and Reset Counter");
     numberField = new JTextField(10);
     counterLabel = new JLabel("Rolls: 0");
-    sheetdisplay = new JLabel("<html><body>" + sheetlist[0].sheet_to_string().replace("\n", "<br>") + "</body></html>");
+    sheetdisplay = new JLabel(
+        "<html><body>" + sheetlist[activeSpielerNr].sheet_to_string().replace("\n", "<br>") + "</body></html>");
     dicedisplay = new JLabel("");
     feldliste = new JList<String>(options);
     würfelstand = new int[5];
+    spieleridendify = new JLabel("Spieler " + activeSpielerNr);
+    spieleranzahl = mainSpieleranzahl;
 
     // Feldindex mit 0 initialisieren
     feldindex = 0;
@@ -82,6 +85,7 @@ public class View extends JFrame {
     add(sheetdisplay);
     add(dicedisplay);
     add(feldliste);
+    add(spieleridendify);
 
     // ActionListener für Alert Button
     alertButton.addActionListener(new ActionListener() {
@@ -104,9 +108,19 @@ public class View extends JFrame {
       @Override
       public void actionPerformed(ActionEvent e) {
         updateAndReset();
+
+        System.out.println("Spieler " + activeSpielerNr + "\n" + sheetlist[activeSpielerNr].sheet_to_string());
+
         // update das sheetdisplay
-        // TODO hier statt [0] die "spielernummer eintragen"
-        sheetdisplay.setText("<html><body>" + sheetlist[0].sheet_to_string().replace("\n", "<br>"));
+        if (activeSpielerNr == spieleranzahl - 1) {
+          activeSpielerNr = 0;
+        } else {
+          activeSpielerNr++;
+        }
+        spieleridendify.setText("Spieler" + activeSpielerNr);
+        sheetdisplay.setText(
+            "<html><body>" + sheetlist[activeSpielerNr].sheet_to_string().replace("\n", "<br>") + "</body></html>");
+
       }
     });
 
@@ -204,10 +218,9 @@ public class View extends JFrame {
     // hier wird der in feldindex festgelegte index auf Sheet.indexSet eingesetzt um
     // im Sheet das passende feld zu ändern
 
-    // TODO hier statt [0] die spielernummer eintragen
     // TODO die quickBrain kann auch durch eine klassenvariable abgelößt werden
     Brain quickBrain = new Brain(würfelstand);
-    sheetlist[0].indexSet(feldindex, quickBrain.getSumvalues(würfelstand)[feldindex]);
+    sheetlist[activeSpielerNr].indexSet(feldindex, quickBrain.getSumvalues(würfelstand)[feldindex]);
   }
 
   /**
@@ -215,9 +228,20 @@ public class View extends JFrame {
    * Erstellt und zeigt das GUI-Fenster.
    */
   public static void main(String[] args) {
+
     SwingUtilities.invokeLater(new Runnable() {
       public void run() {
-        new View().setVisible(true);
+        Sheet[] mySheetList = new Sheet[3];
+        for (int i = 0; i < mySheetList.length; i++) {
+          mySheetList[i] = new Sheet(); // oder eine passende Initialisierung für deine Anwendung
+        }
+        mySheetList[1].fünfer = 15;
+        System.out.println("Preproofing:");
+        for (Sheet sheet : mySheetList) {
+          sheet.sheet_to_string();
+        }
+        System.out.println("");
+        new View(mySheetList, mySheetList.length).setVisible(true);
       }
     });
   }

@@ -35,7 +35,7 @@ public class Main {
     Sheet[] sheets = new Sheet[numberOfPlayers];
 
     // Erstellen der View-Instanz und übergeben des Sheet-Arrays
-    View view = new View();
+    View view = new View(sheets, numberOfPlayers);
 
     // Starten des GUI
     SwingUtilities.invokeLater(() -> {
