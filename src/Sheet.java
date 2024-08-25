@@ -12,37 +12,22 @@ import java.util.Set;
 public class Sheet {
 
   // hier sind die Felder welche das Sheet hat.
-  int einser;
-  int zweier;
-  int dreier;
-  int vierer;
-  int fünfer; // ü ist potenziell keine gute idee
-  int sechser;
+  int einser = 0;
+  int zweier = 0;
+  int dreier = 0;
+  int vierer = 0;
+  int fünfer = 0; // ü ist potenziell keine gute idee
+  int sechser = 0;
 
-  int dreierpasch;
-  int viererpasch;
-  int full_house;
-  int kleine_str;
-  int grosse_str;
-  int kniffel;
-  int chance;
+  int dreierpasch = 0;
+  int viererpasch = 0;
+  int full_house = 0;
+  int kleine_str = 0;
+  int grosse_str = 0;
+  int kniffel = 0;
+  int chance = 0;
 
   public Sheet() {
-    einser = 0;
-    zweier = 0;
-    dreier = 0;
-    vierer = 0;
-    fünfer = 0; // ü ist potenziell keine gute idee
-    sechser = 0;
-
-    dreierpasch = 0;
-    viererpasch = 0;
-    full_house = 0;
-    kleine_str = 0;
-    grosse_str = 0;
-    kniffel = 0;
-    chance = 0;
-
   }
 
   /**
