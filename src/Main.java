@@ -33,6 +33,9 @@ public class Main {
 
     // Erstellen eines Arrays von Sheet-Instanzen
     Sheet[] sheets = new Sheet[numberOfPlayers];
+    for (int i = 0; i < sheets.length; i++) {
+      sheets[i] = new Sheet(); // oder eine passende Initialisierung für deine Anwendung
+    }
 
     // Erstellen der View-Instanz und übergeben des Sheet-Arrays
     View view = new View(sheets, numberOfPlayers);

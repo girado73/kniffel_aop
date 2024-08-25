@@ -109,8 +109,6 @@ public class View extends JFrame {
       public void actionPerformed(ActionEvent e) {
         updateAndReset();
 
-        System.out.println("Spieler " + activeSpielerNr + "\n" + sheetlist[activeSpielerNr].sheet_to_string());
-
         // update das sheetdisplay
         if (activeSpielerNr == spieleranzahl - 1) {
           activeSpielerNr = 0;
@@ -201,7 +199,9 @@ public class View extends JFrame {
     setList();
     resetCounter();
     // Anzeige des aktualisierten Werts des 'einser' Felds
-    JOptionPane.showMessageDialog(this, options[feldindex] + "-Feld aktualisiert: ", "Update Sheet",
+    JOptionPane.showMessageDialog(this,
+        options[feldindex] + "-Feld aktualisiert. " + Brain.getSumvalues(würfelstand)[feldindex] + " Punkte",
+        "Update Sheet",
         JOptionPane.INFORMATION_MESSAGE);
   }
 
@@ -218,9 +218,7 @@ public class View extends JFrame {
     // hier wird der in feldindex festgelegte index auf Sheet.indexSet eingesetzt um
     // im Sheet das passende feld zu ändern
 
-    // TODO die quickBrain kann auch durch eine klassenvariable abgelößt werden
-    Brain quickBrain = new Brain(würfelstand);
-    sheetlist[activeSpielerNr].indexSet(feldindex, quickBrain.getSumvalues(würfelstand)[feldindex]);
+    sheetlist[activeSpielerNr].indexSet(feldindex, Brain.getSumvalues(würfelstand)[feldindex]);
   }
 
   /**
@@ -235,12 +233,6 @@ public class View extends JFrame {
         for (int i = 0; i < mySheetList.length; i++) {
           mySheetList[i] = new Sheet(); // oder eine passende Initialisierung für deine Anwendung
         }
-        mySheetList[1].fünfer = 15;
-        System.out.println("Preproofing:");
-        for (Sheet sheet : mySheetList) {
-          sheet.sheet_to_string();
-        }
-        System.out.println("");
         new View(mySheetList, mySheetList.length).setVisible(true);
       }
     });
