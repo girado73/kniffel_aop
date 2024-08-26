@@ -12,20 +12,23 @@ import java.util.Set;
 public class Sheet {
 
   // hier sind die Felder welche das Sheet hat.
-  static int einser = 0;
-  static int zweier = 0;
-  static int dreier = 0;
-  static int vierer = 0;
-  static int fünfer = 0; // ü ist potenziell keine gute idee
-  static int sechser = 0;
+  int einser = 0;
+  int zweier = 0;
+  int dreier = 0;
+  int vierer = 0;
+  int fünfer = 0; // ü ist potenziell keine gute idee
+  int sechser = 0;
 
-  static int dreierpasch = 0;
-  static int viererpasch = 0;
-  static int full_house = 0;
-  static int kleine_str = 0;
-  static int grosse_str = 0;
-  static int kniffel = 0;
-  static int chance = 0;
+  int dreierpasch = 0;
+  int viererpasch = 0;
+  int full_house = 0;
+  int kleine_str = 0;
+  int grosse_str = 0;
+  int kniffel = 0;
+  int chance = 0;
+
+  public Sheet() {
+  }
 
   /**
    * Diese Methode fasst alle Klassenfelder/Variablen unter einem String zusammen
@@ -33,7 +36,7 @@ public class Sheet {
    * @return gibt einen formatierten String mit allen Feldern wieder
    * @author Ricardo Güttner
    */
-  public static String sheet_to_string() {
+  public String sheet_to_string() {
     String returnstring = "einser: " + String.valueOf(einser) + "\n" +
         "zweier: " + String.valueOf(zweier) + "\n" +
         "dreier: " + String.valueOf(dreier) + "\n" +
@@ -55,7 +58,7 @@ public class Sheet {
   /**
    * Setter für die Class Methods über index
    */
-  public static void indexSet(int index, int value) {
+  public void indexSet(int index, int value) {
     switch (index) {
       case 0:
         einser = value;
@@ -337,13 +340,15 @@ public class Sheet {
     }
     return true;
   }
+
   public boolean isFull() {
-    int[] fields = {einser, zweier, dreier, vierer, fünfer, sechser, dreierpasch, viererpasch, full_house, kleine_str, grosse_str, kniffel, chance};
+    int[] fields = { einser, zweier, dreier, vierer, fünfer, sechser, dreierpasch, viererpasch, full_house, kleine_str,
+        grosse_str, kniffel, chance };
     for (int field : fields) {
-        if (field == 0) {
-            return false;
-        }
+      if (field == 0) {
+        return false;
+      }
     }
     return true;
-}
+  }
 }

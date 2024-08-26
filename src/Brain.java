@@ -12,12 +12,18 @@ public class Brain extends Sheet {
    */
   private static final int fieldArrayLen = 13;
 
+  private static final String[] options = {
+      "Einsen", "Zweien", "Dreien", "Vieren", "Fünfen", "Sechsen",
+      "Dreierpasch", "Viererpasch", "Full House", "Kleine Straße",
+      "Große Straße", "Kniffel"
+  };
+
   /**
    * Autoexecute all Funktions to instantly give proposal
    */
   public Brain(int[] würfel) {
-    printSumValues(würfel);
-    giveProp(würfel);
+    // printSumValues(würfel);
+    // giveProp(würfel);
   }
 
   /**
@@ -37,14 +43,6 @@ public class Brain extends Sheet {
         maxValue = sumvalues[i];
       }
     }
-
-    // TODO options zu final und als klassenvariable machen
-    // Output result based on the bestIndex
-    String[] options = {
-        "Einsen", "Zweien", "Dreien", "Vieren", "Fünfen", "Sechsen",
-        "Dreierpasch", "Viererpasch", "Full House", "Kleine Straße",
-        "Große Straße", "Kniffel"
-    };
 
     if (bestIndex >= 0 && bestIndex < options.length) {
       System.out.println(options[bestIndex] + " mit dem Wert: " + maxValue);
@@ -81,13 +79,6 @@ public class Brain extends Sheet {
     int[] sumvalues = getSumvalues(würfel);
 
     System.out.println("Würfel: " + Arrays.toString(würfel));
-
-    // Output result based on the bestIndex
-    String[] options = {
-        "Einsen", "Zweien", "Dreien", "Vieren", "Fünfen", "Sechsen",
-        "Dreierpasch", "Viererpasch", "Full House", "Kleine Straße",
-        "Große Straße", "Kniffel", "Chance"
-    };
 
     for (int i = 0; i < fieldArrayLen; i++) {
       System.out.println(options[i] + ": " + sumvalues[i]);
