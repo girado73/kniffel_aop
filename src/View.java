@@ -3,7 +3,6 @@ package src;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -41,6 +40,7 @@ public class View extends JFrame {
   private final String[] options = { "Einsen", "Zweien", "Dreien", "Vieren", "Fünfen", "Sechsen", "Dreierpasch",
       "Viererpasch", "Full House", "Kleine Straße", "Große Straße", "Kniffel" };;
   private int[] würfelstand;
+  private int würfelindex = 0;
 
   /**
    * Konstruktor für die View Klasse.
@@ -225,23 +225,31 @@ public class View extends JFrame {
   }
 
   /**
-   * Würfelt den aktuell ausgewählten Würfel neu.
+   * Würfelt die aktuell ausgewählten Würfel neu.
    */
   private void rerollSelectedDie() {
-    // Verhindern, dass der Button gedrückt wird, wenn keine Würfel vorhanden sind
-    if (würfelstand.length == 0) {
-      JOptionPane.showMessageDialog(this, "Es gibt keine geworfenen Würfel, die neu geworfen werden können.", "Fehler", JOptionPane.ERROR_MESSAGE);
-      return;
-    }
+    try {
+        // Eingabe aus dem Textfeld lesen und in einen Array von Strings aufteilen
+        String[] indices = numberField.getText().split(",");
 
-    // Überprüfen, ob ein Würfel ausgewählt ist
-    if (feldindex >= 0 && feldindex < würfelstand.length) {
-      // Nur den ausgewählten Würfel neu würfeln
-      int[] newWürfelstand = dice.rollSpecific(würfelstand, feldindex);
-      würfelstand = newWürfelstand;
-      dicedisplay.setText(Arrays.toString(würfelstand));
-    } else {
-      JOptionPane.showMessageDialog(this, "Kein gültiger Würfel ausgewählt.", "Fehler", JOptionPane.ERROR_MESSAGE);
+        // Für jeden eingegebenen Index den entsprechenden Würfel neu würfeln
+        for (String indexStr : indices) {
+            int index = Integer.parseInt(indexStr.trim()); // Leerzeichen entfernen und in Integer konvertieren
+
+            // Überprüfen, ob ein gültiger Würfel ausgewählt ist
+            if (index >= 0 && index < würfelstand.length) {
+                // Nur den ausgewählten Würfel neu würfeln
+                würfelstand = dice.rollSpecific(würfelstand, index);
+            } else {
+                JOptionPane.showMessageDialog(this, "Kein gültiger Würfel ausgewählt: " + index, "Fehler", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+        // Die neuen Würfelergebnisse anzeigen
+        dicedisplay.setText(Arrays.toString(würfelstand));
+
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "Bitte gültige Würfelindizes eingeben, getrennt durch Kommas.", "Fehler", JOptionPane.ERROR_MESSAGE);
     }
   }
 
