@@ -231,6 +231,7 @@ public class View extends JFrame {
       try {
         // Eingabe aus dem Textfeld lesen und in einen Array von Strings aufteilen
         String[] indices = numberField.getText().split(",");
+        boolean counteradd = false;
 
         // Für jeden eingegebenen Index den entsprechenden Würfel neu würfeln
         for (String indexStr : indices) {
@@ -240,14 +241,17 @@ public class View extends JFrame {
           if (index >= 0 && index < würfelstand.length) {
             // Nur den ausgewählten Würfel neu würfeln
             würfelstand = dice.rollSpecific(würfelstand, index);
-            counter++;
-            counterLabel.setText("Rolls: " + counter);
+            counteradd = true;
+
           } else {
             JOptionPane.showMessageDialog(this, "Kein gültiger Würfel ausgewählt: " + index, "Fehler",
                 JOptionPane.ERROR_MESSAGE);
           }
         }
-
+        if (counteradd) {
+          counter++;
+          counterLabel.setText("Rolls: " + counter);
+        }
         // Die neuen Würfelergebnisse anzeigen
         dicedisplay.setText(Arrays.toString(würfelstand));
 
