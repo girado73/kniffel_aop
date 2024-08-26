@@ -40,7 +40,6 @@ public class View extends JFrame {
   private final String[] options = { "Einsen", "Zweien", "Dreien", "Vieren", "Fünfen", "Sechsen", "Dreierpasch",
       "Viererpasch", "Full House", "Kleine Straße", "Große Straße", "Kniffel" };;
   private int[] würfelstand;
-  private int würfelindex = 0;
 
   /**
    * Konstruktor für die View Klasse.
@@ -228,29 +227,41 @@ public class View extends JFrame {
    * Würfelt die aktuell ausgewählten Würfel neu.
    */
   private void rerollSelectedDie() {
-    try {
+    if (counter < maxRolls) {
+      try {
         // Eingabe aus dem Textfeld lesen und in einen Array von Strings aufteilen
         String[] indices = numberField.getText().split(",");
 
         // Für jeden eingegebenen Index den entsprechenden Würfel neu würfeln
         for (String indexStr : indices) {
-            int index = Integer.parseInt(indexStr.trim()); // Leerzeichen entfernen und in Integer konvertieren
+          int index = Integer.parseInt(indexStr.trim()); // Leerzeichen entfernen und in Integer konvertieren
 
-            // Überprüfen, ob ein gültiger Würfel ausgewählt ist
-            if (index >= 0 && index < würfelstand.length) {
-                // Nur den ausgewählten Würfel neu würfeln
-                würfelstand = dice.rollSpecific(würfelstand, index);
-            } else {
-                JOptionPane.showMessageDialog(this, "Kein gültiger Würfel ausgewählt: " + index, "Fehler", JOptionPane.ERROR_MESSAGE);
-            }
+          // Überprüfen, ob ein gültiger Würfel ausgewählt ist
+          if (index >= 0 && index < würfelstand.length) {
+            // Nur den ausgewählten Würfel neu würfeln
+            würfelstand = dice.rollSpecific(würfelstand, index);
+            counter++;
+            counterLabel.setText("Rolls: " + counter);
+          } else {
+            JOptionPane.showMessageDialog(this, "Kein gültiger Würfel ausgewählt: " + index, "Fehler",
+                JOptionPane.ERROR_MESSAGE);
+          }
         }
 
         // Die neuen Würfelergebnisse anzeigen
         dicedisplay.setText(Arrays.toString(würfelstand));
 
-    } catch (NumberFormatException ex) {
-        JOptionPane.showMessageDialog(this, "Bitte gültige Würfelindizes eingeben, getrennt durch Kommas.", "Fehler", JOptionPane.ERROR_MESSAGE);
+      } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "Bitte gültige Würfelindizes eingeben, getrennt durch Kommas.", "Fehler",
+            JOptionPane.ERROR_MESSAGE);
+      }
+    } else {
+      JOptionPane.showMessageDialog(this,
+          "Maximale Anzahl an Würfen erreicht. Bitte das Sheet aktualisieren und den Counter zurücksetzen.", "Fehler",
+          JOptionPane.ERROR_MESSAGE);
+
     }
+
   }
 
   /**
