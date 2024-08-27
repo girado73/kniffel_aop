@@ -28,6 +28,16 @@ public class Dice {
     return results;
   }
 
+  /**
+   * Erstelle einen Array von Zufallsints, wobei nur der Würfel an der gegebenen
+   * Position neu geworfen wird.
+   */
+  public int[] rollSpecific(int[] diceStates, int indexToReroll) {
+    int[] results = Arrays.copyOf(diceStates, diceStates.length);
+    results[indexToReroll] = roll();
+    return results;
+  }
+
   public static void main(String[] args) {
     Dice dice = new Dice();
     int[] results = dice.rollMultiple(5);

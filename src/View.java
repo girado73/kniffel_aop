@@ -3,7 +3,6 @@ package src;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,6 +26,7 @@ public class View extends JFrame {
   private JButton alertButton;
   private JButton rollDiceButton;
   private JButton updateAndResetButton;
+  private JButton rerollButton;
   private JTextField numberField;
   private JLabel counterLabel;
   private int counter;
@@ -63,6 +63,7 @@ public class View extends JFrame {
     alertButton = new JButton("Alert");
     rollDiceButton = new JButton("Roll Dice");
     updateAndResetButton = new JButton("Update Sheet and Reset Counter");
+    rerollButton = new JButton("Reroll Selected Die");
     numberField = new JTextField(10);
     counterLabel = new JLabel("Rolls: 0");
     sheetdisplay = new JLabel(
@@ -82,6 +83,7 @@ public class View extends JFrame {
     add(rollDiceButton);
     add(counterLabel);
     add(updateAndResetButton);
+    add(rerollButton);
     add(sheetdisplay);
     add(dicedisplay);
     add(feldliste);
@@ -122,6 +124,14 @@ public class View extends JFrame {
       }
     });
 
+    // ActionListener für Reroll Button
+    rerollButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        rerollSelectedDie();
+      }
+    });
+
     // ListSelectionListener für die Felderliste
     feldliste.addListSelectionListener(new ListSelectionListener() {
       @Override
@@ -133,6 +143,7 @@ public class View extends JFrame {
     // Initialisierung des Counters und Deaktivierung des Update-Buttons
     counter = 0;
     updateAndResetButton.setEnabled(false);
+    rerollButton.setEnabled(false); // Reroll Button wird erst aktiv, wenn mindestens einmal geworfen wurde
   }
 
   /**
@@ -161,8 +172,8 @@ public class View extends JFrame {
         int[] rollResults = dice.rollMultiple(inputNumber);
         würfelstand = rollResults;
 
-        // Anzeigen der gewürfelten Zahl
-        JOptionPane.showMessageDialog(this, "Gewürfelte Zahlen: " + Arrays.toString(rollResults), "Würfeln",
+        // Anzeigen der geworfenen Zahlen
+        JOptionPane.showMessageDialog(this, "Geworfene Zahlen: " + Arrays.toString(rollResults), "Würfeln",
             JOptionPane.INFORMATION_MESSAGE);
 
         // Counter erhöhen und aktualisieren
@@ -175,6 +186,7 @@ public class View extends JFrame {
         // Aktivieren des Update-Buttons, wenn maximale Anzahl erreicht ist
         if (counter > 0) {
           updateAndResetButton.setEnabled(true);
+          rerollButton.setEnabled(true); // Reroll Button aktivieren
         }
       } catch (NumberFormatException ex) {
         // Fehlermeldung anzeigen, wenn die Eingabe keine gültige Zahl ist
@@ -195,7 +207,7 @@ public class View extends JFrame {
    * Aktualisiert das passende Feld im Sheet und setzt den Counter zurück.
    */
   private void updateAndReset() {
-    // Beispiel: Update des 'einser' Felds im Sheet mit einer gewürfelten Zahl
+    // Beispiel: Update des 'einser' Felds im Sheet mit einer geworfenen Zahl
     setList();
     resetCounter();
     // Anzeige des aktualisierten Werts des 'einser' Felds
@@ -212,6 +224,7 @@ public class View extends JFrame {
     counter = 0;
     counterLabel.setText("Rolls: " + counter);
     updateAndResetButton.setEnabled(false);
+    rerollButton.setEnabled(false);
   }
 
   private void setList() {
@@ -219,6 +232,51 @@ public class View extends JFrame {
     // im Sheet das passende feld zu ändern
 
     sheetlist[activeSpielerNr].indexSet(feldindex, Brain.getSumvalues(würfelstand)[feldindex]);
+  }
+
+  /**
+   * Würfelt die aktuell ausgewählten Würfel neu.
+   */
+  private void rerollSelectedDie() {
+    if (counter < maxRolls) {
+      try {
+        // Eingabe aus dem Textfeld lesen und in einen Array von Strings aufteilen
+        String[] indices = numberField.getText().split(",");
+        boolean counteradd = false;
+
+        // Für jeden eingegebenen Index den entsprechenden Würfel neu würfeln
+        for (String indexStr : indices) {
+          int index = Integer.parseInt(indexStr.trim()); // Leerzeichen entfernen und in Integer konvertieren
+
+          // Überprüfen, ob ein gültiger Würfel ausgewählt ist
+          if (index >= 0 && index < würfelstand.length) {
+            // Nur den ausgewählten Würfel neu würfeln
+            würfelstand = dice.rollSpecific(würfelstand, index);
+            counteradd = true;
+
+          } else {
+            JOptionPane.showMessageDialog(this, "Kein gültiger Würfel ausgewählt: " + index, "Fehler",
+                JOptionPane.ERROR_MESSAGE);
+          }
+        }
+        if (counteradd) {
+          counter++;
+          counterLabel.setText("Rolls: " + counter);
+        }
+        // Die neuen Würfelergebnisse anzeigen
+        dicedisplay.setText(Arrays.toString(würfelstand));
+
+      } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "Bitte gültige Würfelindizes eingeben, getrennt durch Kommas.", "Fehler",
+            JOptionPane.ERROR_MESSAGE);
+      }
+    } else {
+      JOptionPane.showMessageDialog(this,
+          "Maximale Anzahl an Würfen erreicht. Bitte das Sheet aktualisieren und den Counter zurücksetzen.", "Fehler",
+          JOptionPane.ERROR_MESSAGE);
+
+    }
+
   }
 
   /**
