@@ -150,7 +150,7 @@ public class View extends JFrame {
    * Zeigt einen Alert-Dialog mit einer Nachricht an.
    */
   private void showAlert() {
-    JOptionPane.showMessageDialog(this, "Spielanleitung\n1. Klicke auf 'Roll Dice'\n2. Du bekommst deine geworfenen Würfel angezeigt.\n3. Gib die Zahl des Würfels ein, welche du ändern möchtest\n4. Klicke auf 'Reroll Selected Dice'\n5. Wenn alle 5 Würfel durch sind wählst du mittels klicken auf das untere Feld was du eintragen möchtest und klickst dann auf 'Update Sheet'", "Spielanleitung", JOptionPane.INFORMATION_MESSAGE);
+    JOptionPane.showMessageDialog(this, "Spielanleitung\n1. Klicke auf 'Roll Dice'\n2. Du bekommst deine geworfenen Würfel angezeigt.\n3. Gib die Zahl des Würfels ein, welche du ändern möchtest\n4. Klicke auf 'Reroll Selected Dice'\n5. Wenn alle Versuche aufgebraucht sind, dann auf 'Update Sheet and Reset Counter' klicken um neue Würfel zu würfeln.", "Spielanleitung", JOptionPane.INFORMATION_MESSAGE);
   }
 
   /**
