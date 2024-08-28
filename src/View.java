@@ -132,6 +132,10 @@ public class View extends JFrame {
     gbc.fill = GridBagConstraints.BOTH;
     add(sheetdisplay, gbc);
 
+    gbc.gridx = 2;
+    gbc.gridy = 5;
+    add(spieleridendify, gbc);
+
     // ActionListener für Alert Button
     alertButton.addActionListener(new ActionListener() {
       @Override
