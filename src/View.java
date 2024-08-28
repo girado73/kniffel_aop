@@ -10,13 +10,6 @@ import java.util.Arrays;
 
 /**
  * View
- * Diese Klasse repräsentiert die grafische Benutzeroberfläche für das Kniffel-Spiel.
- * 
- * @author Max Hollerbaum
- */
-
-/**
- * View
  * Diese Klasse repräsentiert die grafische Benutzeroberfläche für das
  * Kniffel-Spiel.
  *
@@ -72,7 +65,7 @@ public class View extends JFrame {
     sheetdisplay = new JLabel(
         "<html><body>" + sheetlist[activeSpielerNr].sheet_to_string().replace("\n", "<br>") + "</body></html>");
     dicedisplay = new JLabel("");
-    feldliste = new JList<String>(options);
+    feldliste = new JList<>(options);
     würfelstand = new int[5];
     spieleridendify = new JLabel("Spieler " + activeSpielerNr);
     spieleranzahl = mainSpieleranzahl;
@@ -264,7 +257,7 @@ public class View extends JFrame {
     resetCounter();
     // Anzeige des aktualisierten Werts des 'einser' Felds
     JOptionPane.showMessageDialog(this,
-        options[feldindex] + "-Feld aktualisiert. " + Brain.getSumvalues(würfelstand)[feldindex] + " Punkte",
+        options[feldindex] + "-Feld aktualisiert. " + Brain.getSumvalues(würfelstand, sheetlist[activeSpielerNr])[feldindex] + " Punkte",
         "Update Sheet",
         JOptionPane.INFORMATION_MESSAGE);
   }
@@ -283,7 +276,7 @@ public class View extends JFrame {
     // hier wird der in feldindex festgelegte index auf Sheet.indexSet eingesetzt um
     // im Sheet das passende feld zu ändern
 
-    sheetlist[activeSpielerNr].indexSet(feldindex, Brain.getSumvalues(würfelstand)[feldindex]);
+    sheetlist[activeSpielerNr].indexSet(feldindex, Brain.getSumvalues(würfelstand, sheetlist[activeSpielerNr])[feldindex]);
   }
 
   /**

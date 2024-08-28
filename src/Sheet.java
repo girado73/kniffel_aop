@@ -136,7 +136,7 @@ public class Sheet {
    *
    * @param value   Integer welche eingefügt werden soll
    * @param checker Boolean welche entscheidet ob die sum gebildet wird
-   * @return gibt die Summe des int[] zurück
+   * @return gibt die Summe des Values
    * @author Ricardo Güttner
    */
   public static int setIf(int value, boolean checker) {
@@ -144,6 +144,21 @@ public class Sheet {
       return value;
     } else
       return 0;
+  }
+
+  /**
+   * Wrapper für sumIf/setIf um bei Mehrfachem Kniffel 100 in alles einzutragen
+   *
+   * @param würfel   Array welcher zusammengefasst werden soll
+   * @param prevalue Value ohne Wrapper
+   * @return gibt 100 zurück wenn weiterer Kniffel gewürfelt wurde sonst prevalue
+   * @author Ricardo Güttner
+   */
+  public int multipleKniffel(int[] würfel, int prevalue) {
+    if (kniffel != 0 && kniffelcheck(würfel)) {
+      return 100;
+    } else
+      return prevalue;
   }
 
   /**
