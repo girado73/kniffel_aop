@@ -53,7 +53,10 @@ public class View extends JFrame {
     setTitle("Kniffel Spiel");
     setSize(800, 800);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setLayout(new FlowLayout());
+    setLayout(new GridBagLayout());
+    GridBagConstraints gbc = new GridBagConstraints();
+    gbc.insets = new Insets(5, 5, 5, 5); // Abstand zwischen den Komponenten
+    gbc.fill = GridBagConstraints.HORIZONTAL;
 
     // Würfel-Instanz initialisieren
     dice = new Dice();
@@ -77,17 +80,61 @@ public class View extends JFrame {
     // Feldindex mit 0 initialisieren
     feldindex = 0;
 
-    // Komponenten dem Fenster hinzufügen
-    add(alertButton);
-    add(numberField);
-    add(rollDiceButton);
-    add(counterLabel);
-    add(updateAndResetButton);
-    add(rerollButton);
-    add(sheetdisplay);
-    add(dicedisplay);
-    add(feldliste);
-    add(spieleridendify);
+    // Komponente für Spielanleitung
+    gbc.gridx = 0;
+    gbc.gridy = 0;
+    gbc.gridwidth = 2;
+    add(alertButton, gbc);
+
+    // Nummer eingeben
+    gbc.gridx = 0;
+    gbc.gridy = 1;
+    gbc.gridwidth = 1;
+    add(numberField, gbc);
+
+    // Roll Dice Button
+    gbc.gridx = 1;
+    gbc.gridy = 1;
+    add(rollDiceButton, gbc);
+
+    // Counter Label neben Roll Dice Button
+    gbc.gridx = 2;
+    gbc.gridy = 1;
+    add(counterLabel, gbc);
+
+    // Komponente für Reroll Selected Die
+    gbc.gridx = 0;
+    gbc.gridy = 2;
+    gbc.gridwidth = 2;
+    add(rerollButton, gbc);
+
+    // Anzeige der geworfenen Würfel und die Auswahl der Felder
+    gbc.gridx = 0;
+    gbc.gridy = 3;
+    gbc.gridwidth = 2;
+    add(dicedisplay, gbc);
+
+    gbc.gridx = 2;
+    gbc.gridy = 3;
+    gbc.gridwidth = 1;
+    add(feldliste, gbc);
+
+    // Komponente für Update Sheet and Reset Counter
+    gbc.gridx = 0;
+    gbc.gridy = 4;
+    gbc.gridwidth = 3;
+    add(updateAndResetButton, gbc);
+
+    // Das aktuelle Sheet
+    gbc.gridx = 0;
+    gbc.gridy = 5;
+    gbc.gridwidth = 3;
+    gbc.fill = GridBagConstraints.BOTH;
+    add(sheetdisplay, gbc);
+
+    gbc.gridx = 2;
+    gbc.gridy = 5;
+    add(spieleridendify, gbc);
 
     // ActionListener für Alert Button
     alertButton.addActionListener(new ActionListener() {
