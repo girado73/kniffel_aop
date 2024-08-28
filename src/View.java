@@ -86,15 +86,21 @@ public class View extends JFrame {
     gbc.gridwidth = 2;
     add(alertButton, gbc);
 
-    // Komponente für Nummer eingeben und Roll Dice
+    // Nummer eingeben
     gbc.gridx = 0;
     gbc.gridy = 1;
     gbc.gridwidth = 1;
     add(numberField, gbc);
 
+    // Roll Dice Button
     gbc.gridx = 1;
     gbc.gridy = 1;
     add(rollDiceButton, gbc);
+
+    // Counter Label neben Roll Dice Button
+    gbc.gridx = 2;
+    gbc.gridy = 1;
+    add(counterLabel, gbc);
 
     // Komponente für Reroll Selected Die
     gbc.gridx = 0;
