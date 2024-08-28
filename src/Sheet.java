@@ -132,6 +132,21 @@ public class Sheet {
   }
 
   /**
+   * Auf value setzen wenn checker true ist ansonten wird 0 zurück gegeben
+   *
+   * @param value   Integer welche eingefügt werden soll
+   * @param checker Boolean welche entscheidet ob die sum gebildet wird
+   * @return gibt die Summe des int[] zurück
+   * @author Ricardo Güttner
+   */
+  public static int setIf(int value, boolean checker) {
+    if (checker) {
+      return value;
+    } else
+      return 0;
+  }
+
+  /**
    * Zähle das Vorkommen von target in würfel
    *
    * @param würfel ist der Array von integern welches die würfel representiert
