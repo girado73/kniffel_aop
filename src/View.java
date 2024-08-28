@@ -255,6 +255,14 @@ public class View extends JFrame {
 
         boolean counteradd = false;
 
+        if (indices[0].equals("d")) {
+          // wenn die debug flag gesetzt wird, dann gehen wir in die neue funktion und
+          // droppen die alte
+          // außerdem müssen wir die debug flag vor debugRoll loswerden
+          debugRoll(Arrays.copyOfRange(indices, 1, indices.length));
+          return;
+        }
+
         // Für jeden eingegebenen Index den entsprechenden Würfel neu würfeln
         for (String indexStr : indices) {
           int index = Integer.parseInt(indexStr.trim()); // Leerzeichen entfernen und in Integer konvertieren
@@ -288,6 +296,31 @@ public class View extends JFrame {
 
     }
 
+  }
+
+  private void debugRoll(String[] würfelString) {
+    int würfelstandcounter = 0;
+    if (würfelString.length != 5) {
+      JOptionPane.showMessageDialog(this, "Nicht genau 5 Zahlen eingegeben", "Fehler", JOptionPane.ERROR_MESSAGE);
+      return;
+    }
+    for (String indexStr : würfelString) {
+      int index = Integer.parseInt(indexStr.trim()); // Leerzeichen entfernen und in Integer konvertieren
+
+      // Überprüfen ob es würfelzahlen sind
+      if (index >= 1 && index <= 6) {
+        // Nur den ausgewählten Würfel neu würfeln
+        würfelstand[würfelstandcounter] = index;
+        würfelstandcounter++;
+      } else {
+        JOptionPane.showMessageDialog(this, "Würfel geht nur von 1 bis 6, ausgewählt wurde: " + index, "Fehler",
+            JOptionPane.ERROR_MESSAGE);
+      }
+    }
+    // würfelstand festsetzen
+    dicedisplay.setText(Arrays.toString(würfelstand));
+    // info über den roll
+    Brain.printSumValues(würfelstand);
   }
 
   /**
