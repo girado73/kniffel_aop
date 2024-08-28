@@ -31,7 +31,7 @@ public class View extends JFrame {
   private JList<String> feldliste;
   private int feldindex; // Index des feldes in sheet welches verändert wird
   private final String[] options = { "Einsen", "Zweien", "Dreien", "Vieren", "Fünfen", "Sechsen", "Dreierpasch",
-      "Viererpasch", "Full House", "Kleine Straße", "Große Straße", "Kniffel" };
+      "Viererpasch", "Full House", "Kleine Straße", "Große Straße", "Kniffel", "Chance" };;
   private int[] würfelstand;
   private int activeSpielerNr = 0;
   private JLabel spieleridendify;
@@ -46,14 +46,17 @@ public class View extends JFrame {
     setTitle("Kniffel Spiel");
     setSize(800, 800);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setLayout(new FlowLayout());
+    setLayout(new GridBagLayout());
+    GridBagConstraints gbc = new GridBagConstraints();
+    gbc.insets = new Insets(5, 5, 5, 5); // Abstand zwischen den Komponenten
+    gbc.fill = GridBagConstraints.HORIZONTAL;
 
     // Würfel-Instanz initialisieren
     dice = new Dice();
     sheetlist = mainSheetlist;
 
     // GUI-Komponenten initialisieren
-    alertButton = new JButton("Alert");
+    alertButton = new JButton("Spielanleitung");
     rollDiceButton = new JButton("Roll Dice");
     updateAndResetButton = new JButton("Update Sheet and Reset Counter");
     rerollButton = new JButton("Reroll Selected Die");
@@ -70,17 +73,61 @@ public class View extends JFrame {
     // Feldindex mit 0 initialisieren
     feldindex = 0;
 
-    // Komponenten dem Fenster hinzufügen
-    add(alertButton);
-    add(numberField);
-    add(rollDiceButton);
-    add(counterLabel);
-    add(updateAndResetButton);
-    add(rerollButton);
-    add(sheetdisplay);
-    add(dicedisplay);
-    add(feldliste);
-    add(spieleridendify);
+    // Komponente für Spielanleitung
+    gbc.gridx = 0;
+    gbc.gridy = 0;
+    gbc.gridwidth = 2;
+    add(alertButton, gbc);
+
+    // Nummer eingeben
+    gbc.gridx = 0;
+    gbc.gridy = 1;
+    gbc.gridwidth = 1;
+    add(numberField, gbc);
+
+    // Roll Dice Button
+    gbc.gridx = 1;
+    gbc.gridy = 1;
+    add(rollDiceButton, gbc);
+
+    // Counter Label neben Roll Dice Button
+    gbc.gridx = 2;
+    gbc.gridy = 1;
+    add(counterLabel, gbc);
+
+    // Komponente für Reroll Selected Die
+    gbc.gridx = 0;
+    gbc.gridy = 2;
+    gbc.gridwidth = 2;
+    add(rerollButton, gbc);
+
+    // Anzeige der geworfenen Würfel und die Auswahl der Felder
+    gbc.gridx = 0;
+    gbc.gridy = 3;
+    gbc.gridwidth = 2;
+    add(dicedisplay, gbc);
+
+    gbc.gridx = 2;
+    gbc.gridy = 3;
+    gbc.gridwidth = 1;
+    add(feldliste, gbc);
+
+    // Komponente für Update Sheet and Reset Counter
+    gbc.gridx = 0;
+    gbc.gridy = 4;
+    gbc.gridwidth = 3;
+    add(updateAndResetButton, gbc);
+
+    // Das aktuelle Sheet
+    gbc.gridx = 0;
+    gbc.gridy = 5;
+    gbc.gridwidth = 3;
+    gbc.fill = GridBagConstraints.BOTH;
+    add(sheetdisplay, gbc);
+
+    gbc.gridx = 2;
+    gbc.gridy = 5;
+    add(spieleridendify, gbc);
 
     // ActionListener für Alert Button
     alertButton.addActionListener(new ActionListener() {
@@ -143,7 +190,17 @@ public class View extends JFrame {
    * Zeigt einen Alert-Dialog mit einer Nachricht an.
    */
   private void showAlert() {
-    JOptionPane.showMessageDialog(this, "Das ist eine Nachricht!", "Alert", JOptionPane.INFORMATION_MESSAGE);
+    JOptionPane.showMessageDialog(this,
+        "Spielanleitung\n1. Um deinen Spielzug zu beginnen, wirf die Würfen indem du auf 'Roll Dice' klickst." +
+            "\n2. Schau dir deine Würfel an und überlege dir welche Würfel du nochmal würfeln möchtest.\n3. " +
+            "Gib die Stelle der Würfel in das Feld ein, die du neu würfeln möchtest.\n4. " +
+            "Würfle neu indem du auf 'Reroll Selected Dice' klickst.\n5. " +
+            "Wenn du noch nicht zufrieden bist, nutze deinen dritten Versuch wie in Schritten 2 bis 4 beschrieben.\n6. "
+            +
+            "Wähle aus in welche Kategorie dein Spielzug zählen soll.\n7. " +
+            "Um deinen Zug abzuschließen, klicke auf 'Update Sheet and Reset Counter'.\n8. " +
+            "Der nächste Spielzug kann mit 'Roll Dice' gestartet werden.",
+        "Spielanleitung", JOptionPane.INFORMATION_MESSAGE);
   }
 
   /**
@@ -154,12 +211,7 @@ public class View extends JFrame {
     if (counter < maxRolls) {
       try {
         // Überprüfung der Eingabe, ob sie eine gültige Zahl ist
-        int inputNumber = Integer.parseInt(numberField.getText());
-
-        // Überprüfung, ob die Zahl zwischen 1 und 5 liegt
-        if (inputNumber < 1 || inputNumber > 5) {
-          throw new IllegalArgumentException("Die Zahl muss zwischen 1 und 5 liegen.");
-        }
+        int inputNumber = 5;
 
         // Würfeln mehrerer Würfel basierend auf der eingegebenen Zahl
         int[] rollResults = dice.rollMultiple(inputNumber);
@@ -235,7 +287,21 @@ public class View extends JFrame {
       try {
         // Eingabe aus dem Textfeld lesen und in einen Array von Strings aufteilen
         String[] indices = numberField.getText().split(",");
+        for (int i = 0; i < indices.length; i++) {
+          int value = Integer.parseInt(indices[i].trim()); // Konvertiere das String-Element in eine Ganzzahl
+          value -= 1; // Ziehe 1 von der Zahl ab
+          indices[i] = Integer.toString(value); // Konvertiere die Zahl wieder in einen String
+        }
+
         boolean counteradd = false;
+
+        if (indices[0].equals("d")) {
+          // wenn die debug flag gesetzt wird, dann gehen wir in die neue funktion und
+          // droppen die alte
+          // außerdem müssen wir die debug flag vor debugRoll loswerden
+          debugRoll(Arrays.copyOfRange(indices, 1, indices.length));
+          return;
+        }
 
         // Für jeden eingegebenen Index den entsprechenden Würfel neu würfeln
         for (String indexStr : indices) {
@@ -270,6 +336,31 @@ public class View extends JFrame {
 
     }
 
+  }
+
+  private void debugRoll(String[] würfelString) {
+    int würfelstandcounter = 0;
+    if (würfelString.length != 5) {
+      JOptionPane.showMessageDialog(this, "Nicht genau 5 Zahlen eingegeben", "Fehler", JOptionPane.ERROR_MESSAGE);
+      return;
+    }
+    for (String indexStr : würfelString) {
+      int index = Integer.parseInt(indexStr.trim()); // Leerzeichen entfernen und in Integer konvertieren
+
+      // Überprüfen ob es würfelzahlen sind
+      if (index >= 1 && index <= 6) {
+        // Nur den ausgewählten Würfel neu würfeln
+        würfelstand[würfelstandcounter] = index;
+        würfelstandcounter++;
+      } else {
+        JOptionPane.showMessageDialog(this, "Würfel geht nur von 1 bis 6, ausgewählt wurde: " + index, "Fehler",
+            JOptionPane.ERROR_MESSAGE);
+      }
+    }
+    // würfelstand festsetzen
+    dicedisplay.setText(Arrays.toString(würfelstand));
+    // info über den roll
+    Brain.printSumValues(würfelstand);
   }
 
   /**
