@@ -294,6 +294,14 @@ public class View extends JFrame {
       try {
         // Eingabe aus dem Textfeld lesen und in einen Array von Strings aufteilen
         String[] indices = numberField.getText().split(",");
+        if (indices[0].equals("d")) {
+              // wenn die debug flag gesetzt wird, dann gehen wir in die neue funktion und
+              // droppen die alte
+              // außerdem müssen wir die debug flag vor debugRoll loswerden
+              debugRoll(Arrays.copyOfRange(indices, 1, indices.length));
+              return;
+        }
+
         for (int i = 0; i < indices.length; i++) {
           int value = Integer.parseInt(indices[i].trim()); // Konvertiere das String-Element in eine Ganzzahl
           value -= 1; // Ziehe 1 von der Zahl ab
@@ -301,14 +309,6 @@ public class View extends JFrame {
         }
 
         boolean counteradd = false;
-
-        if (indices[0].equals("d")) {
-          // wenn die debug flag gesetzt wird, dann gehen wir in die neue funktion und
-          // droppen die alte
-          // außerdem müssen wir die debug flag vor debugRoll loswerden
-          debugRoll(Arrays.copyOfRange(indices, 1, indices.length));
-          return;
-        }
 
         // Für jeden eingegebenen Index den entsprechenden Würfel neu würfeln
         for (String indexStr : indices) {
