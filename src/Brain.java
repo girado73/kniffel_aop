@@ -29,8 +29,8 @@ public class Brain extends Sheet {
   /**
    * Get a proposal on what option to take based on the dice you have
    */
-  public static void giveProp(int[] würfel) {
-    int[] sumvalues = getSumvalues(würfel);
+  public static void giveProp(int[] würfel, Sheet mysheet) {
+    int[] sumvalues = getSumvalues(würfel, mysheet);
     int bestIndex = -1;
     int maxValue = 0;
 
@@ -54,20 +54,20 @@ public class Brain extends Sheet {
   /**
    * Wendet alle Checker für die Felder an und fasst es in einem int[] zusammen
    */
-  public static int[] getSumvalues(int[] würfel) {
+  public static int[] getSumvalues(int[] würfel, Sheet mysheet) {
     int[] sumvalues = new int[13];
 
     for (int i = 0; i < 6; i++) {
-      sumvalues[i] = nummercounter(würfel, i + 1);
+      sumvalues[i] = mysheet.multipleKniffel(würfel, nummercounter(würfel, i + 1));
     }
 
-    sumvalues[6] = paschcounter(würfel);
-    sumvalues[7] = sumIf(würfel, pasch4checker(würfel));
-    sumvalues[8] = setIf(25, full_house_check(würfel));
-    sumvalues[9] = setIf(30, klstrcheck(würfel));
-    sumvalues[10] = setIf(40, grstrcheck(würfel));
-    sumvalues[11] = setIf(50, kniffelcheck(würfel));
-    sumvalues[12] = sum(würfel);
+    sumvalues[6] = mysheet.multipleKniffel(würfel, paschcounter(würfel));
+    sumvalues[7] = mysheet.multipleKniffel(würfel, sumIf(würfel, pasch4checker(würfel)));
+    sumvalues[8] = mysheet.multipleKniffel(würfel, setIf(25, full_house_check(würfel)));
+    sumvalues[9] = mysheet.multipleKniffel(würfel, setIf(30, klstrcheck(würfel)));
+    sumvalues[10] = mysheet.multipleKniffel(würfel, setIf(40, grstrcheck(würfel)));
+    sumvalues[11] = mysheet.multipleKniffel(würfel, setIf(50, kniffelcheck(würfel)));
+    sumvalues[12] = mysheet.multipleKniffel(würfel, sum(würfel));
 
     return sumvalues;
   }
@@ -75,8 +75,8 @@ public class Brain extends Sheet {
   /**
    * Printfunktion für die bessere Anschauung der Felder
    */
-  public static void printSumValues(int[] würfel) {
-    int[] sumvalues = getSumvalues(würfel);
+  public static void printSumValues(int[] würfel, Sheet mysheet) {
+    int[] sumvalues = getSumvalues(würfel, mysheet);
 
     System.out.println("Würfel: " + Arrays.toString(würfel));
 
@@ -87,7 +87,7 @@ public class Brain extends Sheet {
 
   public static void main(String[] args) {
     int[] würfel = { 1, 2, 2, 2, 4 };
-    printSumValues(würfel);
-    giveProp(würfel);
+    printSumValues(würfel, new Sheet());
+    giveProp(würfel, new Sheet());
   }
 }
