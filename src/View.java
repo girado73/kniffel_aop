@@ -150,7 +150,17 @@ public class View extends JFrame {
    * Zeigt einen Alert-Dialog mit einer Nachricht an.
    */
   private void showAlert() {
-    JOptionPane.showMessageDialog(this, "Spielanleitung\n1. Um deinen Spielzug zu beginnen, wirf die Würfen indem du auf 'Roll Dice' klickst.\n2. Schau dir deine Würfel an und überlege dir welche Würfel du nochmal würfeln möchtest.\n3. Gib die Stelle der Würfel in das Feld ein, die du neu würfeln möchtest.\n4. Würfle neu indem du auf 'Reroll Selected Dice' klickst.\n5. Wenn du noch nicht zufrieden bist, nutze deinen dritten Versuch wie in Schritten 2 bis 4 beschrieben.\n6. Wähle aus in welche Kategorie dein Spielzug zählen soll.\n7. Um deinen Zug abzuschließen, klicke auf 'Update Sheet and Reset Counter'.\n8. Du kannst nun deinen nächsten Spielzug mit 'Roll Dice' starten.", "Spielanleitung", JOptionPane.INFORMATION_MESSAGE);
+    JOptionPane.showMessageDialog(this,
+        "Spielanleitung\n1. Um deinen Spielzug zu beginnen, wirf die Würfen indem du auf 'Roll Dice' klickst." +
+            "\n2. Schau dir deine Würfel an und überlege dir welche Würfel du nochmal würfeln möchtest.\n3. " +
+            "Gib die Stelle der Würfel in das Feld ein, die du neu würfeln möchtest.\n4. " +
+            "Würfle neu indem du auf 'Reroll Selected Dice' klickst.\n5. " +
+            "Wenn du noch nicht zufrieden bist, nutze deinen dritten Versuch wie in Schritten 2 bis 4 beschrieben.\n6. "
+            +
+            "Wähle aus in welche Kategorie dein Spielzug zählen soll.\n7. " +
+            "Um deinen Zug abzuschließen, klicke auf 'Update Sheet and Reset Counter'.\n8. " +
+            "Der nächste Spielzug kann mit 'Roll Dice' gestartet werden.",
+        "Spielanleitung", JOptionPane.INFORMATION_MESSAGE);
   }
 
   /**
@@ -238,9 +248,9 @@ public class View extends JFrame {
         // Eingabe aus dem Textfeld lesen und in einen Array von Strings aufteilen
         String[] indices = numberField.getText().split(",");
         for (int i = 0; i < indices.length; i++) {
-           int value = Integer.parseInt(indices[i].trim()); // Konvertiere das String-Element in eine Ganzzahl
-            value -= 1; // Ziehe 1 von der Zahl ab
-         indices[i] = Integer.toString(value); // Konvertiere die Zahl wieder in einen String
+          int value = Integer.parseInt(indices[i].trim()); // Konvertiere das String-Element in eine Ganzzahl
+          value -= 1; // Ziehe 1 von der Zahl ab
+          indices[i] = Integer.toString(value); // Konvertiere die Zahl wieder in einen String
         }
 
         boolean counteradd = false;
