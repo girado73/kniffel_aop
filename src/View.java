@@ -150,7 +150,7 @@ public class View extends JFrame {
    * Zeigt einen Alert-Dialog mit einer Nachricht an.
    */
   private void showAlert() {
-    JOptionPane.showMessageDialog(this, "Spielanleitung\n1. Klicke auf 'Roll Dice'\n2. Du bekommst deine geworfenen Würfel angezeigt.\n3. Gib die Zahl des Würfels ein, welche du ändern möchtest\n4. Klicke auf 'Reroll Selected Dice'\n5. Wenn alle Versuche aufgebraucht sind, dann auf 'Update Sheet and Reset Counter' klicken um neue Würfel zu würfeln.", "Spielanleitung", JOptionPane.INFORMATION_MESSAGE);
+    JOptionPane.showMessageDialog(this, "Spielanleitung\n1. Um deinen Spielzug zu beginnen, wirf die Würfen indem du auf 'Roll Dice' klickst.\n2. Schau dir deine Würfel an und überlege dir welche Würfel du nochmal würfeln möchtest.\n3. Gib die Stelle der Würfel in das Feld ein, die du neu würfeln möchtest.\n4. Würfle neu indem du auf 'Reroll Selected Dice' klickst.\n5. Wenn du noch nicht zufrieden bist, nutze deinen dritten Versuch wie in Schritten 2 bis 4 beschrieben.\n6. Wähle aus in welche Kategorie dein Spielzug zählen soll.\n7. Um deinen Zug abzuschließen, klicke auf 'Update Sheet and Reset Counter'.\n8. Du kannst nun deinen nächsten Spielzug mit 'Roll Dice' starten.", "Spielanleitung", JOptionPane.INFORMATION_MESSAGE);
   }
 
   /**
