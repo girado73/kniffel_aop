@@ -10,13 +10,6 @@ import java.util.Arrays;
 
 /**
  * View
- * Diese Klasse repräsentiert die grafische Benutzeroberfläche für das Kniffel-Spiel.
- * 
- * @author Max Hollerbaum
- */
-
-/**
- * View
  * Diese Klasse repräsentiert die grafische Benutzeroberfläche für das
  * Kniffel-Spiel.
  *
@@ -38,7 +31,7 @@ public class View extends JFrame {
   private JList<String> feldliste;
   private int feldindex; // Index des feldes in sheet welches verändert wird
   private final String[] options = { "Einsen", "Zweien", "Dreien", "Vieren", "Fünfen", "Sechsen", "Dreierpasch",
-      "Viererpasch", "Full House", "Kleine Straße", "Große Straße", "Kniffel" };;
+      "Viererpasch", "Full House", "Kleine Straße", "Große Straße", "Kniffel" };
   private int[] würfelstand;
   private int activeSpielerNr = 0;
   private JLabel spieleridendify;
@@ -69,7 +62,7 @@ public class View extends JFrame {
     sheetdisplay = new JLabel(
         "<html><body>" + sheetlist[activeSpielerNr].sheet_to_string().replace("\n", "<br>") + "</body></html>");
     dicedisplay = new JLabel("");
-    feldliste = new JList<String>(options);
+    feldliste = new JList<>(options);
     würfelstand = new int[5];
     spieleridendify = new JLabel("Spieler " + activeSpielerNr);
     spieleranzahl = mainSpieleranzahl;
