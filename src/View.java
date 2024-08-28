@@ -288,7 +288,7 @@ public class View extends JFrame {
   }
 
   private void debugRoll(String[] würfelString) {
-    counter = 0;
+    int würfelstandcounter = 0;
     if (würfelString.length != 5) {
       JOptionPane.showMessageDialog(this, "Nicht genau 5 Zahlen eingegeben", "Fehler", JOptionPane.ERROR_MESSAGE);
       return;
@@ -299,8 +299,8 @@ public class View extends JFrame {
       // Überprüfen ob es würfelzahlen sind
       if (index >= 1 && index <= 6) {
         // Nur den ausgewählten Würfel neu würfeln
-        würfelstand[counter] = index;
-        counter++;
+        würfelstand[würfelstandcounter] = index;
+        würfelstandcounter++;
       } else {
         JOptionPane.showMessageDialog(this, "Würfel geht nur von 1 bis 6, ausgewählt wurde: " + index, "Fehler",
             JOptionPane.ERROR_MESSAGE);
