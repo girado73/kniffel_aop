@@ -38,7 +38,7 @@ public class View extends JFrame {
   private JList<String> feldliste;
   private int feldindex; // Index des feldes in sheet welches verändert wird
   private final String[] options = { "Einsen", "Zweien", "Dreien", "Vieren", "Fünfen", "Sechsen", "Dreierpasch",
-      "Viererpasch", "Full House", "Kleine Straße", "Große Straße", "Kniffel" };;
+      "Viererpasch", "Full House", "Kleine Straße", "Große Straße", "Kniffel", "Chance" };;
   private int[] würfelstand;
   private int activeSpielerNr = 0;
   private JLabel spieleridendify;
