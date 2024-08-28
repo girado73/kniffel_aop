@@ -212,7 +212,7 @@ public class View extends JFrame {
     resetCounter();
     // Anzeige des aktualisierten Werts des 'einser' Felds
     JOptionPane.showMessageDialog(this,
-        options[feldindex] + "-Feld aktualisiert. " + Brain.getSumvalues(würfelstand)[feldindex] + " Punkte",
+        options[feldindex] + "-Feld aktualisiert. " + Brain.getSumvalues(würfelstand, sheetlist[activeSpielerNr])[feldindex] + " Punkte",
         "Update Sheet",
         JOptionPane.INFORMATION_MESSAGE);
   }
@@ -231,7 +231,7 @@ public class View extends JFrame {
     // hier wird der in feldindex festgelegte index auf Sheet.indexSet eingesetzt um
     // im Sheet das passende feld zu ändern
 
-    sheetlist[activeSpielerNr].indexSet(feldindex, Brain.getSumvalues(würfelstand)[feldindex]);
+    sheetlist[activeSpielerNr].indexSet(feldindex, Brain.getSumvalues(würfelstand, sheetlist[activeSpielerNr])[feldindex]);
   }
 
   /**
