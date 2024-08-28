@@ -60,7 +60,7 @@ public class View extends JFrame {
     sheetlist = mainSheetlist;
 
     // GUI-Komponenten initialisieren
-    alertButton = new JButton("Alert");
+    alertButton = new JButton("Spielanleitung");
     rollDiceButton = new JButton("Roll Dice");
     updateAndResetButton = new JButton("Update Sheet and Reset Counter");
     rerollButton = new JButton("Reroll Selected Die");
@@ -150,7 +150,17 @@ public class View extends JFrame {
    * Zeigt einen Alert-Dialog mit einer Nachricht an.
    */
   private void showAlert() {
-    JOptionPane.showMessageDialog(this, "Das ist eine Nachricht!", "Alert", JOptionPane.INFORMATION_MESSAGE);
+    JOptionPane.showMessageDialog(this,
+        "Spielanleitung\n1. Um deinen Spielzug zu beginnen, wirf die Würfen indem du auf 'Roll Dice' klickst." +
+            "\n2. Schau dir deine Würfel an und überlege dir welche Würfel du nochmal würfeln möchtest.\n3. " +
+            "Gib die Stelle der Würfel in das Feld ein, die du neu würfeln möchtest.\n4. " +
+            "Würfle neu indem du auf 'Reroll Selected Dice' klickst.\n5. " +
+            "Wenn du noch nicht zufrieden bist, nutze deinen dritten Versuch wie in Schritten 2 bis 4 beschrieben.\n6. "
+            +
+            "Wähle aus in welche Kategorie dein Spielzug zählen soll.\n7. " +
+            "Um deinen Zug abzuschließen, klicke auf 'Update Sheet and Reset Counter'.\n8. " +
+            "Der nächste Spielzug kann mit 'Roll Dice' gestartet werden.",
+        "Spielanleitung", JOptionPane.INFORMATION_MESSAGE);
   }
 
   /**
@@ -161,12 +171,7 @@ public class View extends JFrame {
     if (counter < maxRolls) {
       try {
         // Überprüfung der Eingabe, ob sie eine gültige Zahl ist
-        int inputNumber = Integer.parseInt(numberField.getText());
-
-        // Überprüfung, ob die Zahl zwischen 1 und 5 liegt
-        if (inputNumber < 1 || inputNumber > 5) {
-          throw new IllegalArgumentException("Die Zahl muss zwischen 1 und 5 liegen.");
-        }
+        int inputNumber = 5;
 
         // Würfeln mehrerer Würfel basierend auf der eingegebenen Zahl
         int[] rollResults = dice.rollMultiple(inputNumber);
@@ -242,6 +247,12 @@ public class View extends JFrame {
       try {
         // Eingabe aus dem Textfeld lesen und in einen Array von Strings aufteilen
         String[] indices = numberField.getText().split(",");
+        for (int i = 0; i < indices.length; i++) {
+          int value = Integer.parseInt(indices[i].trim()); // Konvertiere das String-Element in eine Ganzzahl
+          value -= 1; // Ziehe 1 von der Zahl ab
+          indices[i] = Integer.toString(value); // Konvertiere die Zahl wieder in einen String
+        }
+
         boolean counteradd = false;
 
         // Für jeden eingegebenen Index den entsprechenden Würfel neu würfeln
