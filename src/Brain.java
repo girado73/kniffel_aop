@@ -63,10 +63,10 @@ public class Brain extends Sheet {
 
     sumvalues[6] = paschcounter(würfel);
     sumvalues[7] = sumIf(würfel, pasch4checker(würfel));
-    sumvalues[8] = sumIf(würfel, full_house_check(würfel));
-    sumvalues[9] = sumIf(würfel, klstrcheck(würfel));
-    sumvalues[10] = sumIf(würfel, grstrcheck(würfel));
-    sumvalues[11] = sumIf(würfel, kniffelcheck(würfel));
+    sumvalues[8] = setIf(25, full_house_check(würfel));
+    sumvalues[9] = setIf(30, klstrcheck(würfel));
+    sumvalues[10] = setIf(40, grstrcheck(würfel));
+    sumvalues[11] = setIf(50, kniffelcheck(würfel));
     sumvalues[12] = sum(würfel);
 
     return sumvalues;
