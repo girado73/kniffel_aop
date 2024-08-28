@@ -305,9 +305,11 @@ public class View extends JFrame {
         JOptionPane.showMessageDialog(this, "Würfel geht nur von 1 bis 6, ausgewählt wurde: " + index, "Fehler",
             JOptionPane.ERROR_MESSAGE);
       }
-      // würfelstand festsetzen
-      dicedisplay.setText(Arrays.toString(würfelstand));
     }
+    // würfelstand festsetzen
+    dicedisplay.setText(Arrays.toString(würfelstand));
+    // info über den roll
+    Brain.printSumValues(würfelstand);
   }
 
   /**

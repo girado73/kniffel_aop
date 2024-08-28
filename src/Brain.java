@@ -15,7 +15,7 @@ public class Brain extends Sheet {
   private static final String[] options = {
       "Einsen", "Zweien", "Dreien", "Vieren", "Fünfen", "Sechsen",
       "Dreierpasch", "Viererpasch", "Full House", "Kleine Straße",
-      "Große Straße", "Kniffel"
+      "Große Straße", "Kniffel", "Chance"
   };
 
   /**
