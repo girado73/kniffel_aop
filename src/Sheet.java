@@ -12,20 +12,23 @@ import java.util.Set;
 public class Sheet {
 
   // hier sind die Felder welche das Sheet hat.
-  static int einser = 0;
-  static int zweier = 0;
-  static int dreier = 0;
-  static int vierer = 0;
-  static int fünfer = 0; // ü ist potenziell keine gute idee
-  static int sechser = 0;
+  int einser = 0;
+  int zweier = 0;
+  int dreier = 0;
+  int vierer = 0;
+  int fünfer = 0; // ü ist potenziell keine gute idee
+  int sechser = 0;
 
-  static int dreierpasch = 0;
-  static int viererpasch = 0;
-  static int full_house = 0;
-  static int kleine_str = 0;
-  static int grosse_str = 0;
-  static int kniffel = 0;
-  static int chance = 0;
+  int dreierpasch = 0;
+  int viererpasch = 0;
+  int full_house = 0;
+  int kleine_str = 0;
+  int grosse_str = 0;
+  int kniffel = 0;
+  int chance = 0;
+
+  public Sheet() {
+  }
 
   /**
    * Diese Methode fasst alle Klassenfelder/Variablen unter einem String zusammen
@@ -33,7 +36,7 @@ public class Sheet {
    * @return gibt einen formatierten String mit allen Feldern wieder
    * @author Ricardo Güttner
    */
-  public static String sheet_to_string() {
+  public String sheet_to_string() {
     String returnstring = "einser: " + String.valueOf(einser) + "\n" +
         "zweier: " + String.valueOf(zweier) + "\n" +
         "dreier: " + String.valueOf(dreier) + "\n" +
@@ -50,6 +53,56 @@ public class Sheet {
         "chance: " + String.valueOf(chance) + "\n";
 
     return returnstring;
+  }
+
+  /**
+   * Setter für die Class Methods über index
+   */
+  public void indexSet(int index, int value) {
+    switch (index) {
+      case 0:
+        einser = value;
+        break;
+      case 1:
+        zweier = value;
+        break;
+      case 2:
+        dreier = value;
+        break;
+      case 3:
+        vierer = value;
+        break;
+      case 4:
+        fünfer = value;
+        break;
+      case 5:
+        sechser = value;
+        break;
+      case 6:
+        dreierpasch = value;
+        break;
+      case 7:
+        viererpasch = value;
+        break;
+      case 8:
+        full_house = value;
+        break;
+      case 9:
+        kleine_str = value;
+        break;
+      case 10:
+        grosse_str = value;
+        break;
+      case 11:
+        kniffel = value;
+        break;
+      case 12:
+        chance = value;
+        break;
+      default:
+        System.out.println("Es ist ein unerwarteter fehler aufgetreten");
+        break;
+    }
   }
 
   /**
@@ -74,6 +127,21 @@ public class Sheet {
   public static int sumIf(int[] würfel, boolean checker) {
     if (checker) {
       return sum(würfel);
+    } else
+      return 0;
+  }
+
+  /**
+   * Auf value setzen wenn checker true ist ansonten wird 0 zurück gegeben
+   *
+   * @param value   Integer welche eingefügt werden soll
+   * @param checker Boolean welche entscheidet ob die sum gebildet wird
+   * @return gibt die Summe des int[] zurück
+   * @author Ricardo Güttner
+   */
+  public static int setIf(int value, boolean checker) {
+    if (checker) {
+      return value;
     } else
       return 0;
   }
@@ -197,6 +265,7 @@ public class Sheet {
 
   }
 
+
   /**
    * Checke ob das Intarray eine große Straße ist
    *
@@ -288,4 +357,14 @@ public class Sheet {
     return true;
   }
 
+  public boolean isFull() {
+    int[] fields = { einser, zweier, dreier, vierer, fünfer, sechser, dreierpasch, viererpasch, full_house, kleine_str,
+        grosse_str, kniffel, chance };
+    for (int field : fields) {
+      if (field == 0) {
+        return false;
+      }
+    }
+    return true;
+  }
 }

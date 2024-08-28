@@ -12,12 +12,18 @@ public class Brain extends Sheet {
    */
   private static final int fieldArrayLen = 13;
 
+  private static final String[] options = {
+      "Einsen", "Zweien", "Dreien", "Vieren", "Fünfen", "Sechsen",
+      "Dreierpasch", "Viererpasch", "Full House", "Kleine Straße",
+      "Große Straße", "Kniffel", "Chance"
+  };
+
   /**
    * Autoexecute all Funktions to instantly give proposal
    */
   public Brain(int[] würfel) {
-    printSumValues(würfel);
-    giveProp(würfel);
+    // printSumValues(würfel);
+    // giveProp(würfel);
   }
 
   /**
@@ -40,13 +46,6 @@ public class Brain extends Sheet {
       }
     }
 
-    // Output result based on the bestIndex
-    String[] options = {
-        "Einsen", "Zweien", "Dreien", "Vieren", "Fünfen", "Sechsen",
-        "Dreierpasch", "Viererpasch", "Full House", "Kleine Straße",
-        "Große Straße", "Kniffel"
-    };
-
     if (bestIndex >= 0 && bestIndex < options.length) {
       System.out.println(options[bestIndex] + " mit dem Wert: " + maxValue);
     } else {
@@ -66,10 +65,10 @@ public class Brain extends Sheet {
 
     sumvalues[6] = paschcounter(würfel);
     sumvalues[7] = sumIf(würfel, pasch4checker(würfel));
-    sumvalues[8] = sumIf(würfel, full_house_check(würfel));
-    sumvalues[9] = sumIf(würfel, klstrcheck(würfel));
-    sumvalues[10] = sumIf(würfel, grstrcheck(würfel));
-    sumvalues[11] = sumIf(würfel, kniffelcheck(würfel));
+    sumvalues[8] = setIf(25, full_house_check(würfel));
+    sumvalues[9] = setIf(30, klstrcheck(würfel));
+    sumvalues[10] = setIf(40, grstrcheck(würfel));
+    sumvalues[11] = setIf(50, kniffelcheck(würfel));
     sumvalues[12] = sum(würfel);
 
     return sumvalues;
@@ -82,13 +81,6 @@ public class Brain extends Sheet {
     int[] sumvalues = getSumvalues(würfel);
 
     System.out.println("Würfel: " + Arrays.toString(würfel));
-
-    // Output result based on the bestIndex
-    String[] options = {
-        "Einsen", "Zweien", "Dreien", "Vieren", "Fünfen", "Sechsen",
-        "Dreierpasch", "Viererpasch", "Full House", "Kleine Straße",
-        "Große Straße", "Kniffel", "Chance"
-    };
 
     for (int i = 0; i < fieldArrayLen; i++) {
       System.out.println(options[i] + ": " + sumvalues[i]);
