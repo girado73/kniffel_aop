@@ -66,7 +66,7 @@ public class Brain extends Sheet {
     sumvalues[8] = mysheet.multipleKniffel(würfel, setIf(25, full_house_check(würfel)));
     sumvalues[9] = mysheet.multipleKniffel(würfel, setIf(30, klstrcheck(würfel)));
     sumvalues[10] = mysheet.multipleKniffel(würfel, setIf(40, grstrcheck(würfel)));
-    sumvalues[11] = mysheet.multipleKniffel(würfel, setIf(50, kniffelcheck(würfel)));
+    sumvalues[11] = setIf(50, kniffelcheck(würfel));
     sumvalues[12] = mysheet.multipleKniffel(würfel, sum(würfel));
 
     return sumvalues;

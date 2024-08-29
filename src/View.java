@@ -253,6 +253,7 @@ public class View extends JFrame {
    */
   private void updateAndReset() {
     // Beispiel: Update des 'einser' Felds im Sheet mit einer geworfenen Zahl
+
     if (setList()) {
       resetCounter();
       // Anzeige des aktualisierten Werts des 'einser' Felds

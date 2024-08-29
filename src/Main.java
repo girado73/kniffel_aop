@@ -5,11 +5,12 @@ import java.util.Scanner;
 
 public class Main {
 
+  private static int numberOfPlayers = 0;
+
   public static void main(String[] args) {
     // Scanner für die Konsoleneingabe
     Scanner scanner = new Scanner(System.in);
 
-    int numberOfPlayers = 0;
     boolean validInput = false;
 
     // Schleife zur Eingabe der Anzahl der Spieler
@@ -58,8 +59,23 @@ public class Main {
 
       if (oneSheetFull) {
         ((Timer) e.getSource()).stop(); // Stoppen des Timers, wenn alle Sheets voll sind
+        int[] sheetSums = new int[numberOfPlayers];
+        int maxValIndex = 0;
+        int maxVal = 0;
+        for (int i = 0; i < sheets.length; i++) {
+          int sumOfSheet = sheets[i].sheetSum();
+          if (sumOfSheet > maxVal) {
+            maxVal = sumOfSheet;
+            maxValIndex = i;
+          }
+          sheetSums[i] = sumOfSheet;
+        }
         JOptionPane.showMessageDialog(null, "Das Spiel ist vorbei! Alle Sheets sind voll.", "Spiel beendet",
             JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null,
+            "Spieler " + maxValIndex + " hat das Spiel mit " + maxVal + " Punkten gewonnen", "Spiel beendet",
+            JOptionPane.INFORMATION_MESSAGE);
+        System.out.println(sheets[maxValIndex].sheet_to_string());
       }
     });
     gameTimer.start();
