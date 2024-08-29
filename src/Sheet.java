@@ -280,7 +280,6 @@ public class Sheet {
 
   }
 
-
   /**
    * Checke ob das Intarray eine große Straße ist
    *
@@ -381,5 +380,15 @@ public class Sheet {
       }
     }
     return true;
+  }
+
+  public int sheetSum() {
+    int returnvalue = 0;
+    int[] fields = { einser, zweier, dreier, vierer, fünfer, sechser, dreierpasch, viererpasch, full_house, kleine_str,
+        grosse_str, kniffel, chance };
+    for (int field : fields) {
+      returnvalue += field;
+    }
+    return returnvalue;
   }
 }
