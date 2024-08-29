@@ -178,7 +178,7 @@ public class Test {
   private static boolean getSumvalues_test() {
     System.out.println("Brain.getSumvalues Test: ");
     int[] würfel = { 1, 2, 2, 2, 4 };
-    int[] sumvalues = src.Brain.getSumvalues(würfel);
+    int[] sumvalues = src.Brain.getSumvalues(würfel, new Sheet());
     try {
       assert 6 == sumvalues[1] : "Count Values 2";
       assert 1 == sumvalues[0] : "Count Values 1";
