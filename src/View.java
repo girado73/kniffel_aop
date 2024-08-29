@@ -253,14 +253,17 @@ public class View extends JFrame {
    */
   private void updateAndReset() {
     // Beispiel: Update des 'einser' Felds im Sheet mit einer geworfenen Zahl
-    setList();
-    resetCounter();
-    // Anzeige des aktualisierten Werts des 'einser' Felds
-    JOptionPane.showMessageDialog(this,
-        options[feldindex] + "-Feld aktualisiert. "
-            + Brain.getSumvalues(würfelstand, sheetlist[activeSpielerNr])[feldindex] + " Punkte",
-        "Update Sheet",
-        JOptionPane.INFORMATION_MESSAGE);
+    if (setList()) {
+      resetCounter();
+      // Anzeige des aktualisierten Werts des 'einser' Felds
+      JOptionPane.showMessageDialog(this,
+          options[feldindex] + "-Feld aktualisiert. "
+              + Brain.getSumvalues(würfelstand, sheetlist[activeSpielerNr])[feldindex] + " Punkte",
+          "Update Sheet",
+          JOptionPane.INFORMATION_MESSAGE);
+    } else {
+      JOptionPane.showMessageDialog(this, "Feld ist schon mit Wert belegt", "Fehler", JOptionPane.ERROR_MESSAGE);
+    }
   }
 
   /**
@@ -273,12 +276,15 @@ public class View extends JFrame {
     rerollButton.setEnabled(false);
   }
 
-  private void setList() {
+  private boolean setList() {
     // hier wird der in feldindex festgelegte index auf Sheet.indexSet eingesetzt um
     // im Sheet das passende feld zu ändern
-
-    sheetlist[activeSpielerNr].indexSet(feldindex,
-        Brain.getSumvalues(würfelstand, sheetlist[activeSpielerNr])[feldindex]);
+    if (sheetlist[activeSpielerNr].indexSet(feldindex,
+        Brain.getSumvalues(würfelstand, sheetlist[activeSpielerNr])[feldindex])) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   /**
