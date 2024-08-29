@@ -13,7 +13,7 @@ import java.util.Arrays;
  * Diese Klasse repräsentiert die grafische Benutzeroberfläche für das
  * Kniffel-Spiel.
  *
- * @author Max Hollerbaum, Ricardo Güttner
+ * @author Max Hollerbaum, Ricardo Güttner, Eric Petersen
  */
 public class View extends JFrame {
   private JButton alertButton;
@@ -187,7 +187,7 @@ public class View extends JFrame {
   }
 
   /**
-   * Zeigt einen Alert-Dialog mit einer Nachricht an.
+   * Zeigt einen Spielanleitungs-Dialog mit der Anleitung an.
    */
   private void showAlert() {
     JOptionPane.showMessageDialog(this,
@@ -250,6 +250,8 @@ public class View extends JFrame {
 
   /**
    * Aktualisiert das passende Feld im Sheet und setzt den Counter zurück.
+   *
+   * @author Ricardo Güttner, Max Hollerbaum
    */
   private void updateAndReset() {
     // Beispiel: Update des 'einser' Felds im Sheet mit einer geworfenen Zahl
@@ -276,6 +278,12 @@ public class View extends JFrame {
     rerollButton.setEnabled(false);
   }
 
+  /**
+   * Setze den Wert mithilfe des Index in das aktuelle Sheet
+   *
+   * @return gibt einen Boolean zurück ob der Wert schon vergeben war oder nicht
+   * @author Ricardo Güttner
+   */
   private boolean setList() {
     // hier wird der in feldindex festgelegte index auf Sheet.indexSet eingesetzt um
     // im Sheet das passende feld zu ändern
@@ -346,6 +354,12 @@ public class View extends JFrame {
 
   }
 
+  /**
+   * Lege die Würfel zum debuggen fest
+   * 
+   * @param würfelString string welcher aus dem Textfeld entnommen wird
+   * @author Ricardo Güttner
+   */
   private void debugRoll(String[] würfelString) {
     int würfelstandcounter = 0;
     if (würfelString.length != 5) {

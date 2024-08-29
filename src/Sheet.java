@@ -27,6 +27,9 @@ public class Sheet {
   int kniffel = 0;
   int chance = 0;
 
+  /**
+   * Leerer Konstruktor da nicht gebraucht
+   */
   public Sheet() {
   }
 

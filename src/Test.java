@@ -1,5 +1,8 @@
 package src;
 
+/**
+ * Klasse zum Testen der Methoden in diesem Package
+ */
 public class Test {
 
   public static final String ANSI_RESET = "\u001B[0m";
