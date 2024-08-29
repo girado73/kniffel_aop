@@ -58,50 +58,102 @@ public class Sheet {
   /**
    * Setter für die Class Methods über index
    */
-  public void indexSet(int index, int value) {
+  public boolean indexSet(int index, int value) {
     switch (index) {
       case 0:
-        einser = value;
-        break;
+        if (einser == 0) {
+          einser = value;
+          return true;
+        } else {
+          return false;
+        }
       case 1:
-        zweier = value;
-        break;
+        if (zweier == 0) {
+          zweier = value;
+          return true;
+        } else {
+          return false;
+        }
       case 2:
-        dreier = value;
-        break;
+        if (dreier == 0) {
+          dreier = value;
+          return true;
+        } else {
+          return false;
+        }
       case 3:
-        vierer = value;
-        break;
+        if (vierer == 0) {
+          vierer = value;
+          return true;
+        } else {
+          return false;
+        }
       case 4:
-        fünfer = value;
-        break;
+        if (fünfer == 0) {
+          fünfer = value;
+          return true;
+        } else {
+          return false;
+        }
       case 5:
-        sechser = value;
-        break;
+        if (sechser == 0) {
+          sechser = value;
+          return true;
+        } else {
+          return false;
+        }
       case 6:
-        dreierpasch = value;
-        break;
+        if (dreierpasch == 0) {
+          dreierpasch = value;
+          return true;
+        } else {
+          return false;
+        }
       case 7:
-        viererpasch = value;
-        break;
+        if (viererpasch == 0) {
+          viererpasch = value;
+          return true;
+        } else {
+          return false;
+        }
       case 8:
-        full_house = value;
-        break;
+        if (full_house == 0) {
+          full_house = value;
+          return true;
+        } else {
+          return false;
+        }
       case 9:
-        kleine_str = value;
-        break;
+        if (kleine_str == 0) {
+          kleine_str = value;
+          return true;
+        } else {
+          return false;
+        }
       case 10:
-        grosse_str = value;
-        break;
+        if (grosse_str == 0) {
+          grosse_str = value;
+          return true;
+        } else {
+          return false;
+        }
       case 11:
-        kniffel = value;
-        break;
+        if (kniffel == 0) {
+          kniffel = value;
+          return true;
+        } else {
+          return false;
+        }
       case 12:
-        chance = value;
-        break;
+        if (chance == 0) {
+          chance = value;
+          return true;
+        } else {
+          return false;
+        }
       default:
-        System.out.println("Es ist ein unerwarteter fehler aufgetreten");
-        break;
+        System.out.println("Es ist ein unerwarteter Fehler beim setzen der Variablen aufgetreten");
+        return false;
     }
   }
 
@@ -279,7 +331,6 @@ public class Sheet {
       return false;
 
   }
-
 
   /**
    * Checke ob das Intarray eine große Straße ist
