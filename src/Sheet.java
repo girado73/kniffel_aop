@@ -30,6 +30,14 @@ public class Sheet {
   public Sheet() {
   }
 
+  private String fieldToSting(int feld) {
+    if (feld >= 0) {
+      return String.valueOf(feld);
+    } else {
+      return "0 (belegt)";
+    }
+  }
+
   /**
    * Diese Methode fasst alle Klassenfelder/Variablen unter einem String zusammen
    * 
@@ -38,19 +46,19 @@ public class Sheet {
    */
   public String sheet_to_string() {
     String returnstring = "einser: " + String.valueOf(einser) + "\n" +
-        "zweier: " + String.valueOf(zweier) + "\n" +
-        "dreier: " + String.valueOf(dreier) + "\n" +
-        "vierer: " + String.valueOf(vierer) + "\n" +
-        "fünfer: " + String.valueOf(fünfer) + "\n" +
-        "sechser: " + String.valueOf(sechser) + "\n" +
+        "zweier: " + fieldToSting(zweier) + "\n" +
+        "dreier: " + fieldToSting(dreier) + "\n" +
+        "vierer: " + fieldToSting(vierer) + "\n" +
+        "fünfer: " + fieldToSting(fünfer) + "\n" +
+        "sechser: " + fieldToSting(sechser) + "\n" +
         "\n" +
-        "dreierpasch: " + String.valueOf(dreierpasch) + "\n" +
-        "viererpasch: " + String.valueOf(viererpasch) + "\n" +
-        "full_house: " + String.valueOf(full_house) + "\n" +
-        "kleine_str: " + String.valueOf(kleine_str) + "\n" +
-        "grosse_str: " + String.valueOf(grosse_str) + "\n" +
-        "kniffel: " + String.valueOf(kniffel) + "\n" +
-        "chance: " + String.valueOf(chance) + "\n";
+        "dreierpasch: " + fieldToSting(dreierpasch) + "\n" +
+        "viererpasch: " + fieldToSting(viererpasch) + "\n" +
+        "full_house: " + fieldToSting(full_house) + "\n" +
+        "kleine_str: " + fieldToSting(kleine_str) + "\n" +
+        "grosse_str: " + fieldToSting(grosse_str) + "\n" +
+        "kniffel: " + fieldToSting(kniffel) + "\n" +
+        "chance: " + fieldToSting(chance) + "\n";
 
     return returnstring;
   }
@@ -146,7 +154,7 @@ public class Sheet {
     if (checker) {
       return sum(würfel);
     } else
-      return 0;
+      return -1;
   }
 
   /**
@@ -161,7 +169,7 @@ public class Sheet {
     if (checker) {
       return value;
     } else
-      return 0;
+      return -1;
   }
 
   /**
@@ -194,7 +202,11 @@ public class Sheet {
         resultnumber += number;
       }
     }
-    return resultnumber;
+    if (resultnumber == 0) {
+      return -1;
+    } else {
+      return resultnumber;
+    }
   }
 
   /**
@@ -213,7 +225,7 @@ public class Sheet {
       }
       return resultnumber; // returnt mit summe aller würfel
     } else {
-      return resultnumber; // returnt mit 0
+      return -1; // returnt mit 0
     }
   }
 

@@ -253,7 +253,6 @@ public class View extends JFrame {
    */
   private void updateAndReset() {
     // Beispiel: Update des 'einser' Felds im Sheet mit einer geworfenen Zahl
-
     if (setList()) {
       resetCounter();
       // Anzeige des aktualisierten Werts des 'einser' Felds
@@ -265,7 +264,6 @@ public class View extends JFrame {
     } else {
       JOptionPane.showMessageDialog(this, "Feld ist schon mit Wert belegt", "Fehler", JOptionPane.ERROR_MESSAGE);
     }
-
   }
 
   /**
@@ -281,7 +279,6 @@ public class View extends JFrame {
   private boolean setList() {
     // hier wird der in feldindex festgelegte index auf Sheet.indexSet eingesetzt um
     // im Sheet das passende feld zu ändern
-
     if (sheetlist[activeSpielerNr].indexSet(feldindex,
         Brain.getSumvalues(würfelstand, sheetlist[activeSpielerNr])[feldindex])) {
       return true;
