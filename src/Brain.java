@@ -3,12 +3,15 @@ package src;
 import java.util.Arrays;
 
 /**
- * Brain
+ * Brain-Klasse zur Auswertung der Sheet-Checker Methoden
+ *
  */
 public class Brain extends Sheet {
 
   /**
    * Enthält die Feldanzahl für das Sheet
+   *
+   * @author Ricardo Güttner
    */
   private static final int fieldArrayLen = 13;
 
@@ -19,15 +22,17 @@ public class Brain extends Sheet {
   };
 
   /**
-   * Autoexecute all Funktions to instantly give proposal
+   * Leerer Constructor da nicht nötig
    */
   public Brain(int[] würfel) {
-    // printSumValues(würfel);
-    // giveProp(würfel);
   }
 
   /**
    * Get a proposal on what option to take based on the dice you have
+   * 
+   * @param würfel  int[] welcher ausgewertet werden soll
+   * @param mysheet Sheet auf welches giveProp angewendet werden soll
+   * @author Ricardo Güttner
    */
   public static void giveProp(int[] würfel, Sheet mysheet) {
     int[] sumvalues = getSumvalues(würfel, mysheet);
@@ -36,8 +41,6 @@ public class Brain extends Sheet {
 
     // Check for the best option, ignoring the last field (assumed to be "chance")
     for (int i = 0; i < fieldArrayLen - 1; i++) {
-      // TODO hier muss aus dem Sheet entnommen werden, welche felder noch nicht
-      // vergeben sind
       if (sumvalues[i] >= maxValue) {
         bestIndex = i;
         maxValue = sumvalues[i];
@@ -53,6 +56,10 @@ public class Brain extends Sheet {
 
   /**
    * Wendet alle Checker für die Felder an und fasst es in einem int[] zusammen
+   *
+   * @param würfel  int[] welcher ausgewertet werden soll
+   * @param mysheet Sheet auf welches getSumvalues angewendet werden soll
+   * @author Ricardo Güttner
    */
   public static int[] getSumvalues(int[] würfel, Sheet mysheet) {
     int[] sumvalues = new int[13];
@@ -74,6 +81,10 @@ public class Brain extends Sheet {
 
   /**
    * Printfunktion für die bessere Anschauung der Felder
+   * 
+   * @param würfel  int[] welcher ausgewertet und geprintet werden soll
+   * @param mysheet Sheet auf welches printSumValues angewendet werden soll
+   * @author Ricardo Güttner
    */
   public static void printSumValues(int[] würfel, Sheet mysheet) {
     int[] sumvalues = getSumvalues(würfel, mysheet);
