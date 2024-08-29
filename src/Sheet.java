@@ -28,7 +28,7 @@ public class Sheet {
   int chance = 0;
 
   /**
-   * Leerer Konstruktor da nicht gebraucht
+   *
    */
   public Sheet() {
   }
