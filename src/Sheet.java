@@ -128,7 +128,7 @@ public class Sheet {
     if (checker) {
       return sum(würfel);
     } else
-      return 0;
+      return -1;
   }
 
   /**
@@ -143,7 +143,7 @@ public class Sheet {
     if (checker) {
       return value;
     } else
-      return 0;
+      return -1;
   }
 
   /**
@@ -176,7 +176,11 @@ public class Sheet {
         resultnumber += number;
       }
     }
-    return resultnumber;
+    if (resultnumber == 0) {
+      return -1;
+    } else {
+      return resultnumber;
+    }
   }
 
   /**
@@ -195,7 +199,7 @@ public class Sheet {
       }
       return resultnumber; // returnt mit summe aller würfel
     } else {
-      return resultnumber; // returnt mit 0
+      return -1; // returnt mit 0
     }
   }
 
@@ -279,7 +283,6 @@ public class Sheet {
       return false;
 
   }
-
 
   /**
    * Checke ob das Intarray eine große Straße ist

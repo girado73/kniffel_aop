@@ -257,7 +257,8 @@ public class View extends JFrame {
     resetCounter();
     // Anzeige des aktualisierten Werts des 'einser' Felds
     JOptionPane.showMessageDialog(this,
-        options[feldindex] + "-Feld aktualisiert. " + Brain.getSumvalues(würfelstand, sheetlist[activeSpielerNr])[feldindex] + " Punkte",
+        options[feldindex] + "-Feld aktualisiert. "
+            + Brain.getSumvalues(würfelstand, sheetlist[activeSpielerNr])[feldindex] + " Punkte",
         "Update Sheet",
         JOptionPane.INFORMATION_MESSAGE);
   }
@@ -276,7 +277,8 @@ public class View extends JFrame {
     // hier wird der in feldindex festgelegte index auf Sheet.indexSet eingesetzt um
     // im Sheet das passende feld zu ändern
 
-    sheetlist[activeSpielerNr].indexSet(feldindex, Brain.getSumvalues(würfelstand, sheetlist[activeSpielerNr])[feldindex]);
+    sheetlist[activeSpielerNr].indexSet(feldindex,
+        Brain.getSumvalues(würfelstand, sheetlist[activeSpielerNr])[feldindex]);
   }
 
   /**
@@ -288,11 +290,11 @@ public class View extends JFrame {
         // Eingabe aus dem Textfeld lesen und in einen Array von Strings aufteilen
         String[] indices = numberField.getText().split(",");
         if (indices[0].equals("d")) {
-              // wenn die debug flag gesetzt wird, dann gehen wir in die neue funktion und
-              // droppen die alte
-              // außerdem müssen wir die debug flag vor debugRoll loswerden
-              debugRoll(Arrays.copyOfRange(indices, 1, indices.length));
-              return;
+          // wenn die debug flag gesetzt wird, dann gehen wir in die neue funktion und
+          // droppen die alte
+          // außerdem müssen wir die debug flag vor debugRoll loswerden
+          debugRoll(Arrays.copyOfRange(indices, 1, indices.length));
+          return;
         }
 
         for (int i = 0; i < indices.length; i++) {
@@ -360,7 +362,7 @@ public class View extends JFrame {
     // würfelstand festsetzen
     dicedisplay.setText(Arrays.toString(würfelstand));
     // info über den roll
-    Brain.printSumValues(würfelstand);
+    Brain.printSumValues(würfelstand, sheetlist[activeSpielerNr]);
   }
 
   /**
