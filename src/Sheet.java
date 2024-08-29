@@ -58,51 +58,69 @@ public class Sheet {
   /**
    * Setter für die Class Methods über index
    */
-  public void indexSet(int index, int value) {
-    switch (index) {
-      case 0:
-        einser = value;
-        break;
-      case 1:
-        zweier = value;
-        break;
-      case 2:
-        dreier = value;
-        break;
-      case 3:
-        vierer = value;
-        break;
-      case 4:
-        fünfer = value;
-        break;
-      case 5:
-        sechser = value;
-        break;
-      case 6:
-        dreierpasch = value;
-        break;
-      case 7:
-        viererpasch = value;
-        break;
-      case 8:
-        full_house = value;
-        break;
-      case 9:
-        kleine_str = value;
-        break;
-      case 10:
-        grosse_str = value;
-        break;
-      case 11:
-        kniffel = value;
-        break;
-      case 12:
-        chance = value;
-        break;
-      default:
-        System.out.println("Es ist ein unerwarteter fehler aufgetreten");
-        break;
+  public boolean indexSet(int index, int value) {
+    // Array der Felder
+    int[] fields = {
+        einser, zweier, dreier, vierer, fünfer, sechser,
+        dreierpasch, viererpasch, full_house, kleine_str,
+        grosse_str, kniffel, chance
+    };
+
+    // Überprüfen, ob der Index im gültigen Bereich liegt
+    if (index < 0 || index >= fields.length) {
+      System.out.println("Es ist ein unerwarteter Fehler beim Setzen der Variablen aufgetreten");
+      return false;
     }
+
+    // Wert nur setzen, wenn das Feld noch nicht belegt ist
+    if (fields[index] == 0) {
+      fields[index] = value;
+      // Update the corresponding field
+      switch (index) {
+        case 0:
+          einser = value;
+          break;
+        case 1:
+          zweier = value;
+          break;
+        case 2:
+          dreier = value;
+          break;
+        case 3:
+          vierer = value;
+          break;
+        case 4:
+          fünfer = value;
+          break;
+        case 5:
+          sechser = value;
+          break;
+        case 6:
+          dreierpasch = value;
+          break;
+        case 7:
+          viererpasch = value;
+          break;
+        case 8:
+          full_house = value;
+          break;
+        case 9:
+          kleine_str = value;
+          break;
+        case 10:
+          grosse_str = value;
+          break;
+        case 11:
+          kniffel = value;
+          break;
+        case 12:
+          chance = value;
+          break;
+      }
+      return true;
+    }
+
+    return false;
   }
 
   /**
@@ -279,7 +297,6 @@ public class Sheet {
       return false;
 
   }
-
 
   /**
    * Checke ob das Intarray eine große Straße ist
