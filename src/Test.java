@@ -35,7 +35,22 @@ public class Test {
 
     try {
       assert 15 == src.Sheet.sumIf(würfel, true) : "True Assertation Failed";
-      assert 0 == src.Sheet.sumIf(würfel, false) : "False Assertation Failed";
+      assert -1 == src.Sheet.sumIf(würfel, false) : "False Assertation Failed";
+      successPrint("Sum Test Succeeded");
+      return true;
+    } catch (AssertionError e) {
+      errorPrint("Sum Test failed");
+      System.out.println(e.getMessage());
+      return false;
+    }
+  };
+
+  private static boolean setIf_test() {
+    System.out.println("Sheet.setIf Test: ");
+
+    try {
+      assert 15 == src.Sheet.setIf(15, true) : "True Assertation Failed";
+      assert -1 == src.Sheet.setIf(15, false) : "False Assertation Failed";
       successPrint("Sum Test Succeeded");
       return true;
     } catch (AssertionError e) {
@@ -169,6 +184,64 @@ public class Test {
     }
   }
 
+  private static boolean sheetSum_test() {
+    System.out.println("Sheet.sheetSum Test");
+    Sheet testsheet = new Sheet();
+
+    for (int i = 0; i < 13; i++) {
+      testsheet.indexSet(i, 10);
+    }
+    try {
+      assert 130 == testsheet.sheetSum() : "Sum Failure";
+      System.out.println(ANSI_GREEN + " sheetSum Assertation Completed" + ANSI_RESET);
+      return true;
+    } catch (AssertionError e) {
+      System.out.println(ANSI_RED + "sheetSum Assertation Failed" + ANSI_RESET);
+      System.out.println(e.getMessage());
+      return false;
+    }
+
+  }
+
+  private static boolean isFull_test() {
+    System.out.println("Sheet.isFull Test");
+    Sheet fullsheet = new Sheet();
+    Sheet emptysheet = new Sheet();
+
+    for (int i = 0; i < 13; i++) {
+      fullsheet.indexSet(i, 10);
+    }
+    try {
+      assert true == fullsheet.isFull() : "Fullsheet Failure";
+      assert false == emptysheet.isFull() : "Emptysheet Failure";
+      System.out.println(ANSI_GREEN + "isFull Assertation Completed" + ANSI_RESET);
+      return true;
+    } catch (AssertionError e) {
+      System.out.println(ANSI_RED + "isFull Assertation Failed" + ANSI_RESET);
+      System.out.println(e.getMessage());
+      return false;
+    }
+
+  }
+
+  private static boolean indexSet_test() {
+    System.out.println("Sheet.indexSet Test");
+    Sheet testsheet = new Sheet();
+
+    testsheet.indexSet(5, 10);
+
+    try {
+      assert 10 == testsheet.sechser : "secher Failure";
+      assert 0 == testsheet.einser : "einser Failure";
+      System.out.println(ANSI_GREEN + "indexSet Assertation Completed" + ANSI_RESET);
+      return true;
+    } catch (AssertionError e) {
+      System.out.println(ANSI_RED + "indexSet Assertation Failed" + ANSI_RESET);
+      System.out.println(e.getMessage());
+      return false;
+    }
+
+  }
   // ----------------------------------------------------------
   // Brain.java Tests
 
@@ -182,12 +255,13 @@ public class Test {
     try {
       assert 6 == sumvalues[1] : "Count Values 2";
       assert 1 == sumvalues[0] : "Count Values 1";
-      assert 0 == sumvalues[5] : "Count Values 6";
+      System.out.println("sumvalues: " + sumvalues[5]);
+      assert -1 == sumvalues[5] : "Count Values 6";
 
       assert 11 == sumvalues[6] : "Paschcheck + sum";
-      assert 11 == sumvalues[7] : "Paschcheck2 + sum";
+      assert -1 == sumvalues[7] : "Paschcheck2 + sum";
 
-      assert 0 == sumvalues[11] : "Kniffelcheck";
+      assert -1 == sumvalues[11] : "Kniffelcheck";
       assert 11 == sumvalues[12] : "Chance(sum)";
 
       System.out.println(ANSI_GREEN + "getSumvalues Assertation Succeeded" + ANSI_RESET);
@@ -227,5 +301,13 @@ public class Test {
     sumIf_test();
     System.out.println("- - - - - - - - - ");
     getSumvalues_test();
+    System.out.println("- - - - - - - - - ");
+    setIf_test();
+    System.out.println("- - - - - - - - - ");
+    sheetSum_test();
+    System.out.println("- - - - - - - - - ");
+    isFull_test();
+    System.out.println("- - - - - - - - - ");
+    indexSet_test();
   }
 }

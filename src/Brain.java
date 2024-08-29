@@ -36,8 +36,6 @@ public class Brain extends Sheet {
 
     // Check for the best option, ignoring the last field (assumed to be "chance")
     for (int i = 0; i < fieldArrayLen - 1; i++) {
-      // TODO hier muss aus dem Sheet entnommen werden, welche felder noch nicht
-      // vergeben sind
       if (sumvalues[i] >= maxValue) {
         bestIndex = i;
         maxValue = sumvalues[i];

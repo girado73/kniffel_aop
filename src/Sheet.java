@@ -30,6 +30,13 @@ public class Sheet {
   public Sheet() {
   }
 
+  /**
+   * Converte einen Feldint in einen String zum Printen
+   *
+   * @param feld ist das Feld welches in einen String umgewandelt wird
+   * @return gibt einen String des Feldes zurück
+   * @author Ricardo Güttner
+   */
   private String fieldToSting(int feld) {
     if (feld >= 0) {
       return String.valueOf(feld);
@@ -65,6 +72,11 @@ public class Sheet {
 
   /**
    * Setter für die Class Methods über index
+   *
+   * @param index Index für das Feld was angesprochen werden soll. Beginnt bei 0
+   * @param value der Wert welcher gesetzt weden soll
+   * @return returnt ein Boolean ob der Wert schon gesetzt wurde oder nicht
+   * @author Ricardo Güttner
    */
   public boolean indexSet(int index, int value) {
     // Array der Felder
@@ -401,6 +413,12 @@ public class Sheet {
     return true;
   }
 
+  /**
+   * Checke ob jedes Feld belegt ist
+   *
+   * @return gibt einen Boolean zurück ob alle Werte belegt sind
+   * @author Ricardo Güttner
+   */
   public boolean isFull() {
     int[] fields = { einser, zweier, dreier, vierer, fünfer, sechser, dreierpasch, viererpasch, full_house, kleine_str,
         grosse_str, kniffel, chance };
@@ -412,6 +430,12 @@ public class Sheet {
     return true;
   }
 
+  /**
+   * Bilde die Summe aus allen Feldern im Sheet
+   *
+   * @return gibt die Summe als Integer zurück
+   * @author Ricardo Güttner
+   */
   public int sheetSum() {
     int returnvalue = 0;
     int[] fields = { einser, zweier, dreier, vierer, fünfer, sechser, dreierpasch, viererpasch, full_house, kleine_str,
