@@ -59,102 +59,68 @@ public class Sheet {
    * Setter für die Class Methods über index
    */
   public boolean indexSet(int index, int value) {
-    switch (index) {
-      case 0:
-        if (einser == 0) {
-          einser = value;
-          return true;
-        } else {
-          return false;
-        }
-      case 1:
-        if (zweier == 0) {
-          zweier = value;
-          return true;
-        } else {
-          return false;
-        }
-      case 2:
-        if (dreier == 0) {
-          dreier = value;
-          return true;
-        } else {
-          return false;
-        }
-      case 3:
-        if (vierer == 0) {
-          vierer = value;
-          return true;
-        } else {
-          return false;
-        }
-      case 4:
-        if (fünfer == 0) {
-          fünfer = value;
-          return true;
-        } else {
-          return false;
-        }
-      case 5:
-        if (sechser == 0) {
-          sechser = value;
-          return true;
-        } else {
-          return false;
-        }
-      case 6:
-        if (dreierpasch == 0) {
-          dreierpasch = value;
-          return true;
-        } else {
-          return false;
-        }
-      case 7:
-        if (viererpasch == 0) {
-          viererpasch = value;
-          return true;
-        } else {
-          return false;
-        }
-      case 8:
-        if (full_house == 0) {
-          full_house = value;
-          return true;
-        } else {
-          return false;
-        }
-      case 9:
-        if (kleine_str == 0) {
-          kleine_str = value;
-          return true;
-        } else {
-          return false;
-        }
-      case 10:
-        if (grosse_str == 0) {
-          grosse_str = value;
-          return true;
-        } else {
-          return false;
-        }
-      case 11:
-        if (kniffel == 0) {
-          kniffel = value;
-          return true;
-        } else {
-          return false;
-        }
-      case 12:
-        if (chance == 0) {
-          chance = value;
-          return true;
-        } else {
-          return false;
-        }
-      default:
-        System.out.println("Es ist ein unerwarteter Fehler beim setzen der Variablen aufgetreten");
-        return false;
+    // Array der Felder
+    int[] fields = {
+        einser, zweier, dreier, vierer, fünfer, sechser,
+        dreierpasch, viererpasch, full_house, kleine_str,
+        grosse_str, kniffel, chance
+    };
+
+    // Überprüfen, ob der Index im gültigen Bereich liegt
+    if (index < 0 || index >= fields.length) {
+      System.out.println("Es ist ein unerwarteter Fehler beim Setzen der Variablen aufgetreten");
+      return false;
     }
+
+    // Wert nur setzen, wenn das Feld noch nicht belegt ist
+    if (fields[index] == 0) {
+      fields[index] = value;
+      // Update the corresponding field
+      switch (index) {
+        case 0:
+          einser = value;
+          break;
+        case 1:
+          zweier = value;
+          break;
+        case 2:
+          dreier = value;
+          break;
+        case 3:
+          vierer = value;
+          break;
+        case 4:
+          fünfer = value;
+          break;
+        case 5:
+          sechser = value;
+          break;
+        case 6:
+          dreierpasch = value;
+          break;
+        case 7:
+          viererpasch = value;
+          break;
+        case 8:
+          full_house = value;
+          break;
+        case 9:
+          kleine_str = value;
+          break;
+        case 10:
+          grosse_str = value;
+          break;
+        case 11:
+          kniffel = value;
+          break;
+        case 12:
+          chance = value;
+          break;
+      }
+      return true;
+    }
+
+    return false;
   }
 
   /**
