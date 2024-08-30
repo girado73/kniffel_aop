@@ -76,7 +76,7 @@ public class Main {
             "Spieler " + maxValIndex + " hat das Spiel mit " + maxVal + " Punkten gewonnen", "Spiel beendet",
             JOptionPane.INFORMATION_MESSAGE);
 
-        for (int i = 0; i <= numberOfPlayers; i++) {
+        for (int i = 0; i < numberOfPlayers; i++) {
           System.out.println("Spieler: " + i);
           System.out.println(sheets[i].sheet_to_string());
           System.out.println("Sum: " + sheets[i].sheetSum());
