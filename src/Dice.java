@@ -38,9 +38,4 @@ public class Dice {
     return results;
   }
 
-  public static void main(String[] args) {
-    Dice dice = new Dice();
-    int[] results = dice.rollMultiple(5);
-    System.out.println("Das Ergebnis der Würfel ist: " + Arrays.toString(results));
-  }
 }

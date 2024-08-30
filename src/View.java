@@ -385,20 +385,4 @@ public class View extends JFrame {
     Brain.printSumValues(würfelstand, sheetlist[activeSpielerNr]);
   }
 
-  /**
-   * Einstiegspunkt des Programms.
-   * Erstellt und zeigt das GUI-Fenster.
-   */
-  public static void main(String[] args) {
-
-    SwingUtilities.invokeLater(new Runnable() {
-      public void run() {
-        Sheet[] mySheetList = new Sheet[3];
-        for (int i = 0; i < mySheetList.length; i++) {
-          mySheetList[i] = new Sheet(); // oder eine passende Initialisierung für deine Anwendung
-        }
-        new View(mySheetList, mySheetList.length).setVisible(true);
-      }
-    });
-  }
 }

@@ -96,9 +96,4 @@ public class Brain extends Sheet {
     }
   }
 
-  public static void main(String[] args) {
-    int[] würfel = { 1, 2, 2, 2, 4 };
-    printSumValues(würfel, new Sheet());
-    giveProp(würfel, new Sheet());
-  }
 }
