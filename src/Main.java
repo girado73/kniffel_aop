@@ -49,10 +49,14 @@ public class Main {
     // Spiel-Loop zur Überprüfung, ob das Sheet voll ist
     Timer gameTimer = new Timer(5000, e -> {
       boolean oneSheetFull = false;
+      int allSheetsFull = 0;
 
       for (Sheet sheet : sheets) {
         if (sheet.isFull()) {
-          oneSheetFull = true;
+          allSheetsFull++;
+          if(allSheetsFull >= numberOfPlayers){
+            oneSheetFull = true;
+          }
           break;
         }
       }
