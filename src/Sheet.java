@@ -158,7 +158,7 @@ public class Sheet {
   }
 
   /**
-   * Sum wenn checker true ist ansonten wird 0 zurück gegeben
+   * Sum wenn checker true ist ansonten wird -1 zurück gegeben
    *
    * @param würfel  Array welcher zusammengefasst werden soll
    * @param checker Boolean welche entscheidet ob die sum gebildet wird
@@ -173,7 +173,7 @@ public class Sheet {
   }
 
   /**
-   * Auf value setzen wenn checker true ist ansonten wird 0 zurück gegeben
+   * Auf value setzen wenn checker true ist ansonten wird -1 zurück gegeben
    *
    * @param value   Integer welche eingefügt werden soll
    * @param checker Boolean welche entscheidet ob die sum gebildet wird
@@ -228,7 +228,7 @@ public class Sheet {
    * Zähle alle Würfel zusammen falls ein Pasch innerhalb der Würfel ist
    *
    * @param würfel ist der Array von integern welches die würfel representiert
-   * @return gibt entweder 0 zurück wenn kein Pasch enthalten ist oder die Summe
+   * @return gibt entweder -1 zurück wenn kein Pasch enthalten ist oder die Summe
    *         aller würfel
    * @author Ricardo Güttner
    */
@@ -240,7 +240,7 @@ public class Sheet {
       }
       return resultnumber; // returnt mit summe aller würfel
     } else {
-      return -1; // returnt mit 0
+      return -1; // returnt mit -1
     }
   }
 
