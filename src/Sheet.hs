@@ -6,7 +6,7 @@ import Data.List
 sumIf :: (Num a) => [a] -> Bool -> a
 sumIf xs b
   | b = sum xs
-  | otherwise = 0
+  | otherwise = -1
 
 -- Function to count target in list
 nummercounter :: [Int] -> Int -> Int
@@ -31,10 +31,13 @@ grStrCheck :: (Ord a, Num a) => [a] -> Bool
 grStrCheck xs = genericLength (nub xs) == 5 && sort xs == [1, 2, 3, 4, 5] || sort xs == [2, 3, 4, 5, 6]
 
 -- Function to check if list is "klStr"
-klStrCheck :: (Num a, Ord a) => [a] -> Bool
-klStrCheck xs =
-  let noDup = sort $ nub xs
-   in noDup == [1, 2, 3, 4] || noDup == [2, 3, 4, 5] || noDup == [3, 4, 5, 6]
+klStrCheck :: (Num a, Ord a, Enum a) => [a] -> Bool
+klStrCheck xs
+  | length xs == 5 = any (`isInfixOf` [1 .. 6]) $ windows 4 $ nub $ sort xs
+  | otherwise = False
+
+windows :: Int -> [a] -> [[a]]
+windows n = foldr (zipWith (:)) (repeat []) . take n . tails
 
 -- Function to check if all elements are the same
 kniffelcheck :: (Ord a) => [a] -> Bool
