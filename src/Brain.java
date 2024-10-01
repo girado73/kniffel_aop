@@ -9,14 +9,14 @@ import java.util.Arrays;
 public class Brain extends Sheet {
 
   /**
-   * Enthält die Feldanzahl für das Sheet
+   * Enthält die Feldanzahl fuer das Sheet
    *
-   * @author Ricardo Güttner
+   * @author Ricardo Guettner
    */
   private static final int fieldArrayLen = 13;
 
   private static final String[] options = {
-      "Einsen", "Zweien", "Dreien", "Vieren", "Fünfen", "Sechsen",
+      "Einsen", "Zweien", "Dreien", "Vieren", "Fuenfen", "Sechsen",
       "Dreierpasch", "Viererpasch", "Full House", "Kleine Straße",
       "Große Straße", "Kniffel", "Chance"
   };
@@ -24,18 +24,18 @@ public class Brain extends Sheet {
   /**
    * Leerer Constructor da nicht nötig
    */
-  public Brain(int[] würfel) {
+  public Brain(int[] wuerfel) {
   }
 
   /**
    * Get a proposal on what option to take based on the dice you have
    * 
-   * @param würfel  int[] welcher ausgewertet werden soll
+   * @param wuerfel  int[] welcher ausgewertet werden soll
    * @param mysheet Sheet auf welches giveProp angewendet werden soll
-   * @author Ricardo Güttner
+   * @author Ricardo Guettner
    */
-  public static void giveProp(int[] würfel, Sheet mysheet) {
-    int[] sumvalues = getSumvalues(würfel, mysheet);
+  public static void giveProp(int[] wuerfel, Sheet mysheet) {
+    int[] sumvalues = getSumvalues(wuerfel, mysheet);
     int bestIndex = -1;
     int maxValue = 0;
 
@@ -55,41 +55,41 @@ public class Brain extends Sheet {
   }
 
   /**
-   * Wendet alle Checker für die Felder an und fasst es in einem int[] zusammen
+   * Wendet alle Checker fuer die Felder an und fasst es in einem int[] zusammen
    *
-   * @param würfel  int[] welcher ausgewertet werden soll
+   * @param wuerfel  int[] welcher ausgewertet werden soll
    * @param mysheet Sheet auf welches getSumvalues angewendet werden soll
-   * @author Ricardo Güttner
+   * @author Ricardo Guettner
    */
-  public static int[] getSumvalues(int[] würfel, Sheet mysheet) {
+  public static int[] getSumvalues(int[] wuerfel, Sheet mysheet) {
     int[] sumvalues = new int[13];
 
     for (int i = 0; i < 6; i++) {
-      sumvalues[i] = mysheet.multipleKniffel(würfel, nummercounter(würfel, i + 1));
+      sumvalues[i] = mysheet.multipleKniffel(wuerfel, nummercounter(wuerfel, i + 1));
     }
 
-    sumvalues[6] = mysheet.multipleKniffel(würfel, paschcounter(würfel));
-    sumvalues[7] = mysheet.multipleKniffel(würfel, sumIf(würfel, pasch4checker(würfel)));
-    sumvalues[8] = mysheet.multipleKniffel(würfel, setIf(25, full_house_check(würfel)));
-    sumvalues[9] = mysheet.multipleKniffel(würfel, setIf(30, klstrcheck(würfel)));
-    sumvalues[10] = mysheet.multipleKniffel(würfel, setIf(40, grstrcheck(würfel)));
-    sumvalues[11] = setIf(50, kniffelcheck(würfel));
-    sumvalues[12] = mysheet.multipleKniffel(würfel, sum(würfel));
+    sumvalues[6] = mysheet.multipleKniffel(wuerfel, paschcounter(wuerfel));
+    sumvalues[7] = mysheet.multipleKniffel(wuerfel, sumIf(wuerfel, pasch4checker(wuerfel)));
+    sumvalues[8] = mysheet.multipleKniffel(wuerfel, setIf(25, full_house_check(wuerfel)));
+    sumvalues[9] = mysheet.multipleKniffel(wuerfel, setIf(30, klstrcheck(wuerfel)));
+    sumvalues[10] = mysheet.multipleKniffel(wuerfel, setIf(40, grstrcheck(wuerfel)));
+    sumvalues[11] = setIf(50, kniffelcheck(wuerfel));
+    sumvalues[12] = mysheet.multipleKniffel(wuerfel, sum(wuerfel));
 
     return sumvalues;
   }
 
   /**
-   * Printfunktion für die bessere Anschauung der Felder
+   * Printfunktion fuer die bessere Anschauung der Felder
    * 
-   * @param würfel  int[] welcher ausgewertet und geprintet werden soll
+   * @param wuerfel  int[] welcher ausgewertet und geprintet werden soll
    * @param mysheet Sheet auf welches printSumValues angewendet werden soll
-   * @author Ricardo Güttner
+   * @author Ricardo Guettner
    */
-  public static void printSumValues(int[] würfel, Sheet mysheet) {
-    int[] sumvalues = getSumvalues(würfel, mysheet);
+  public static void printSumValues(int[] wuerfel, Sheet mysheet) {
+    int[] sumvalues = getSumvalues(wuerfel, mysheet);
 
-    System.out.println("Würfel: " + Arrays.toString(würfel));
+    System.out.println("Wuerfel: " + Arrays.toString(wuerfel));
 
     for (int i = 0; i < fieldArrayLen; i++) {
       System.out.println(options[i] + ": " + sumvalues[i]);

@@ -16,7 +16,7 @@ public class Sheet {
   int zweier = 0;
   int dreier = 0;
   int vierer = 0;
-  int fünfer = 0; // ü ist potenziell keine gute idee
+  int fuenfer = 0; // ue ist potenziell keine gute idee
   int sechser = 0;
 
   int dreierpasch = 0;
@@ -36,8 +36,8 @@ public class Sheet {
    * Converte einen Feldint in einen String zum Printen
    *
    * @param feld ist das Feld welches in einen String umgewandelt wird
-   * @return gibt einen String des Feldes zurück
-   * @author Ricardo Güttner
+   * @return gibt einen String des Feldes zurueck
+   * @author Ricardo Guettner
    */
   private String fieldToSting(int feld) {
     if (feld >= 0) {
@@ -52,14 +52,14 @@ public class Sheet {
    * zusammen
    *
    * @return gibt einen formatierten String mit allen Feldern wieder
-   * @author Ricardo Güttner
+   * @author Ricardo Guettner
    */
   public String sheet_to_string() {
     String returnstring = "einser: " + String.valueOf(einser) + "\n"
                           + "zweier: " + fieldToSting(zweier) + "\n"
                           + "dreier: " + fieldToSting(dreier) + "\n"
                           + "vierer: " + fieldToSting(vierer) + "\n"
-                          + "fünfer: " + fieldToSting(fünfer) + "\n"
+                          + "fuenfer: " + fieldToSting(fuenfer) + "\n"
                           + "sechser: " + fieldToSting(sechser) + "\n"
                           + "\n"
                           + "dreierpasch: " + fieldToSting(dreierpasch) + "\n"
@@ -74,21 +74,21 @@ public class Sheet {
   }
 
   /**
-   * Setter für die Class Methods über index
+   * Setter fuer die Class Methods ueber index
    *
-   * @param index Index für das Feld was angesprochen werden soll. Beginnt bei 0
+   * @param index Index fuer das Feld was angesprochen werden soll. Beginnt bei 0
    * @param value der Wert welcher gesetzt weden soll
    * @return returnt ein Boolean ob der Wert schon gesetzt wurde oder nicht
-   * @author Ricardo Güttner
+   * @author Ricardo Guettner
    */
   public boolean indexSet(int index, int value) {
     // Array der Felder
     int[] fields = {einser,     zweier,     dreier,      vierer,
-                    fünfer,     sechser,    dreierpasch, viererpasch,
+                    fuenfer,     sechser,    dreierpasch, viererpasch,
                     full_house, kleine_str, grosse_str,  kniffel,
                     chance};
 
-    // Überprüfen, ob der Index im gültigen Bereich liegt
+    // ueberpruefen, ob der Index im gueltigen Bereich liegt
     if (index < 0 || index >= fields.length) {
       System.out.println("Es ist ein unerwarteter Fehler beim Setzen der "
                          + "Variablen aufgetreten");
@@ -113,7 +113,7 @@ public class Sheet {
         vierer = value;
         break;
       case 4:
-        fünfer = value;
+        fuenfer = value;
         break;
       case 5:
         sechser = value;
@@ -149,34 +149,34 @@ public class Sheet {
   /**
    * Faltet einen int[] indem es die Summe aller Werte bildet
    *
-   * @param würfel Array welcher zusammengefasst werden soll
-   * @return gibt die Summe des int[] zurück
-   * @author Ricardo Güttner
+   * @param wuerfel Array welcher zusammengefasst werden soll
+   * @return gibt die Summe des int[] zurueck
+   * @author Ricardo Guettner
    */
-  public static int sum(int[] würfel) { return Arrays.stream(würfel).sum(); }
+  public static int sum(int[] wuerfel) { return Arrays.stream(wuerfel).sum(); }
 
   /**
-   * Sum wenn checker true ist ansonten wird -1 zurück gegeben
+   * Sum wenn checker true ist ansonten wird -1 zurueck gegeben
    *
-   * @param würfel  Array welcher zusammengefasst werden soll
+   * @param wuerfel  Array welcher zusammengefasst werden soll
    * @param checker Boolean welche entscheidet ob die sum gebildet wird
-   * @return gibt die Summe des int[] zurück
-   * @author Ricardo Güttner
+   * @return gibt die Summe des int[] zurueck
+   * @author Ricardo Guettner
    */
-  public static int sumIf(int[] würfel, boolean checker) {
+  public static int sumIf(int[] wuerfel, boolean checker) {
     if (checker) {
-      return sum(würfel);
+      return sum(wuerfel);
     } else
       return -1;
   }
 
   /**
-   * Auf value setzen wenn checker true ist ansonten wird -1 zurück gegeben
+   * Auf value setzen wenn checker true ist ansonten wird -1 zurueck gegeben
    *
-   * @param value   Integer welche eingefügt werden soll
+   * @param value   Integer welche eingefuegt werden soll
    * @param checker Boolean welche entscheidet ob die sum gebildet wird
    * @return gibt die Summe des Values
-   * @author Ricardo Güttner
+   * @author Ricardo Guettner
    */
   public static int setIf(int value, boolean checker) {
     if (checker) {
@@ -186,32 +186,32 @@ public class Sheet {
   }
 
   /**
-   * Wrapper für sumIf/setIf um bei Mehrfachem Kniffel 100 in alles einzutragen
+   * Wrapper fuer sumIf/setIf um bei Mehrfachem Kniffel 100 in alles einzutragen
    *
-   * @param würfel   Array welcher zusammengefasst werden soll
+   * @param wuerfel   Array welcher zusammengefasst werden soll
    * @param prevalue Value ohne Wrapper
-   * @return gibt 100 zurück wenn weiterer Kniffel gewürfelt wurde sonst
+   * @return gibt 100 zurueck wenn weiterer Kniffel gewuerfelt wurde sonst
    *         prevalue
-   * @author Ricardo Güttner
+   * @author Ricardo Guettner
    */
-  public int multipleKniffel(int[] würfel, int prevalue) {
-    if (kniffel != 0 && kniffelcheck(würfel)) {
+  public int multipleKniffel(int[] wuerfel, int prevalue) {
+    if (kniffel != 0 && kniffelcheck(wuerfel)) {
       return 100;
     } else
       return prevalue;
   }
 
   /**
-   * Zähle das Vorkommen von target in würfel
+   * Zähle das Vorkommen von target in wuerfel
    *
-   * @param würfel ist der Array von integern welches die würfel representiert
+   * @param wuerfel ist der Array von integern welches die wuerfel representiert
    * @param nummer ist die nummer nach welcher gesucht wird
-   * @return gibt das vorkommen von nummer zurück
-   * @author Ricardo Güttner
+   * @return gibt das vorkommen von nummer zurueck
+   * @author Ricardo Guettner
    */
-  public static int nummercounter(int[] würfel, int nummer) {
+  public static int nummercounter(int[] wuerfel, int nummer) {
     int resultnumber = 0;
-    for (int number : würfel) {
+    for (int number : wuerfel) {
       if (number == nummer) {
         resultnumber += number;
       }
@@ -224,45 +224,45 @@ public class Sheet {
   }
 
   /**
-   * Zähle alle Würfel zusammen falls ein Pasch innerhalb der Würfel ist
+   * Zähle alle Wuerfel zusammen falls ein Pasch innerhalb der Wuerfel ist
    *
-   * @param würfel ist der Array von integern welches die würfel representiert
-   * @return gibt entweder -1 zurück wenn kein Pasch enthalten ist oder die
+   * @param wuerfel ist der Array von integern welches die wuerfel representiert
+   * @return gibt entweder -1 zurueck wenn kein Pasch enthalten ist oder die
    *         Summe
-   *         aller würfel
-   * @author Ricardo Güttner
+   *         aller wuerfel
+   * @author Ricardo Guettner
    */
-  public static int paschcounter(int[] würfel) {
+  public static int paschcounter(int[] wuerfel) {
     int resultnumber = 0;
-    if (pasch4checker(würfel) || pasch3checker(würfel)) {
-      for (int number : würfel) {
+    if (pasch4checker(wuerfel) || pasch3checker(wuerfel)) {
+      for (int number : wuerfel) {
         resultnumber += number;
       }
-      return resultnumber; // returnt mit summe aller würfel
+      return resultnumber; // returnt mit summe aller wuerfel
     } else {
       return -1; // returnt mit -1
     }
   }
 
   /**
-   * Checke ob ein 4erpasch in würfel ist
+   * Checke ob ein 4erpasch in wuerfel ist
    *
-   * @param würfel ist der Array von integern welches die würfel representiert
-   * @return gibt einen Boolean zurück ob ein 4erpasch im Array ist
-   * @author Ricardo Güttner
+   * @param wuerfel ist der Array von integern welches die wuerfel representiert
+   * @return gibt einen Boolean zurueck ob ein 4erpasch im Array ist
+   * @author Ricardo Guettner
    */
-  public static boolean pasch4checker(int[] würfel) {
-    Arrays.sort(würfel);
-    int[] vers1 = new int[4]; // 2 vers. von würfel, drop [0], drop[-1]
+  public static boolean pasch4checker(int[] wuerfel) {
+    Arrays.sort(wuerfel);
+    int[] vers1 = new int[4]; // 2 vers. von wuerfel, drop [0], drop[-1]
     int[] vers2 = new int[4];
     int counter = 0;
 
     // erstellen der Listen
-    for (int x : würfel) {
+    for (int x : wuerfel) {
       if (counter == 0) {
         vers2[counter] = x;
       } else {
-        if (counter == würfel.length - 1) {
+        if (counter == wuerfel.length - 1) {
           vers1[counter - 1] = x;
         } else {
           vers1[counter - 1] = x;
@@ -273,23 +273,23 @@ public class Sheet {
     }
 
     return kniffelcheck(vers1) ||
-        kniffelcheck(vers2); // veroderung von kniffelcheck welches prüft ob
+        kniffelcheck(vers2); // veroderung von kniffelcheck welches prueft ob
                              // alle zahlen gleich sind
   }
 
   /**
    * Checke ob ein Dreierpasch in einem Intarray ist
    *
-   * @param würfel ist der Array von integern welches die würfel representiert
-   * @return gibt einen Boolean zurück ob ein 3erpasch im Array ist
-   * @author Ricardo Güttner
+   * @param wuerfel ist der Array von integern welches die wuerfel representiert
+   * @return gibt einen Boolean zurueck ob ein 3erpasch im Array ist
+   * @author Ricardo Guettner
    */
-  public static boolean pasch3checker(int[] würfel) {
-    Arrays.sort(würfel);
+  public static boolean pasch3checker(int[] wuerfel) {
+    Arrays.sort(wuerfel);
 
     int last_number = 0;
     int counter = 1;
-    for (int x : würfel) {
+    for (int x : wuerfel) {
       if (x == last_number) {
         counter += 1;
         if (counter >= 3) {
@@ -306,14 +306,14 @@ public class Sheet {
   /**
    * Checke ob ein Intarray ein "full_house" ist
    *
-   * @param würfel ist der Array von integern welches die würfel representiert
-   * @return gibt einen Boolean zurück ob ein Full House im Array ist
-   * @author Ricardo Güttner
+   * @param wuerfel ist der Array von integern welches die wuerfel representiert
+   * @return gibt einen Boolean zurueck ob ein Full House im Array ist
+   * @author Ricardo Guettner
    */
-  public static boolean full_house_check(int[] würfel) {
+  public static boolean full_house_check(int[] wuerfel) {
     Map<Integer, Integer> countMap = new HashMap<>();
 
-    for (int num : würfel) {
+    for (int num : wuerfel) {
       countMap.put(num, countMap.getOrDefault(num, 0) + 1);
     }
     boolean hasTwice = false;
@@ -340,14 +340,14 @@ public class Sheet {
   /**
    * Checke ob das Intarray eine große Straße ist
    *
-   * @param würfel ist der Array von integern welches die würfel representiert
-   * @return gibt einen Boolean zurück ob eine große Straße im Array ist
-   * @author Ricardo Güttner
+   * @param wuerfel ist der Array von integern welches die wuerfel representiert
+   * @return gibt einen Boolean zurueck ob eine große Straße im Array ist
+   * @author Ricardo Guettner
    */
-  public static boolean grstrcheck(int[] würfel) {
-    Arrays.sort(würfel);
-    int tmpnumber = würfel[0] - 1;
-    for (int number : würfel) {
+  public static boolean grstrcheck(int[] wuerfel) {
+    Arrays.sort(wuerfel);
+    int tmpnumber = wuerfel[0] - 1;
+    for (int number : wuerfel) {
       if (number != tmpnumber + 1) {
         return false;
       } else {
@@ -360,19 +360,19 @@ public class Sheet {
   /**
    * Checke ob das Intarray eine kleine Straße ist
    *
-   * @param würfel ist der Array von integern welches die würfel representiert
-   * @return gibt einen Boolean zurück ob eine kleine Straße im Array ist
-   * @author Ricardo Güttner
+   * @param wuerfel ist der Array von integern welches die wuerfel representiert
+   * @return gibt einen Boolean zurueck ob eine kleine Straße im Array ist
+   * @author Ricardo Guettner
    */
-  public static boolean klstrcheck(int[] würfel) {
-    Arrays.sort(würfel);
+  public static boolean klstrcheck(int[] wuerfel) {
+    Arrays.sort(wuerfel);
     // Entfernen von Duplikaten und Sortieren des Arrays
-    int[] uniqueDice = Arrays.stream(würfel).distinct().sorted().toArray();
+    int[] uniqueDice = Arrays.stream(wuerfel).distinct().sorted().toArray();
 
     // Alle möglichen kleinen Straßen
     int[][] smallStraights = {{1, 2, 3, 4}, {2, 3, 4, 5}, {3, 4, 5, 6}};
 
-    // Überprüfung, ob eine der kleinen Straßen im Array enthalten ist
+    // ueberpruefung, ob eine der kleinen Straßen im Array enthalten ist
     for (int[] straight : smallStraights) {
       if (containsSubArray(uniqueDice, straight)) {
         return true;
@@ -383,13 +383,13 @@ public class Sheet {
   }
 
   /**
-   * Hilfsmethode, die überprüft, ob das große Array das kleine Array enthält
+   * Hilfsmethode, die ueberprueft, ob das große Array das kleine Array enthält
    *
    * @param array    der "größere Array"
    * @param subArray der "kleinere Array" welcher im größeren enthalten sein
    *                 soll
    * @return true wenn subArray Teil von array sonst false
-   * @author Ricardo Güttner
+   * @author Ricardo Guettner
    */
   private static boolean containsSubArray(int[] array, int[] subArray) {
     for (int i = 0; i <= array.length - subArray.length; i++) {
@@ -410,14 +410,14 @@ public class Sheet {
   /**
    * Checke ob ein Kniffel im Intarray vorliegt
    *
-   * @param würfel ist der Array von integern welches die würfel representiert
-   * @return gibt einen Boolean zurück ob ein Kniffel im Array ist
-   * @author Ricardo Güttner
+   * @param wuerfel ist der Array von integern welches die wuerfel representiert
+   * @return gibt einen Boolean zurueck ob ein Kniffel im Array ist
+   * @author Ricardo Guettner
    */
-  public static boolean kniffelcheck(int[] würfel) {
-    int checkval = würfel[0];
+  public static boolean kniffelcheck(int[] wuerfel) {
+    int checkval = wuerfel[0];
 
-    for (int x : würfel) {
+    for (int x : wuerfel) {
       if (x != checkval) {
         return false;
       }
@@ -428,12 +428,12 @@ public class Sheet {
   /**
    * Checke ob jedes Feld belegt ist
    *
-   * @return gibt einen Boolean zurück ob alle Werte belegt sind
-   * @author Ricardo Güttner
+   * @return gibt einen Boolean zurueck ob alle Werte belegt sind
+   * @author Ricardo Guettner
    */
   public boolean isFull() {
     int[] fields = {einser,     zweier,     dreier,      vierer,
-                    fünfer,     sechser,    dreierpasch, viererpasch,
+                    fuenfer,     sechser,    dreierpasch, viererpasch,
                     full_house, kleine_str, grosse_str,  kniffel,
                     chance};
     for (int field : fields) {
@@ -447,13 +447,13 @@ public class Sheet {
   /**
    * Bilde die Summe aus allen Feldern im Sheet
    *
-   * @return gibt die Summe als Integer zurück
-   * @author Ricardo Güttner
+   * @return gibt die Summe als Integer zurueck
+   * @author Ricardo Guettner
    */
   public int sheetSum() {
     int returnvalue = 0;
     int[] fields = {einser,     zweier,     dreier,      vierer,
-                    fünfer,     sechser,    dreierpasch, viererpasch,
+                    fuenfer,     sechser,    dreierpasch, viererpasch,
                     full_house, kleine_str, grosse_str,  kniffel,
                     chance};
     for (int field : fields) {

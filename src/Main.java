@@ -8,7 +8,7 @@ public class Main {
   private static int numberOfPlayers = 0;
 
   public static void main(String[] args) {
-    // Scanner für die Konsoleneingabe
+    // Scanner fuer die Konsoleneingabe
     Scanner scanner = new Scanner(System.in);
 
     boolean validInput = false;
@@ -26,7 +26,7 @@ public class Main {
           System.out.println("Die Anzahl der Spieler muss eine positive Zahl sein.");
         }
       } catch (NumberFormatException e) {
-        System.out.println("Ungültige Eingabe. Bitte geben Sie eine gültige Zahl ein.");
+        System.out.println("Ungueltige Eingabe. Bitte geben Sie eine gueltige Zahl ein.");
       }
     }
 
@@ -35,10 +35,10 @@ public class Main {
     // Erstellen eines Arrays von Sheet-Instanzen
     Sheet[] sheets = new Sheet[numberOfPlayers];
     for (int i = 0; i < sheets.length; i++) {
-      sheets[i] = new Sheet(); // oder eine passende Initialisierung für deine Anwendung
+      sheets[i] = new Sheet(); // oder eine passende Initialisierung fuer deine Anwendung
     }
 
-    // Erstellen der View-Instanz und übergeben des Sheet-Arrays
+    // Erstellen der View-Instanz und uebergeben des Sheet-Arrays
     View view = new View(sheets, numberOfPlayers);
 
     // Starten des GUI
@@ -46,7 +46,7 @@ public class Main {
       view.setVisible(true);
     });
 
-    // Spiel-Loop zur Überprüfung, ob das Sheet voll ist
+    // Spiel-Loop zur ueberpruefung, ob das Sheet voll ist
     Timer gameTimer = new Timer(5000, e -> {
       boolean oneSheetFull = false;
       int allSheetsFull = 0;

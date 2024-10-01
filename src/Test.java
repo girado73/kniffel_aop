@@ -19,10 +19,10 @@ public class Test {
 
   private static boolean sum_test() {
     System.out.println("Sheet.sum Test: ");
-    int[] würfel = {1, 2, 3, 4, 5};
+    int[] wuerfel = {1, 2, 3, 4, 5};
 
     try {
-      assert 15 == src.Sheet.sum(würfel) : "True Assertation Failed";
+      assert 15 == src.Sheet.sum(wuerfel) : "True Assertation Failed";
       successPrint("Sum Test Succeeded");
       return true;
     } catch (AssertionError e) {
@@ -34,11 +34,11 @@ public class Test {
 
   private static boolean sumIf_test() {
     System.out.println("Sheet.sumIf Test: ");
-    int[] würfel = {1, 2, 3, 4, 5};
+    int[] wuerfel = {1, 2, 3, 4, 5};
 
     try {
-      assert 15 == src.Sheet.sumIf(würfel, true) : "True Assertation Failed";
-      assert - 1 == src.Sheet.sumIf(würfel, false)
+      assert 15 == src.Sheet.sumIf(wuerfel, true) : "True Assertation Failed";
+      assert - 1 == src.Sheet.sumIf(wuerfel, false)
           : ("False Assertation "
              + "Failed");
       successPrint("Sum Test Succeeded");
@@ -67,13 +67,13 @@ public class Test {
 
   private static boolean nummercounter_test() {
     System.out.println("Nummercounter Test:");
-    int[] würfel = {1, 2, 4, 4, 4};
-    int[] würfel2 = {1, 3, 3, 3, 3};
+    int[] wuerfel = {1, 2, 4, 4, 4};
+    int[] wuerfel2 = {1, 3, 3, 3, 3};
 
     try {
-      assert 12 == src.Sheet.nummercounter(würfel, 4)
+      assert 12 == src.Sheet.nummercounter(wuerfel, 4)
           : "True Assertation Failed";
-      assert 12 == src.Sheet.nummercounter(würfel2, 3)
+      assert 12 == src.Sheet.nummercounter(wuerfel2, 3)
           : "True Assertation2 Failed";
       successPrint("Nummercounter Test Succeeded");
       return true;
@@ -86,13 +86,13 @@ public class Test {
 
   private static boolean pasch4checker_test() {
     System.out.println("Pasch4checker Test:");
-    int[] würfelwrong = {1, 2, 4, 4, 4};
-    int[] würfeltrue = {1, 3, 3, 3, 3};
+    int[] wuerfelwrong = {1, 2, 4, 4, 4};
+    int[] wuerfeltrue = {1, 3, 3, 3, 3};
 
     try {
-      assert true == src.Sheet.pasch4checker(würfeltrue)
+      assert true == src.Sheet.pasch4checker(wuerfeltrue)
           : "True Assertation Failed";
-      assert false == src.Sheet.pasch4checker(würfelwrong)
+      assert false == src.Sheet.pasch4checker(wuerfelwrong)
           : "False Assertation Failed";
       successPrint("Pasch4checker Test Succeeded");
       return true;
@@ -105,13 +105,13 @@ public class Test {
 
   private static boolean full_house_check_test() {
     System.out.println("full_house_check Test:");
-    int[] würfelwrong = {1, 4, 4, 4, 4};
-    int[] würfeltrue = {2, 2, 3, 3, 3};
+    int[] wuerfelwrong = {1, 4, 4, 4, 4};
+    int[] wuerfeltrue = {2, 2, 3, 3, 3};
 
     try {
-      assert true == src.Sheet.full_house_check(würfeltrue)
+      assert true == src.Sheet.full_house_check(wuerfeltrue)
           : "True Assertation Failed";
-      assert false == src.Sheet.full_house_check(würfelwrong)
+      assert false == src.Sheet.full_house_check(wuerfelwrong)
           : "False Assertation Failed";
       successPrint("full_house_check Test Succeeded");
       return true;
@@ -124,13 +124,13 @@ public class Test {
 
   private static boolean klstrcheck_test() {
     System.out.println("klstrcheck Test:");
-    int[] würfelwrong = {1, 2, 4, 4, 4};
-    int[] würfeltrue = {2, 1, 2, 3, 4};
+    int[] wuerfelwrong = {1, 2, 4, 4, 4};
+    int[] wuerfeltrue = {2, 1, 2, 3, 4};
 
     try {
-      assert true == src.Sheet.klstrcheck(würfeltrue)
+      assert true == src.Sheet.klstrcheck(wuerfeltrue)
           : "True Assertation Failed";
-      assert false == src.Sheet.klstrcheck(würfelwrong)
+      assert false == src.Sheet.klstrcheck(wuerfelwrong)
           : "False Assertation Failed";
       successPrint("klstrcheck Test Succeeded");
       return true;
@@ -143,13 +143,13 @@ public class Test {
 
   private static boolean grstrcheck_test() {
     System.out.println("grstrcheck Test:");
-    int[] würfelwrong = {1, 2, 4, 4, 4};
-    int[] würfeltrue = {2, 3, 4, 5, 6};
+    int[] wuerfelwrong = {1, 2, 4, 4, 4};
+    int[] wuerfeltrue = {2, 3, 4, 5, 6};
 
     try {
-      assert true == src.Sheet.grstrcheck(würfeltrue)
+      assert true == src.Sheet.grstrcheck(wuerfeltrue)
           : "True Assertation Failed";
-      assert false == src.Sheet.grstrcheck(würfelwrong)
+      assert false == src.Sheet.grstrcheck(wuerfelwrong)
           : "False Assertation Failed";
       successPrint("grstrcheck Test Succeeded");
       return true;
@@ -271,8 +271,8 @@ public class Test {
    */
   private static boolean getSumvalues_test() {
     System.out.println("Brain.getSumvalues Test: ");
-    int[] würfel = {1, 2, 2, 2, 4};
-    int[] sumvalues = src.Brain.getSumvalues(würfel, new Sheet());
+    int[] wuerfel = {1, 2, 2, 2, 4};
+    int[] sumvalues = src.Brain.getSumvalues(wuerfel, new Sheet());
     try {
       assert 6 == sumvalues[1] : "Count Values 2";
       assert 1 == sumvalues[0] : "Count Values 1";
@@ -299,7 +299,7 @@ public class Test {
   // ----------------------------------------------------------
   // executing Tests
   /**
-   * Ausführen mit java -ea Test.java
+   * Ausfuehren mit java -ea Test.java
    */
   public static void main(String[] args) {
     ClassLoader loader = ClassLoader.getSystemClassLoader();

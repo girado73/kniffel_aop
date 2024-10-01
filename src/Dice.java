@@ -29,7 +29,7 @@ public class Dice {
   }
 
   /**
-   * Erstelle einen Array von Zufallsints, wobei nur der Würfel an der gegebenen
+   * Erstelle einen Array von Zufallsints, wobei nur der Wuerfel an der gegebenen
    * Position neu geworfen wird.
    */
   public int[] rollSpecific(int[] diceStates, int indexToReroll) {
