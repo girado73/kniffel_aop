@@ -1,8 +1,8 @@
 package src;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Sheet
@@ -30,8 +30,7 @@ public class Sheet {
   /**
    *
    */
-  public Sheet() {
-  }
+  public Sheet() {}
 
   /**
    * Converte einen Feldint in einen String zum Printen
@@ -49,26 +48,27 @@ public class Sheet {
   }
 
   /**
-   * Diese Methode fasst alle Klassenfelder/Variablen unter einem String zusammen
-   * 
+   * Diese Methode fasst alle Klassenfelder/Variablen unter einem String
+   * zusammen
+   *
    * @return gibt einen formatierten String mit allen Feldern wieder
    * @author Ricardo Güttner
    */
   public String sheet_to_string() {
-    String returnstring = "einser: " + String.valueOf(einser) + "\n" +
-        "zweier: " + fieldToSting(zweier) + "\n" +
-        "dreier: " + fieldToSting(dreier) + "\n" +
-        "vierer: " + fieldToSting(vierer) + "\n" +
-        "fünfer: " + fieldToSting(fünfer) + "\n" +
-        "sechser: " + fieldToSting(sechser) + "\n" +
-        "\n" +
-        "dreierpasch: " + fieldToSting(dreierpasch) + "\n" +
-        "viererpasch: " + fieldToSting(viererpasch) + "\n" +
-        "full_house: " + fieldToSting(full_house) + "\n" +
-        "kleine_str: " + fieldToSting(kleine_str) + "\n" +
-        "grosse_str: " + fieldToSting(grosse_str) + "\n" +
-        "kniffel: " + fieldToSting(kniffel) + "\n" +
-        "chance: " + fieldToSting(chance) + "\n";
+    String returnstring = "einser: " + String.valueOf(einser) + "\n"
+                          + "zweier: " + fieldToSting(zweier) + "\n"
+                          + "dreier: " + fieldToSting(dreier) + "\n"
+                          + "vierer: " + fieldToSting(vierer) + "\n"
+                          + "fünfer: " + fieldToSting(fünfer) + "\n"
+                          + "sechser: " + fieldToSting(sechser) + "\n"
+                          + "\n"
+                          + "dreierpasch: " + fieldToSting(dreierpasch) + "\n"
+                          + "viererpasch: " + fieldToSting(viererpasch) + "\n"
+                          + "full_house: " + fieldToSting(full_house) + "\n"
+                          + "kleine_str: " + fieldToSting(kleine_str) + "\n"
+                          + "grosse_str: " + fieldToSting(grosse_str) + "\n"
+                          + "kniffel: " + fieldToSting(kniffel) + "\n"
+                          + "chance: " + fieldToSting(chance) + "\n";
 
     return returnstring;
   }
@@ -83,15 +83,15 @@ public class Sheet {
    */
   public boolean indexSet(int index, int value) {
     // Array der Felder
-    int[] fields = {
-        einser, zweier, dreier, vierer, fünfer, sechser,
-        dreierpasch, viererpasch, full_house, kleine_str,
-        grosse_str, kniffel, chance
-    };
+    int[] fields = {einser,     zweier,     dreier,      vierer,
+                    fünfer,     sechser,    dreierpasch, viererpasch,
+                    full_house, kleine_str, grosse_str,  kniffel,
+                    chance};
 
     // Überprüfen, ob der Index im gültigen Bereich liegt
     if (index < 0 || index >= fields.length) {
-      System.out.println("Es ist ein unerwarteter Fehler beim Setzen der Variablen aufgetreten");
+      System.out.println("Es ist ein unerwarteter Fehler beim Setzen der "
+                         + "Variablen aufgetreten");
       return false;
     }
 
@@ -100,45 +100,45 @@ public class Sheet {
       fields[index] = value;
       // Update the corresponding field
       switch (index) {
-        case 0:
-          einser = value;
-          break;
-        case 1:
-          zweier = value;
-          break;
-        case 2:
-          dreier = value;
-          break;
-        case 3:
-          vierer = value;
-          break;
-        case 4:
-          fünfer = value;
-          break;
-        case 5:
-          sechser = value;
-          break;
-        case 6:
-          dreierpasch = value;
-          break;
-        case 7:
-          viererpasch = value;
-          break;
-        case 8:
-          full_house = value;
-          break;
-        case 9:
-          kleine_str = value;
-          break;
-        case 10:
-          grosse_str = value;
-          break;
-        case 11:
-          kniffel = value;
-          break;
-        case 12:
-          chance = value;
-          break;
+      case 0:
+        einser = value;
+        break;
+      case 1:
+        zweier = value;
+        break;
+      case 2:
+        dreier = value;
+        break;
+      case 3:
+        vierer = value;
+        break;
+      case 4:
+        fünfer = value;
+        break;
+      case 5:
+        sechser = value;
+        break;
+      case 6:
+        dreierpasch = value;
+        break;
+      case 7:
+        viererpasch = value;
+        break;
+      case 8:
+        full_house = value;
+        break;
+      case 9:
+        kleine_str = value;
+        break;
+      case 10:
+        grosse_str = value;
+        break;
+      case 11:
+        kniffel = value;
+        break;
+      case 12:
+        chance = value;
+        break;
       }
       return true;
     }
@@ -153,9 +153,7 @@ public class Sheet {
    * @return gibt die Summe des int[] zurück
    * @author Ricardo Güttner
    */
-  public static int sum(int[] würfel) {
-    return Arrays.stream(würfel).sum();
-  }
+  public static int sum(int[] würfel) { return Arrays.stream(würfel).sum(); }
 
   /**
    * Sum wenn checker true ist ansonten wird -1 zurück gegeben
@@ -192,7 +190,8 @@ public class Sheet {
    *
    * @param würfel   Array welcher zusammengefasst werden soll
    * @param prevalue Value ohne Wrapper
-   * @return gibt 100 zurück wenn weiterer Kniffel gewürfelt wurde sonst prevalue
+   * @return gibt 100 zurück wenn weiterer Kniffel gewürfelt wurde sonst
+   *         prevalue
    * @author Ricardo Güttner
    */
   public int multipleKniffel(int[] würfel, int prevalue) {
@@ -228,7 +227,8 @@ public class Sheet {
    * Zähle alle Würfel zusammen falls ein Pasch innerhalb der Würfel ist
    *
    * @param würfel ist der Array von integern welches die würfel representiert
-   * @return gibt entweder -1 zurück wenn kein Pasch enthalten ist oder die Summe
+   * @return gibt entweder -1 zurück wenn kein Pasch enthalten ist oder die
+   *         Summe
    *         aller würfel
    * @author Ricardo Güttner
    */
@@ -246,7 +246,7 @@ public class Sheet {
 
   /**
    * Checke ob ein 4erpasch in würfel ist
-   * 
+   *
    * @param würfel ist der Array von integern welches die würfel representiert
    * @return gibt einen Boolean zurück ob ein 4erpasch im Array ist
    * @author Ricardo Güttner
@@ -272,8 +272,9 @@ public class Sheet {
       counter++;
     }
 
-    return kniffelcheck(vers1) || kniffelcheck(vers2); // veroderung von kniffelcheck welches prüft ob alle zahlen
-                                                       // gleich sind
+    return kniffelcheck(vers1) ||
+        kniffelcheck(vers2); // veroderung von kniffelcheck welches prüft ob
+                             // alle zahlen gleich sind
   }
 
   /**
@@ -310,19 +311,30 @@ public class Sheet {
    * @author Ricardo Güttner
    */
   public static boolean full_house_check(int[] würfel) {
+    Map<Integer, Integer> countMap = new HashMap<>();
 
-    // set lässt nur unterschiedliche elemente zu
-    Set<Integer> countset = new HashSet<>();
-    for (int x : würfel) {
-      countset.add(x);
+    for (int num : würfel) {
+      countMap.put(num, countMap.getOrDefault(num, 0) + 1);
+    }
+    boolean hasTwice = false;
+    boolean hasThrice = false;
+
+    // Check for exactly twice and thrice occurrences
+    for (int count : countMap.values()) {
+      if (count == 2) {
+        if (hasTwice) {
+          return false; // More than one number appears twice
+        }
+        hasTwice = true;
+      } else if (count == 3) {
+        if (hasThrice) {
+          return false; // More than one number appears thrice
+        }
+        hasThrice = true;
+      }
     }
 
-    // wenn set.size() == 2 dann muss es ein full_house sein
-    if (countset.size() == 2)
-      return true;
-    else
-      return false;
-
+    return hasTwice && hasThrice;
   }
 
   /**
@@ -358,11 +370,7 @@ public class Sheet {
     int[] uniqueDice = Arrays.stream(würfel).distinct().sorted().toArray();
 
     // Alle möglichen kleinen Straßen
-    int[][] smallStraights = {
-        { 1, 2, 3, 4 },
-        { 2, 3, 4, 5 },
-        { 3, 4, 5, 6 }
-    };
+    int[][] smallStraights = {{1, 2, 3, 4}, {2, 3, 4, 5}, {3, 4, 5, 6}};
 
     // Überprüfung, ob eine der kleinen Straßen im Array enthalten ist
     for (int[] straight : smallStraights) {
@@ -378,7 +386,8 @@ public class Sheet {
    * Hilfsmethode, die überprüft, ob das große Array das kleine Array enthält
    *
    * @param array    der "größere Array"
-   * @param subArray der "kleinere Array" welcher im größeren enthalten sein soll
+   * @param subArray der "kleinere Array" welcher im größeren enthalten sein
+   *                 soll
    * @return true wenn subArray Teil von array sonst false
    * @author Ricardo Güttner
    */
@@ -423,8 +432,10 @@ public class Sheet {
    * @author Ricardo Güttner
    */
   public boolean isFull() {
-    int[] fields = { einser, zweier, dreier, vierer, fünfer, sechser, dreierpasch, viererpasch, full_house, kleine_str,
-        grosse_str, kniffel, chance };
+    int[] fields = {einser,     zweier,     dreier,      vierer,
+                    fünfer,     sechser,    dreierpasch, viererpasch,
+                    full_house, kleine_str, grosse_str,  kniffel,
+                    chance};
     for (int field : fields) {
       if (field == 0) {
         return false;
@@ -441,8 +452,10 @@ public class Sheet {
    */
   public int sheetSum() {
     int returnvalue = 0;
-    int[] fields = { einser, zweier, dreier, vierer, fünfer, sechser, dreierpasch, viererpasch, full_house, kleine_str,
-        grosse_str, kniffel, chance };
+    int[] fields = {einser,     zweier,     dreier,      vierer,
+                    fünfer,     sechser,    dreierpasch, viererpasch,
+                    full_house, kleine_str, grosse_str,  kniffel,
+                    chance};
     for (int field : fields) {
       returnvalue += field;
     }
